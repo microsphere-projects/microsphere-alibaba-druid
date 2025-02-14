@@ -1,7 +1,7 @@
 # Microsphere Alibaba Druid
 The microsphere projects for Alibaba's Druid
 
-[![Maven Build](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/maven-build.yml/badge.svg)](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/maven-build.yml)
+[![Maven Build](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/gradle-build.yml)
 [![Codecov](https://codecov.io/gh/microsphere-projects/microsphere-alibaba-druid/branch/dev/graph/badge.svg)](https://app.codecov.io/gh/microsphere-projects/microsphere-alibaba-druid)
 ![Maven](https://img.shields.io/maven-central/v/io.github.microsphere-projects/microsphere-alibaba-druid.svg)
 ![License](https://img.shields.io/github/license/microsphere-projects/microsphere-alibaba-druid.svg)
