@@ -32,7 +32,7 @@ publishing {
 
             pom {
                 name = project.name
-                description = project.description
+                description = project.name
                 url = "https://github.com/microsphere-projects/microsphere-alibaba-druid"
 
                 organization {
