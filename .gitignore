@@ -26,6 +26,13 @@ hs_err_pid*
 target/
 !.mvn/wrapper/*
 
+# gradle ignore
+## Ignore Gradle project-specific cache directory
+.gradle
+!gradle/wrapper/*
+## Ignore Gradle build output directory
+build
+
 # eclipse ignore
 .settings/
 .project
