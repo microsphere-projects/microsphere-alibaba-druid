@@ -40,19 +40,17 @@ java {
     }
 }
 
-tasks.jacocoTestReport {
-    dependsOn(tasks.test) // tests are required to run before generating the report
-    reports {
-        xml.required = false
-        csv.required = false
-        html.outputLocation = layout.buildDirectory.dir("jacocoHtml")
-    }
-}
-
 tasks.test {
     finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
 
+tasks.jacocoTestReport {
+    dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.required = true
+        html.required = true
+    }
+}
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.addAll(listOf("-source", "8", "-target", "8"))

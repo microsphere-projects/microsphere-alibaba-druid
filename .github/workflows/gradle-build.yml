@@ -7,7 +7,9 @@ name: Gradle Build
 
 on:
   push:
-    branches: [ 'main' , 'dev' ]
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "main" , "dev" , "release" ]
 
 jobs:
   build:
@@ -26,15 +28,11 @@ jobs:
         java-version: ${{ matrix.java }}
         distribution: 'temurin'
 
-    - name: Setup Docker
-      uses: docker-practice/actions-setup-docker@master
-      timeout-minutes: 15
-
     - name: Setup Gradle
       uses: gradle/actions/setup-gradle@dbbdc275be76ac10734476cc723d82dfe7ec6eda # v3.4.2
 
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build test
       env:
         OSSRH_MAVEN_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
         OSSRH_MAVEN_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
