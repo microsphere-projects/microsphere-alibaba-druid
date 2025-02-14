@@ -32,7 +32,7 @@ jobs:
       uses: gradle/actions/setup-gradle@dbbdc275be76ac10734476cc723d82dfe7ec6eda # v3.4.2
 
     - name: Build with Gradle
-      run: ./gradlew build test
+      run: gradle build test
       env:
         OSSRH_MAVEN_USERNAME: ${{ secrets.OSS_SONATYPE_USERNAME }}
         OSSRH_MAVEN_PASSWORD: ${{ secrets.OSS_SONATYPE_PASSWORD }}
