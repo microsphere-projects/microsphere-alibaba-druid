@@ -40,6 +40,10 @@ java {
     }
 }
 
+jacoco {
+    toolVersion = "0.8.12"
+}
+
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
     reports {
@@ -50,6 +54,10 @@ tasks.jacocoTestReport {
 }
 
 tasks.test {
+    extensions.configure(JacocoTaskExtension::class) {
+        destinationFile = layout.buildDirectory.file("jacoco/jacocoTest.exec").get().asFile
+        classDumpDir = layout.buildDirectory.dir("jacoco/classpathdumps").get().asFile
+    }
     finalizedBy(tasks.jacocoTestReport) // report is always generated after tests run
 }
 
