@@ -46,6 +46,10 @@ tasks.test {
 
 tasks.jacocoTestReport {
     dependsOn(tasks.test) // tests are required to run before generating the report
+    reports {
+        xml.enabled = true
+        html.enabled = true
+    }
 }
 
 tasks.withType<JavaCompile> {
