@@ -9,8 +9,6 @@ plugins {
     jacoco
 }
 
-project.description = "Microsphere Alibaba Druid"
-
 dependencies {
     // BOM
     implementation(platform(libs.microsphere.java.dependencies))
@@ -19,7 +17,7 @@ dependencies {
     implementation("io.github.microsphere-projects:microsphere-java-core")
 
     // Alibaba Druid
-    api(libs.druid)
+    implementation(libs.druid)
 
     // Testing
     testImplementation(libs.junit.jupiter.engine)
@@ -36,6 +34,9 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
     toolchain {
         languageVersion = JavaLanguageVersion.of(8)
+    }
+    registerFeature('signing') {
+        usingSourceSet(sourceSets.main)
     }
 }
 
