@@ -9,15 +9,26 @@ plugins {
     jacoco
 }
 
+java {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(8)
+    }
+    registerFeature("optional") {
+        usingSourceSet(sourceSets["main"])
+    }
+}
+
 dependencies {
     // BOM
     implementation(platform(libs.microsphere.java.dependencies))
 
     // Microsphere Java Code
-    implementation("io.github.microsphere-projects:microsphere-java-core")
+    "optionalApi"("io.github.microsphere-projects:microsphere-java-core")
 
     // Alibaba Druid
-    implementation(libs.druid)
+    "optionalApi"(libs.druid)
 
     // Testing
     testImplementation(libs.junit.jupiter.engine)
@@ -27,14 +38,6 @@ dependencies {
 
     // Logback
     testImplementation(libs.logback.classic)
-}
-
-java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
-    }
 }
 
 tasks.test {
