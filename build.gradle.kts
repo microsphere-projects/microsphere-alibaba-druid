@@ -35,9 +35,6 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(8)
     }
-    registerFeature('signing') {
-        usingSourceSet(sourceSets.main)
-    }
 }
 
 tasks.test {
