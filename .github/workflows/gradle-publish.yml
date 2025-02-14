@@ -9,7 +9,9 @@ name: Gradle Publish
 
 on:
   push:
-    branches: [ 'release' ]
+    branches: [ "release" ]
+  pull_request:
+    branches: [ "release" ]
   workflow_dispatch:
     inputs:
       revision:
