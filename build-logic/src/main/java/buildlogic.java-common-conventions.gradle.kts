@@ -1,9 +1,7 @@
+
 plugins {
     `java`
 }
-
-group = "io.github.microsphere-projects"
-version = System.getProperty("revision", "0.0.1-SNAPSHOT")
 
 repositories {
     // Use the plugin portal to apply community plugins in convention plugins.
@@ -37,4 +35,10 @@ java {
 
 tasks.withType<JavaCompile> {
     options.compilerArgs.addAll(listOf("-source", "8", "-target", "8"))
+}
+
+tasks.javadoc {
+    if (JavaVersion.current().isJava8Compatible) {
+        (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "quiet")
+    }
 }

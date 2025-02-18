@@ -2,7 +2,7 @@ plugins {
     id("buildlogic.java-library-conventions")
 }
 
-description = "Microsphere Alibaba Druid Code"
+project.description = "Microsphere Alibaba Druid Code"
 
 dependencies {
     // BOM
