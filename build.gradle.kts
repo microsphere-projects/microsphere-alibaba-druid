@@ -3,7 +3,6 @@ plugins {
     `signing`
 }
 
-group = "io.github.microsphere-projects"
 version = System.getProperty("revision", "0.0.1-SNAPSHOT")
 
 subprojects {
@@ -17,9 +16,7 @@ subprojects {
     apply(plugin = "signing")
 
     val mavenTaskName = "mavenJava-${name}"
-
-    println("${project.name} : ${project.description}")
-
+    
     publishing {
         publications {
             create<MavenPublication>(mavenTaskName) {
@@ -27,6 +24,7 @@ subprojects {
                 from(components[componentName])
 
                 pom {
+                    groupId = "io.github.microsphere-projects"
                     name = project.name
                     description = project.name
                     version = System.getProperty("revision", "0.0.1-SNAPSHOT")
