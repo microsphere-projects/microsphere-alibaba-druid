@@ -14,19 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.druid.filter;
+package io.microsphere.alibaba.druid.filter;
+
+import com.alibaba.druid.filter.Filter;
+import com.alibaba.druid.proxy.jdbc.StatementProxy;
 
 /**
- * {@link LoggingStatementFilter} Test
+ * Logging {@link StatementProxy} {@link Filter}
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see LoggingStatementFilter
+ * @see AbstractStatementFilter
+ * @see StatementProxy
+ * @see Filter
  * @since 1.0.0
  */
-public class LoggingStatementFilterTest extends AbstractFilterTest<LoggingStatementFilter> {
+public class LoggingStatementFilter extends AbstractStatementFilter {
 
     @Override
-    protected LoggingStatementFilter createFilter() {
-        return new LoggingStatementFilter();
+    protected void beforeExecute(StatementProxy statement, String resourceName) throws Throwable {
+        logger.debug("beforeExecute(statement : {} , resource name : '{}') : {}", statement.getLastExecuteSql(), resourceName);
+    }
+
+    @Override
+    protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
+        logger.debug("afterExecute(statement : {} , resource name : '{}' , result : {} , failure : {})",
+                statement.getLastExecuteSql(), resourceName, result, failure);
     }
 }

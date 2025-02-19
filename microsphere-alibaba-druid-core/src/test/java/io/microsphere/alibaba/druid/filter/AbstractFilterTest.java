@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.druid.filter;
+package io.microsphere.alibaba.druid.filter;
 
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
