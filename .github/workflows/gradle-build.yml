@@ -9,7 +9,7 @@ on:
   push:
     branches: [ "dev-1.x" ]
   pull_request:
-    branches: [ "dev-1.x" , "release-1.x"]
+    branches: [ "release-1.x"]
 
 jobs:
   build:

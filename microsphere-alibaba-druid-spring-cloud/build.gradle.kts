@@ -7,8 +7,6 @@ description = "Microsphere Alibaba Druid Spring Cloud"
 dependencies {
     // BOM
 
-    // Microsphere Java Code
-    "optionalApi"("io.github.microsphere-projects:microsphere-java-core")
 
     // Alibaba Druid
     "optionalApi"(libs.druid)

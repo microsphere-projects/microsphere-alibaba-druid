@@ -14,15 +14,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.druid.filter;
+package io.microsphere.alibaba.druid.spring.beans.factory.config;
 
 import com.alibaba.druid.filter.Filter;
-import com.alibaba.druid.pool.DruidDataSource;
+import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
+import io.microsphere.alibaba.druid.spring.context.annotation.EnableAlibabaDruid;
+import io.microsphere.alibaba.druid.spring.test.DruidDataSourceTestConfiguration;
 import io.microsphere.lang.function.ThrowableConsumer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -31,40 +38,33 @@ import java.sql.Statement;
 import static java.sql.ResultSet.CONCUR_UPDATABLE;
 import static java.sql.ResultSet.TYPE_FORWARD_ONLY;
 import static java.sql.Statement.NO_GENERATED_KEYS;
-import static java.util.Arrays.asList;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * Abstract {@link Filter} Test
+ * {@link DruidDataSourceBeanPostProcessor} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see Filter
+ * @see DruidDataSourceBeanPostProcessor
  * @since 1.0.0
  */
-public abstract class AbstractFilterTest<F extends Filter> {
+@ExtendWith(value = SpringExtension.class)
+@ContextConfiguration(classes = {
+        LoggingStatementFilter.class,
+        DruidDataSourceTestConfiguration.class,
+        DruidDataSourceBeanPostProcessorTest.class,
+})
+@EnableAlibabaDruid(filterBeanClasses = Filter.class)
+public class DruidDataSourceBeanPostProcessorTest {
 
-    private DruidDataSource dataSource;
+    @Autowired
+    private DataSource dataSource;
 
     @BeforeEach
     public void init() throws Throwable {
-        this.dataSource = createDruidDataSource(this.createFilter());
         initData();
     }
-
-    protected abstract F createFilter();
-
-    protected DruidDataSource createDruidDataSource(Filter filter) throws Throwable {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl("jdbc:h2:mem:test_mem");
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUsername("sa");
-        dataSource.setProxyFilters(asList(filter));
-        dataSource.init();
-        return dataSource;
-    }
-
 
     private void initData() throws Throwable {
         executeStatement(statement -> {
@@ -147,7 +147,6 @@ public abstract class AbstractFilterTest<F extends Filter> {
     @AfterEach
     public void destroy() throws Throwable {
         destroyData();
-        dataSource.close();
     }
 
     private void destroyData() throws Throwable {
