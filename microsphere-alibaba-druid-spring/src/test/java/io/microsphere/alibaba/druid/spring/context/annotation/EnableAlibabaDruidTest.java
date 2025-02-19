@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.spring.beans.factory.config;
+package io.microsphere.alibaba.druid.spring.context.annotation;
 
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.spring.test.AbstractDruidSpringTest;
@@ -24,19 +24,18 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
- * {@link DruidDataSourceBeanPostProcessor} Test
+ * {@link EnableAlibabaDruid} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see DruidDataSourceBeanPostProcessor
+ * @see EnableAlibabaDruid
  * @since 1.0.0
  */
 @ExtendWith(value = SpringExtension.class)
 @ContextConfiguration(classes = {
         LoggingStatementFilter.class,
         DruidDataSourceTestConfiguration.class,
-        DruidDataSourceBeanPostProcessor.class,
-        DruidDataSourceBeanPostProcessorTest.class,
+        EnableAlibabaDruidTest.class,
 })
-public class DruidDataSourceBeanPostProcessorTest extends AbstractDruidSpringTest {
-
+@EnableAlibabaDruid(filterBeanClasses = LoggingStatementFilter.class)
+public class EnableAlibabaDruidTest extends AbstractDruidSpringTest {
 }
