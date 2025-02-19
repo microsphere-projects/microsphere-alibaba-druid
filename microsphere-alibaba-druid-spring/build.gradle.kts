@@ -12,9 +12,9 @@ dependencies {
     implementation(platform(libs.spring.framework.bom))
 
     // Microsphere Alibaba Druid
-    implementation(project(":microsphere-alibaba-druid-core"))
+    api(project(":microsphere-alibaba-druid-core"))
     // Microsphere Spring
-    implementation("io.github.microsphere-projects:microsphere-spring-context")
+    api("io.github.microsphere-projects:microsphere-spring-context")
 
     // Alibaba Druid
     "optionalApi"(libs.druid)

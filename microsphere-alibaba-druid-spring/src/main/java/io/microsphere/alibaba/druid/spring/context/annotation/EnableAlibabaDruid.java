@@ -17,6 +17,7 @@
 package io.microsphere.alibaba.druid.spring.context.annotation;
 
 import com.alibaba.druid.filter.Filter;
+import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.Documented;
@@ -41,10 +42,10 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface EnableAlibabaDruid {
 
     /**
-     * The classes of {@link Filter} beans to be registered.
+     * The classes of {@link Filter} beans to be added into {@link DruidDataSource}.
      *
      * @return empty array as default, if value is the class of {@link Filter}, it indicates all {@link Filter} beans
-     * should be registered.
+     * should be added.
      */
     Class<? extends Filter>[] filterBeanClasses() default {};
 

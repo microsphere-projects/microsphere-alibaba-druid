@@ -18,6 +18,7 @@ package io.microsphere.alibaba.druid.spring.beans.factory.config;
 
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
+import io.microsphere.logging.Logger;
 import io.microsphere.spring.beans.factory.config.GenericBeanPostProcessorAdapter;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
@@ -26,8 +27,10 @@ import org.springframework.beans.factory.BeanFactoryAware;
 import java.util.LinkedList;
 import java.util.List;
 
+import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.spring.beans.BeanUtils.getSortedBeans;
 import static io.microsphere.util.ArrayUtils.of;
+import static java.util.Arrays.asList;
 import static org.springframework.core.annotation.AnnotationAwareOrderComparator.sort;
 
 /**
@@ -42,6 +45,8 @@ import static org.springframework.core.annotation.AnnotationAwareOrderComparator
  * @since 1.0.0
  */
 public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAdapter<DruidDataSource> implements BeanFactoryAware {
+
+    private static final Logger logger = getLogger(DruidDataSourceBeanPostProcessor.class);
 
     /**
      * The Spring Bean Name of {@link DruidDataSourceBeanPostProcessor}
@@ -58,6 +63,9 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
 
     public DruidDataSourceBeanPostProcessor(Class<? extends Filter>[] filterBeanClasses) {
         this.filterBeanClasses = filterBeanClasses;
+        if (logger.isTraceEnabled()) {
+            logger.trace("The classes of Filter Bean to be added : {}", asList(filterBeanClasses));
+        }
     }
 
     @Override
@@ -71,6 +79,9 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
             filterBeans.addAll(getSortedBeans(this.beanFactory, filterBeanClass));
         }
         sort(filterBeans);
+        if (logger.isTraceEnabled()) {
+            logger.trace("The {} Filter Beans[{}] will be added into DruidDataSource[{}]", filterBeans.size(), filterBeans, druidDataSource);
+        }
         druidDataSource.getProxyFilters().addAll(filterBeans);
     }
 
