@@ -6,7 +6,7 @@ description = "Microsphere Alibaba Druid Spring"
 
 dependencies {
     // BOM
-    // Microsphere Spring BOM
+    // Microsphere Spring Dependencies(BOM)
     implementation(platform(libs.microsphere.spring.dependencies))
     // Spring Framework BOM
     implementation(platform(libs.spring.framework.bom))
@@ -24,13 +24,7 @@ dependencies {
     "optionalApi"("org.springframework:spring-context")
 
     // Testing
-    testImplementation(libs.junit.jupiter.engine)
-
-    // H2 DataBase
-    testImplementation(libs.h2)
-
-    // Logback
-    testImplementation(libs.logback.classic)
+    testImplementation(project(":microsphere-alibaba-druid-test"))
 
     // Spring Framework Test
     testImplementation("org.springframework:spring-test")

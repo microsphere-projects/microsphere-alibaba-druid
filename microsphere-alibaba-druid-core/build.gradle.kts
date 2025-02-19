@@ -6,6 +6,7 @@ project.description = "Microsphere Alibaba Druid Code"
 
 dependencies {
     // BOM
+    // Microsphere Java Dependencies(BOM)
     implementation(platform(libs.microsphere.java.dependencies))
 
     // Microsphere Java Code
@@ -15,11 +16,5 @@ dependencies {
     "optionalApi"(libs.druid)
 
     // Testing
-    testImplementation(libs.junit.jupiter.engine)
-
-    // H2 DataBase
-    testImplementation(libs.h2)
-
-    // Logback
-    testImplementation(libs.logback.classic)
+    testImplementation(project(":microsphere-alibaba-druid-test"))
 }

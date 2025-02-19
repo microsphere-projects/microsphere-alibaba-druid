@@ -14,26 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.filter;
+package io.microsphere.alibaba.druid.test.spring;
 
-import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+
+import javax.sql.DataSource;
 
 /**
- * Abstract {@link Filter} Test
+ * Abstract Spring Test for Alibaba Druid
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see Filter
+ * @see DataSource
+ * @see DruidDataSource
  * @since 1.0.0
  */
-public abstract class AbstractFilterTest<F extends Filter> extends AbstractAlibabaDruidTest {
+public abstract class AbstractDruidSpringTest extends AbstractAlibabaDruidTest {
 
-    @Override
-    protected void customize(DruidDataSource dataSource) {
-        dataSource.getProxyFilters().add(createFilter());
+    @Autowired
+    private BeanFactory beanFactory;
+
+    protected DruidDataSource buildDruidDataSource() {
+        return beanFactory.getBean(DruidDataSource.class);
     }
-
-    protected abstract F createFilter();
 
 }
