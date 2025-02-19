@@ -11,10 +11,10 @@ dependencies {
     // Spring Framework BOM
     implementation(platform(libs.spring.framework.bom))
 
+    // Microsphere Alibaba Druid
+    implementation(project(":microsphere-alibaba-druid-core"))
     // Microsphere Spring
-    "optionalApi"("io.github.microsphere-projects:microsphere-spring-context")
-    // Microsphere Java Code
-    "optionalApi"("io.github.microsphere-projects:microsphere-java-core")
+    implementation("io.github.microsphere-projects:microsphere-spring-context")
 
     // Alibaba Druid
     "optionalApi"(libs.druid)

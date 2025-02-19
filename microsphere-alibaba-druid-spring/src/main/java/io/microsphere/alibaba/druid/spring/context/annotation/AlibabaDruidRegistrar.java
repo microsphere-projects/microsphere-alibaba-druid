@@ -52,6 +52,7 @@ class AlibabaDruidRegistrar extends BeanCapableImportCandidate implements Import
         Class<? extends Filter>[] filterBeanClasses = (Class<? extends Filter>[]) attributes.getClassArray("filterBeanClasses");
         String beanName = BEAN_NAME;
         Class<?> beanClass = DruidDataSourceBeanPostProcessor.class;
-        registerBeanDefinition(registry, beanName, beanClass, filterBeanClasses);
+        Object argument = filterBeanClasses;
+        registerBeanDefinition(registry, beanName, beanClass, argument);
     }
 }
