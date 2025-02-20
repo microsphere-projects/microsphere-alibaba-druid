@@ -89,7 +89,7 @@ public abstract class AbstractAlibabaDruidTest {
     }
 
     @Test
-    public final void test() throws Throwable {
+    public void test() throws Throwable {
         testExecuteStatement();
         testExecutePreparedStatement();
     }
