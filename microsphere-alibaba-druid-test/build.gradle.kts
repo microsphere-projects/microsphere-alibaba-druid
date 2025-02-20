@@ -2,7 +2,8 @@ plugins {
     id("buildlogic.java-library-conventions")
 }
 
-project.description = "Microsphere Alibaba Druid Code"
+description = "Microsphere Alibaba Druid Test"
+
 
 dependencies {
     // BOM
@@ -16,5 +17,12 @@ dependencies {
     "optionalApi"(libs.druid)
 
     // Testing
-    testImplementation(project(":microsphere-alibaba-druid-test"))
+    api(libs.junit.jupiter.engine)
+
+    // H2 DataBase
+    api(libs.h2)
+
+    // Logback
+    api(libs.logback.classic)
+
 }

@@ -6,16 +6,26 @@ description = "Microsphere Alibaba Druid Spring Boot"
 
 dependencies {
     // BOM
+    // Microsphere Spring Boot BOM
+    implementation(platform(libs.microsphere.spring.boot.dependencies))
+    // Spring Boot BOM
+    implementation(platform(libs.spring.boot.dependencies))
+
+    // Microsphere Alibaba Druid Spring
+    api(project(":microsphere-alibaba-druid-spring"))
+    // Microsphere Spring
+    api("io.github.microsphere-projects:microsphere-spring-boot-core")
 
     // Alibaba Druid
     "optionalApi"(libs.druid)
 
+    // Spring Boot
+    "optionalApi"("org.springframework.boot:spring-boot-starter")
+    "optionalApi"("org.springframework.boot:spring-boot-configuration-processor")
+
     // Testing
-    testImplementation(libs.junit.jupiter.engine)
+    testImplementation(project(":microsphere-alibaba-druid-spring-test"))
 
-    // H2 DataBase
-    testImplementation(libs.h2)
-
-    // Logback
-    testImplementation(libs.logback.classic)
+    // Spring Boot Test
+    testImplementation("org.springframework.boot:spring-boot-starter-test")
 }

@@ -14,14 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.spring.test;
+package io.microsphere.alibaba.druid.test;
 
+import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.lang.function.ThrowableConsumer;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -37,21 +37,49 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * Abstract Spring Test for Alibaba Druid
+ * Abstract Test for Alibaba Druid
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see DataSource
- * @see DruidDataSource
+ * @see Filter
  * @since 1.0.0
  */
-public abstract class AbstractDruidSpringTest {
+public abstract class AbstractAlibabaDruidTest {
 
-    @Autowired
-    private DataSource dataSource;
+    private DruidDataSource dataSource;
 
     @BeforeEach
     public void init() throws Throwable {
+        DruidDataSource dataSource = buildDruidDataSource();
+        customize(dataSource);
+        dataSource.init();
+        this.dataSource = dataSource;
         initData();
+    }
+
+    /**
+     * Build an instance of {@link DruidDataSource}
+     *
+     * @return non-null
+     */
+    protected DruidDataSource buildDruidDataSource() {
+        return createDruidDataSource();
+    }
+
+    /**
+     * Customize the {@link DruidDataSource}
+     *
+     * @param dataSource the {@link DruidDataSource}
+     */
+    protected void customize(DruidDataSource dataSource) {
+    }
+
+    /**
+     * Get the {@link DataSource}
+     *
+     * @return non-null
+     */
+    protected DruidDataSource getDruidDataSource() {
+        return this.dataSource;
     }
 
     private void initData() throws Throwable {
@@ -82,7 +110,6 @@ public abstract class AbstractDruidSpringTest {
 
     @Test
     public void testExecutePreparedStatement() throws Throwable {
-
         executePreparedStatement("INSERT INTO users (id, name) VALUES (?, ?)", preparedStatement -> {
             preparedStatement.setInt(1, 1);
             preparedStatement.setString(2, "Mercy");
@@ -101,7 +128,7 @@ public abstract class AbstractDruidSpringTest {
         });
     }
 
-    private void executePreparedStatement(String sql, ThrowableConsumer<PreparedStatement> consumer) throws Throwable {
+    protected void executePreparedStatement(String sql, ThrowableConsumer<PreparedStatement> consumer) throws Throwable {
         executeConnection(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
             try {
@@ -112,7 +139,7 @@ public abstract class AbstractDruidSpringTest {
         });
     }
 
-    private void executeStatement(ThrowableConsumer<Statement> consumer) throws Throwable {
+    protected void executeStatement(ThrowableConsumer<Statement> consumer) throws Throwable {
         executeConnection(connection -> {
             Statement statement = connection.createStatement();
             try {
@@ -123,7 +150,8 @@ public abstract class AbstractDruidSpringTest {
         });
     }
 
-    private void executeConnection(ThrowableConsumer<Connection> consumer) throws Throwable {
+    protected void executeConnection(ThrowableConsumer<Connection> consumer) throws Throwable {
+        DataSource dataSource = getDruidDataSource();
         Connection connection = dataSource.getConnection();
         try {
             consumer.accept(connection);
@@ -135,11 +163,21 @@ public abstract class AbstractDruidSpringTest {
     @AfterEach
     public void destroy() throws Throwable {
         destroyData();
+        DruidDataSource dataSource = getDruidDataSource();
+        dataSource.close();
     }
 
     private void destroyData() throws Throwable {
         executeStatement(statement -> {
             statement.execute("DROP TABLE users");
         });
+    }
+
+    public static DruidDataSource createDruidDataSource() {
+        DruidDataSource dataSource = new DruidDataSource();
+        dataSource.setUrl("jdbc:h2:mem:test_mem");
+        dataSource.setDriverClassName("org.h2.Driver");
+        dataSource.setUsername("sa");
+        return dataSource;
     }
 }

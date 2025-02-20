@@ -14,29 +14,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.spring.beans.factory.config;
+package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
-import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
+import com.alibaba.druid.pool.DruidDataSource;
+import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * {@link DruidDataSourceBeanPostProcessor} Test
+ * {@link AlibabaDruidAutoConfiguration} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see DruidDataSourceBeanPostProcessor
+ * @see AlibabaDruidAutoConfiguration
  * @since 1.0.0
  */
-@ExtendWith(value = SpringExtension.class)
-@ContextConfiguration(classes = {
-        LoggingStatementFilter.class,
+@SpringBootTest(classes = {
         DruidDataSourceTestConfiguration.class,
-        DruidDataSourceBeanPostProcessor.class,
-        DruidDataSourceBeanPostProcessorTest.class,
-})
-public class DruidDataSourceBeanPostProcessorTest extends AbstractDruidSpringTest {
+        AlibabaDruidAutoConfigurationTest.class
+}, webEnvironment = SpringBootTest.WebEnvironment.NONE)
+@EnableAutoConfiguration
+public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
 
+    @Autowired
+    private AlibabaDruidProperties alibabaDruidProperties;
+
+    @Override
+    protected void customize(DruidDataSource dataSource) {
+        assertNotNull(alibabaDruidProperties);
+    }
 }
+

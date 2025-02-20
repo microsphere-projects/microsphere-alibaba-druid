@@ -14,10 +14,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.spring.test;
+package io.microsphere.alibaba.druid.test.spring;
 
 import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Scope;
+
+import static io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest.createDruidDataSource;
+import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 /**
  * {@link DruidDataSource} Test Configuration
@@ -29,11 +33,8 @@ import org.springframework.context.annotation.Bean;
 public class DruidDataSourceTestConfiguration {
 
     @Bean(initMethod = "init", destroyMethod = "close")
+    @Scope(SCOPE_PROTOTYPE)
     public DruidDataSource dataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl("jdbc:h2:mem:test_mem");
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUsername("sa");
-        return dataSource;
+        return createDruidDataSource();
     }
 }

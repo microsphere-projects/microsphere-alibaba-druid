@@ -44,9 +44,9 @@ public @interface EnableAlibabaDruid {
     /**
      * The classes of {@link Filter} beans to be added into {@link DruidDataSource}.
      *
-     * @return empty array as default, if value is the class of {@link Filter}, it indicates all {@link Filter} beans
+     * @return The default value is the class of {@link Filter}, it indicates all {@link Filter} beans
      * should be added.
      */
-    Class<? extends Filter>[] filterBeanClasses() default {};
+    Class<? extends Filter>[] filterBeanClasses() default {Filter.class};
 
 }
