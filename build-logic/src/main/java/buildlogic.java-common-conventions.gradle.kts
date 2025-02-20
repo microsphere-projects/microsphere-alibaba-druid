@@ -1,4 +1,3 @@
-
 plugins {
     `java`
 }
@@ -35,6 +34,10 @@ java {
 
 tasks.javadoc {
     if (JavaVersion.current().isJava8Compatible) {
-        (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "quiet")
+        options {
+            this as StandardJavadocDocletOptions
+            addBooleanOption("Xdoclint:none", true)
+            addBooleanOption("quiet", true)
+        }
     }
 }
