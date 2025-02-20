@@ -16,7 +16,6 @@
  */
 package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
