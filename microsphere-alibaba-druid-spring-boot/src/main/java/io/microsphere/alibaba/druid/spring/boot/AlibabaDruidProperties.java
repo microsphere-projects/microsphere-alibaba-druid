@@ -18,8 +18,9 @@ package io.microsphere.alibaba.druid.spring.boot;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME;
 import static io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties.PREFIX;
-import static io.microsphere.constants.PropertyConstants.MICROSPHERE_PROPERTY_NAME_PREFIX;
+import static io.microsphere.spring.boot.constants.PropertyConstants.MICROSPHERE_SPRING_BOOT_PROPERTY_NAME_PREFIX;
 import static io.microsphere.util.ArrayUtils.of;
 
 /**
@@ -35,7 +36,7 @@ public class AlibabaDruidProperties {
     /**
      * The prefix of property name of the Spring Boot Properties class for Alibaba Druid
      */
-    public static final String PREFIX = MICROSPHERE_PROPERTY_NAME_PREFIX + "alibaba.druid";
+    public static final String PREFIX = MICROSPHERE_SPRING_BOOT_PROPERTY_NAME_PREFIX + ALIBABA_DRUID_PROPERTY_NAME;
 
     private boolean enabled = true;
 

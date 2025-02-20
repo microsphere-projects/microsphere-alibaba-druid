@@ -6,9 +6,9 @@ description = "Microsphere Alibaba Druid Spring Boot"
 
 dependencies {
     // BOM
-    // Microsphere Spring Boot BOM
+    // Microsphere Spring Boot Dependencies (BOM)
     implementation(platform(libs.microsphere.spring.boot.dependencies))
-    // Spring Boot BOM
+    // Spring Boot Dependencies (BOM)
     implementation(platform(libs.spring.boot.dependencies))
 
     // Microsphere Alibaba Druid Spring
@@ -21,6 +21,7 @@ dependencies {
 
     // Spring Boot
     "optionalApi"("org.springframework.boot:spring-boot-starter")
+    "optionalApi"("org.springframework.boot:spring-boot-starter-actuator")
     "optionalApi"("org.springframework.boot:spring-boot-configuration-processor")
 
     // Testing

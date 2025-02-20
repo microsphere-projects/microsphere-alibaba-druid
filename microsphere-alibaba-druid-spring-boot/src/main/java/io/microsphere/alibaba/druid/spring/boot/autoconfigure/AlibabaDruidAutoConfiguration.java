@@ -18,14 +18,10 @@ package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
 import io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
+import io.microsphere.alibaba.druid.spring.boot.condition.ConditionalOnAlibabaDruidAvailable;
 import org.springframework.beans.factory.config.BeanPostProcessor;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
-
-import static io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties.PREFIX;
-import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 
 /**
  * The Auto-Configuration for Alibaba Druid
@@ -34,8 +30,7 @@ import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
  * @see AlibabaDruidProperties
  * @since 1.0.0
  */
-@ConditionalOnProperty(prefix = PREFIX, name = ENABLED_PROPERTY_NAME, matchIfMissing = true)
-@ConditionalOnClass(name = "com.alibaba.druid.pool.DruidDataSource")
+@ConditionalOnAlibabaDruidAvailable
 @EnableConfigurationProperties(AlibabaDruidProperties.class)
 public class AlibabaDruidAutoConfiguration {
 

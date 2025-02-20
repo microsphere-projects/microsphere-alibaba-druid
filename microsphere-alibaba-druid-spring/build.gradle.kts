@@ -6,7 +6,7 @@ description = "Microsphere Alibaba Druid Spring"
 
 dependencies {
     // BOM
-    // Microsphere Spring Dependencies(BOM)
+    // Microsphere Spring Dependencies (BOM)
     implementation(platform(libs.microsphere.spring.dependencies))
     // Spring Framework BOM
     implementation(platform(libs.spring.framework.bom))

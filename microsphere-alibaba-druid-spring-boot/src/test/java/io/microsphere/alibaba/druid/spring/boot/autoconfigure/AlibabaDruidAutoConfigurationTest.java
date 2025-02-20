@@ -16,11 +16,11 @@
  */
 package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
-import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -36,14 +36,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  * @see AlibabaDruidAutoConfiguration
  * @since 1.0.0
  */
-@SpringBootTest(classes = {
-        LoggingStatementFilter.class,
-        DruidDataSourceTestConfiguration.class,
-        AlibabaDruidAutoConfigurationTest.class
-}, webEnvironment = SpringBootTest.WebEnvironment.NONE, properties = {
-        "microsphere.alibaba.druid.enabled=true",
-        "microsphere.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
-})
+@SpringBootTest(
+        classes = {
+                LoggingStatementFilter.class,
+                DruidDataSourceTestConfiguration.class,
+                AlibabaDruidAutoConfigurationTest.class
+        },
+        webEnvironment = SpringBootTest.WebEnvironment.NONE,
+        properties = {
+                "microsphere.spring.boot.alibaba.druid.enabled=true",
+                "microsphere.spring.boot.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
+        })
 @EnableAutoConfiguration
 public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
 
@@ -53,8 +56,9 @@ public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
     @Autowired
     private LoggingStatementFilter loggingStatementFilter;
 
-    @Override
-    protected void customize(DruidDataSource dataSource) {
+    @Test
+    public void test() throws Throwable {
+        super.test();
         assertNotNull(alibabaDruidProperties);
         assertNotNull(loggingStatementFilter);
 
