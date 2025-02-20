@@ -16,5 +16,6 @@ include(
     "microsphere-alibaba-druid-spring-boot",
     "microsphere-alibaba-druid-spring-cloud",
     "microsphere-alibaba-druid-test",
+    "microsphere-alibaba-druid-spring-test",
     "microsphere-alibaba-druid-dependencies",
 )

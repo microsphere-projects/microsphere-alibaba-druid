@@ -9,8 +9,6 @@ dependencies {
     // BOM
     // Microsphere Java Dependencies(BOM)
     implementation(platform(libs.microsphere.java.dependencies))
-    // Spring Framework BOM
-    implementation(platform(libs.spring.framework.bom))
 
     // Microsphere Java Code
     "optionalApi"("io.github.microsphere-projects:microsphere-java-core")
@@ -26,11 +24,5 @@ dependencies {
 
     // Logback
     api(libs.logback.classic)
-
-    // Spring Framework
-    api("org.springframework:spring-context")
-
-    // Spring Test
-    api("org.springframework:spring-test")
 
 }

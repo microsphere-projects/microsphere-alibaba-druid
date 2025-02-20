@@ -17,7 +17,6 @@
 package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import io.microsphere.alibaba.druid.spring.boot.AbstractDruidSpringBootTest;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;

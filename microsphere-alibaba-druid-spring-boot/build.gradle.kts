@@ -24,7 +24,7 @@ dependencies {
     "optionalApi"("org.springframework.boot:spring-boot-configuration-processor")
 
     // Testing
-    testImplementation(project(":microsphere-alibaba-druid-test"))
+    testImplementation(project(":microsphere-alibaba-druid-spring-test"))
 
     // Spring Boot Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

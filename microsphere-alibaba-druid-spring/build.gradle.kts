@@ -24,7 +24,7 @@ dependencies {
     "optionalApi"("org.springframework:spring-context")
 
     // Testing
-    testImplementation(project(":microsphere-alibaba-druid-test"))
+    testImplementation(project(":microsphere-alibaba-druid-spring-test"))
 
     // Spring Framework Test
     testImplementation("org.springframework:spring-test")
