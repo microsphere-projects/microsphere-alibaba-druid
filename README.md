@@ -35,7 +35,7 @@ Microsphere Alibaba Druid supports the following features:
     <dependencies>
         <groupId>io.github.microsphere-projects</groupId>
         <artifactId>microsphere-alibaba-druid-dependencies</artifactId>
-        <version>${microsphere-alibaba-druid.version}</version>
+        <version>0.0.1</version>
     </dependency>
 </dependencyManagement>
 ```
@@ -44,7 +44,7 @@ Microsphere Alibaba Druid supports the following features:
 
 
 ```kotlin
-implementation(platform("io.github.microsphere-projects:microsphere-alibaba-druid-dependencies:${microsphere-alibaba-druid.version}"))
+implementation(platform("io.github.microsphere-projects:microsphere-alibaba-druid-dependencies:0.0.1"))
 ```
 
 ### 3.2. Demo
