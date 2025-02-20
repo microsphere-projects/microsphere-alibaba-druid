@@ -89,7 +89,12 @@ public abstract class AbstractAlibabaDruidTest {
     }
 
     @Test
-    public void testExecuteStatement() throws Throwable {
+    public final void test() throws Throwable {
+        testExecuteStatement();
+        testExecutePreparedStatement();
+    }
+
+    protected void testExecuteStatement() throws Throwable {
         executeStatement(statement -> {
             assertEquals(1, statement.executeUpdate("INSERT INTO users (id, name) VALUES (1, 'Mercy')"));
             assertEquals(1, statement.executeUpdate("INSERT INTO users (id, name) VALUES (2, 'Blitz')", new String[0]));
@@ -108,8 +113,7 @@ public abstract class AbstractAlibabaDruidTest {
         });
     }
 
-    @Test
-    public void testExecutePreparedStatement() throws Throwable {
+    protected void testExecutePreparedStatement() throws Throwable {
         executePreparedStatement("INSERT INTO users (id, name) VALUES (?, ?)", preparedStatement -> {
             preparedStatement.setInt(1, 1);
             preparedStatement.setString(2, "Mercy");
