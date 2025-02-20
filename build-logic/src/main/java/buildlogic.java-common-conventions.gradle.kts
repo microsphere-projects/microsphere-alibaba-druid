@@ -1,4 +1,3 @@
-
 plugins {
     `java`
 }
@@ -20,10 +19,10 @@ repositories {
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
     toolchain {
-        languageVersion = JavaLanguageVersion.of(8)
+        languageVersion = JavaLanguageVersion.of(17)
     }
     registerFeature("optional") {
         usingSourceSet(sourceSets["main"])
@@ -33,12 +32,12 @@ java {
     withSourcesJar()
 }
 
-tasks.withType<JavaCompile> {
-    options.compilerArgs.addAll(listOf("-source", "8", "-target", "8"))
-}
-
 tasks.javadoc {
     if (JavaVersion.current().isJava8Compatible) {
-        (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "quiet")
+        options {
+            this as StandardJavadocDocletOptions
+            addBooleanOption("Xdoclint:none", true)
+            addBooleanOption("quiet", true)
+        }
     }
 }
