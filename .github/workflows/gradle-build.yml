@@ -7,7 +7,7 @@ name: Gradle Build
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "main" , "dev" ]
   pull_request:
     branches: [ "main" , "dev" , "release" ]
 
