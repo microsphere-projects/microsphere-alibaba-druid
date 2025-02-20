@@ -15,7 +15,7 @@ subprojects {
     apply(plugin = "maven-publish")
     apply(plugin = "signing")
 
-    val mavenTaskName = "mavenJava-${name}"
+    val mavenTaskName = "maven-${name}"
     
     publishing {
         publications {
