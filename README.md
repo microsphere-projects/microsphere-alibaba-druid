@@ -44,29 +44,11 @@ Microsphere Alibaba Druid supports the following features:
 implementation("io.github.microsphere-projects:microsphere-alibaba-druid:${microsphere-alibaba-druid.version}")
 ```
 
-### 3.2. Coding
+### 3.2. Demo
 
-See AbstractStatementFilter [Demo](src/main/java/io/microsphere/druid/filter/LoggingStatementFilter.java): 
+See [Demo](microsphere-alibaba-druid-core/src/main/java/io/microsphere/druid/filter/LoggingStatementFilter.java):
 
-```java
-import com.alibaba.druid.filter.Filter;
-import com.alibaba.druid.proxy.jdbc.StatementProxy;
-import io.microsphere.druid.filter.AbstractStatementFilter;
-
-public class LoggingStatementFilter extends AbstractStatementFilter {
-
-    @Override
-    protected void beforeExecute(StatementProxy statement, String resourceName) throws Throwable {
-        logger.debug("beforeExecute(statement : {} , resource name : '{}') : {}", statement.getLastExecuteSql(), resourceName);
-    }
-
-    @Override
-    protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
-        logger.debug("afterExecute(statement : {} , resource name : '{}' , result : {} , failure : {})",
-                statement.getLastExecuteSql(), resourceName, result, failure);
-    }
-}
-```
+More: [Wiki](https://github.com/microsphere-projects/microsphere-alibaba-druid/wiki)
 
 ## 4. Contributing
 
