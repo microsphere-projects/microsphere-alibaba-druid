@@ -1,8 +1,8 @@
 # Microsphere Alibaba Druid
 
 [![Maven Build](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/gradle-build.yml)
-[![Codecov](https://codecov.io/gh/microsphere-projects/microsphere-alibaba-druid/branch/main/graph/badge.svg)](https://app.codecov.io/gh/microsphere-projects/microsphere-alibaba-druid)
-![Maven](https://img.shields.io/maven-central/v/io.github.microsphere-projects/microsphere-alibaba-druid.svg)
+[![Codecov](https://codecov.io/gh/microsphere-projects/microsphere-alibaba-druid/branch/dev-1.x/graph/badge.svg)](https://app.codecov.io/gh/microsphere-projects/microsphere-alibaba-druid)
+![Maven](https://img.shields.io/maven-central/v/io.github.microsphere-projects/microsphere-alibaba-druid-dependencies.svg)
 ![License](https://img.shields.io/github/license/microsphere-projects/microsphere-alibaba-druid.svg)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/microsphere-projects/microsphere-alibaba-druid.svg)](http://isitmaintained.com/project/microsphere-projects/microsphere-alibaba-druid "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/microsphere-projects/microsphere-alibaba-druid.svg)](http://isitmaintained.com/project/microsphere-projects/microsphere-alibaba-druid "Percentage of issues still open")
@@ -31,11 +31,13 @@ Microsphere Alibaba Druid supports the following features:
 #### 3.1.1 Maven
 
 ```xml
-<dependency>
-    <groupId>io.github.microsphere-projects</groupId>
-    <artifactId>microsphere-alibaba-druid</artifactId>
-    <version>${microsphere-alibaba-druid.version}</version>
-</dependency>
+<dependencyManagement>
+    <dependencies>
+        <groupId>io.github.microsphere-projects</groupId>
+        <artifactId>microsphere-alibaba-druid-dependencies</artifactId>
+        <version>${microsphere-alibaba-druid.version}</version>
+    </dependency>
+</dependencyManagement>
 ```
 
 #### 3.1.2 Gradle Dependency
