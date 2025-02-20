@@ -41,8 +41,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
         DruidDataSourceTestConfiguration.class,
         AlibabaDruidAutoConfigurationTest.class
 }, webEnvironment = SpringBootTest.WebEnvironment.NONE, properties = {
-        "microsphere.alibaba.druid.enabled=true",
-        "microsphere.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
+        "microsphere.spring.boot.alibaba.druid.enabled=true",
+        "microsphere.spring.boot.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
 })
 @EnableAutoConfiguration
 public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
