@@ -1,14 +1,14 @@
 [versions]
 microsphere-java-dependencies-version = "0.0.9"
-microsphere-spring-dependencies-version = "0.1.1"
-microsphere-spring-boot-dependencies-version = "0.1.1"
-microsphere-spring-cloud-dependencies-version = "0.1.0"
+microsphere-spring-dependencies-version = "0.2.1"
+microsphere-spring-boot-dependencies-version = "0.2.1"
+microsphere-spring-cloud-dependencies-version = "0.2.0"
 
 druid-version = "1.2.20"
 h2-version = "1.4.200"
-spring-framework-version = "5.3.39"
-spring-boot-version = "2.7.18"
-spring-cloud-version = "2021.0.9"
+spring-framework-version = "6.2.3"
+spring-boot-version = "3.4.2"
+spring-cloud-version = "2024.0.0"
 
 junit-platform-launcher-version = "1.10.2"
 junit-jupiter-engine-version = "5.10.2"
