@@ -42,15 +42,16 @@ Microsphere Alibaba Druid supports the following features:
 
 #### 3.1.2 Gradle Dependency
 
+
 ```kotlin
-implementation("io.github.microsphere-projects:microsphere-alibaba-druid:${microsphere-alibaba-druid.version}")
+implementation(platform("io.github.microsphere-projects:microsphere-alibaba-druid-dependencies:${microsphere-alibaba-druid.version}"))
 ```
 
 ### 3.2. Demo
 
-See [Demo](microsphere-alibaba-druid-core/src/main/java/io/microsphere/druid/filter/LoggingStatementFilter.java):
+See [Demo](microsphere-alibaba-druid-core/src/main/java/io/microsphere/druid/filter/LoggingStatementFilter.java).
 
-More: [Wiki](https://github.com/microsphere-projects/microsphere-alibaba-druid/wiki)
+More: [Wiki](https://github.com/microsphere-projects/microsphere-alibaba-druid/wiki).
 
 ## 4. Contributing
 
