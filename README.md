@@ -2,7 +2,7 @@
 
 [![Maven Build](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/gradle-build.yml/badge.svg)](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/gradle-build.yml)
 [![Codecov](https://codecov.io/gh/microsphere-projects/microsphere-alibaba-druid/branch/main/graph/badge.svg)](https://app.codecov.io/gh/microsphere-projects/microsphere-alibaba-druid)
-![Maven](https://img.shields.io/maven-central/v/io.github.microsphere-projects/microsphere-alibaba-druid.svg)
+![Maven](https://img.shields.io/maven-central/v/io.github.microsphere-projects/microsphere-alibaba-druid-dependencies.svg)
 ![License](https://img.shields.io/github/license/microsphere-projects/microsphere-alibaba-druid.svg)
 [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/microsphere-projects/microsphere-alibaba-druid.svg)](http://isitmaintained.com/project/microsphere-projects/microsphere-alibaba-druid "Average time to resolve an issue")
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/microsphere-projects/microsphere-alibaba-druid.svg)](http://isitmaintained.com/project/microsphere-projects/microsphere-alibaba-druid "Percentage of issues still open")
@@ -31,42 +31,27 @@ Microsphere Alibaba Druid supports the following features:
 #### 3.1.1 Maven
 
 ```xml
-<dependency>
-    <groupId>io.github.microsphere-projects</groupId>
-    <artifactId>microsphere-alibaba-druid</artifactId>
-    <version>${microsphere-alibaba-druid.version}</version>
-</dependency>
+<dependencyManagement>
+    <dependencies>
+        <groupId>io.github.microsphere-projects</groupId>
+        <artifactId>microsphere-alibaba-druid-dependencies</artifactId>
+        <version>0.0.1</version>
+    </dependency>
+</dependencyManagement>
 ```
 
 #### 3.1.2 Gradle Dependency
 
+
 ```kotlin
-implementation("io.github.microsphere-projects:microsphere-alibaba-druid:${microsphere-alibaba-druid.version}")
+implementation(platform("io.github.microsphere-projects:microsphere-alibaba-druid-dependencies:0.0.1"))
 ```
 
-### 3.2. Coding
+### 3.2. Demo
 
-See AbstractStatementFilter [Demo](src/main/java/io/microsphere/druid/filter/LoggingStatementFilter.java): 
+See [Demo](microsphere-alibaba-druid-core/src/main/java/io/microsphere/druid/filter/LoggingStatementFilter.java).
 
-```java
-import com.alibaba.druid.filter.Filter;
-import com.alibaba.druid.proxy.jdbc.StatementProxy;
-import io.microsphere.druid.filter.AbstractStatementFilter;
-
-public class LoggingStatementFilter extends AbstractStatementFilter {
-
-    @Override
-    protected void beforeExecute(StatementProxy statement, String resourceName) throws Throwable {
-        logger.debug("beforeExecute(statement : {} , resource name : '{}') : {}", statement.getLastExecuteSql(), resourceName);
-    }
-
-    @Override
-    protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
-        logger.debug("afterExecute(statement : {} , resource name : '{}' , result : {} , failure : {})",
-                statement.getLastExecuteSql(), resourceName, result, failure);
-    }
-}
-```
+More: [Wiki](https://github.com/microsphere-projects/microsphere-alibaba-druid/wiki).
 
 ## 4. Contributing
 

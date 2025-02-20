@@ -1,16 +1,28 @@
 [versions]
 microsphere-java-dependencies-version = "0.0.9"
+microsphere-spring-dependencies-version = "0.1.1"
+microsphere-spring-boot-dependencies-version = "0.1.1"
+microsphere-spring-cloud-dependencies-version = "0.1.0"
 
 druid-version = "1.2.20"
 h2-version = "1.4.200"
+spring-framework-version = "5.3.39"
+spring-boot-version = "2.7.18"
+spring-cloud-version = "2021.0.9"
 
 junit-platform-launcher-version = "1.10.2"
 junit-jupiter-engine-version = "5.10.2"
-testcontainers-version = "1.20.1"
-logback-version = "1.3.14"
+logback-version = "1.2.12"
 
 [libraries]
 microsphere-java-dependencies = { group = "io.github.microsphere-projects", name = "microsphere-java-dependencies", version.ref = "microsphere-java-dependencies-version" }
+microsphere-spring-dependencies = { group = "io.github.microsphere-projects", name = "microsphere-spring-dependencies", version.ref = "microsphere-spring-dependencies-version" }
+microsphere-spring-boot-dependencies = { group = "io.github.microsphere-projects", name = "microsphere-spring-boot-dependencies", version.ref = "microsphere-spring-boot-dependencies-version" }
+microsphere-spring-cloud-dependencies = { group = "io.github.microsphere-projects", name = "microsphere-spring-cloud-dependencies", version.ref = "microsphere-spring-cloud-dependencies-version" }
+
+spring-framework-bom = { group = "org.springframework", name = "spring-framework-bom", version.ref = "spring-framework-version" }
+spring-boot-dependencies = { group = "org.springframework.boot", name = "spring-boot-dependencies", version.ref = "spring-boot-version" }
+spring-cloud-dependencies = { group = "org.springframework.cloud", name = "spring-cloud-dependencies", version.ref = "spring-cloud-version" }
 
 druid = { group = "com.alibaba", name = "druid", version.ref = "druid-version" }
 h2 = { group = "com.h2database", name = "h2", version.ref = "h2-version" }
