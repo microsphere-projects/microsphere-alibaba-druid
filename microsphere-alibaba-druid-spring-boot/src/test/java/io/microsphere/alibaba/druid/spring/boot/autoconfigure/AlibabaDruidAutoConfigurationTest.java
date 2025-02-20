@@ -21,6 +21,7 @@ import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -56,8 +57,9 @@ public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
     @Autowired
     private LoggingStatementFilter loggingStatementFilter;
 
-    @Override
-    protected void customize(DruidDataSource dataSource) {
+    @Test
+    public void test() throws Throwable {
+        super.test();
         assertNotNull(alibabaDruidProperties);
         assertNotNull(loggingStatementFilter);
 
