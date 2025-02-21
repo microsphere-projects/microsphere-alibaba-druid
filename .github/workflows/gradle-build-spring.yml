@@ -3,13 +3,13 @@
 # separate terms of service, privacy policy, and support
 # documentation.
 
-name: Gradle Build
+name: Gradle Build - Spring
 
 on:
   push:
-    branches: [ "main" , "dev" ]
+    branches: [ "dev" ]
   pull_request:
-    branches: [ "main" , "dev" , "release" ]
+    branches: [ "dev" ]
 
 jobs:
   build:
@@ -17,6 +17,7 @@ jobs:
     strategy:
       matrix:
         java: [ '17' , '21' ]
+        spring: [ '6.0.23' , '6.1.17' , '6.2.3' ]
 
     steps:
       - name: Checkout Source
@@ -28,8 +29,8 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
 
-      - name: Build with Gradle
-        run: ./gradlew build test
+      - name: Build with Gradle - Spring Framework ${{ matrix.spring }}
+        run: ./gradlew build test -Pspring.version=${{ matrix.spring }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
