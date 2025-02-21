@@ -1,0 +1,39 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Gradle Build - Spring Boot
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '17' , '21' ]
+        spring-boot: [ '3.0.13' , '3.1.12' , '3.2.12' , '3.3.8' , '3.4.2' ]
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup JDK ${{ matrix.Java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+
+      - name: Build with Gradle - Spring Boot ${{ matrix.spring-boot }}
+        run: ./gradlew build test -Pspring-boot.version=${{ matrix.spring-boot }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: microsphere-projects/microsphere-alibaba-druid
