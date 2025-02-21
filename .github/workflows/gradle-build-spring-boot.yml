@@ -17,10 +17,8 @@ jobs:
     strategy:
       matrix:
         java: [ '8' , '11' , '17' , '21' ]
-        spring-boot: [
-          '2.1.18.RELEASE' , '2.2.13.RELEASE' , '2.3.12.RELEASE' ,
-          '2.4.13' , '2.5.15' , '2.6.15' , '2.7.18'
-        ]
+        spring-boot: [ '2.0.9.RELEASE' , '2.1.18.RELEASE' , '2.2.13.RELEASE' , '2.3.12.RELEASE' ,
+                       '2.4.13' , '2.5.15' , '2.6.15' , '2.7.18' ]
 
     steps:
       - name: Checkout Source
