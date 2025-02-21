@@ -24,7 +24,7 @@ jobs:
       packages: write
     strategy:
       matrix:
-        java: [ '17' ]
+        java: [ '11' ]
 
     steps:
     - name: Checkout Source

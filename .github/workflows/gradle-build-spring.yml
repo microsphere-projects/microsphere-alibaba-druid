@@ -7,17 +7,17 @@ name: Gradle Build - Spring
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "dev-1.x" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "dev-1.x" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '17' , '21' ]
-        spring: [ '6.0.23' , '6.1.17' , '6.2.3' ]
+        java: [ '8' , '11' , '17' , '21' ]
+        spring: [ '4.3.30.RELEASE' , '5.0.20.RELEASE' , '5.1.20.RELEASE' , '5.2.25.RELEASE' ,  '5.3.39' ]
 
     steps:
       - name: Checkout Source

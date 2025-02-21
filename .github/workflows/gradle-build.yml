@@ -7,16 +7,16 @@ name: Gradle Build
 
 on:
   push:
-    branches: [ "main" , "dev" ]
+    branches: [ "dev-1.x" ]
   pull_request:
-    branches: [ "main" , "dev" , "release" ]
+    branches: [ "dev-1.x" , "release-1.x" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '17' , '21' ]
+        java: [ '8' , '11' , '17' , '21' ]
 
     steps:
       - name: Checkout Source

@@ -7,17 +7,20 @@ name: Gradle Build - Spring Boot
 
 on:
   push:
-    branches: [ "dev" ]
+    branches: [ "dev-1.x" ]
   pull_request:
-    branches: [ "dev" ]
+    branches: [ "dev-1.x" ]
 
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        java: [ '17' , '21' ]
-        spring-boot: [ '3.0.13' , '3.1.12' , '3.2.12' , '3.3.8' , '3.4.2' ]
+        java: [ '8' , '11' , '17' , '21' ]
+        spring-boot: [
+          '2.1.18.RELEASE' , '2.2.13.RELEASE' , '2.3.12.RELEASE' ,
+          '2.4.13' , '2.5.15' , '2.6.15' , '2.7.18'
+        ]
 
     steps:
       - name: Checkout Source
