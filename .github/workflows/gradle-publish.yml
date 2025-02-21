@@ -11,9 +11,9 @@ on:
   workflow_dispatch:
     inputs:
       revision:
-        description: 'The version to release'
+        description: 'The version to release 1.x'
         required: true
-        default: '2.0.0-SNAPSHOT'
+        default: '0.0.1-SNAPSHOT'
 
 jobs:
   build:
