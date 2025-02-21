@@ -1,4 +1,3 @@
-
 plugins {
     `java`
 }
@@ -33,12 +32,12 @@ java {
     withSourcesJar()
 }
 
-tasks.withType<JavaCompile> {
-    options.compilerArgs.addAll(listOf("-source", "8", "-target", "8"))
-}
-
 tasks.javadoc {
     if (JavaVersion.current().isJava8Compatible) {
-        (options as StandardJavadocDocletOptions).addStringOption("Xdoclint:none", "quiet")
+        options {
+            this as StandardJavadocDocletOptions
+            addBooleanOption("Xdoclint:none", true)
+            addBooleanOption("quiet", true)
+        }
     }
 }
