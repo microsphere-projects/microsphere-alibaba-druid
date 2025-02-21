@@ -1,0 +1,43 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Gradle Build - Spring Cloud
+
+on:
+  push:
+    branches: [ "dev" ]
+  pull_request:
+    branches: [ "dev" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        java: [ '17' , '21' ]
+        spring-cloud: [
+          '2022.0.5' , '2022.0.4' , '2022.0.3' , '2022.0.2' , '2022.0.1' , '2022.0.0' ,
+          '2023.0.5' , '2023.0.4' , '2023.0.3' , '2023.0.2' , '2023.0.1' , '2023.0.0' ,
+          '2024.0.0'
+        ]
+
+    steps:
+      - name: Checkout Source
+        uses: actions/checkout@v4
+
+      - name: Setup JDK ${{ matrix.Java }}
+        uses: actions/setup-java@v4
+        with:
+          java-version: ${{ matrix.java }}
+          distribution: 'temurin'
+
+      - name: Build with Gradle - Spring Cloud ${{ matrix.spring-cloud }}
+        run: ./gradlew build test -Pspring-cloud.version=${{ matrix.spring-cloud }}
+
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: microsphere-projects/microsphere-alibaba-druid
