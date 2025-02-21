@@ -17,7 +17,7 @@ jobs:
     strategy:
       matrix:
         java: [ '17' , '21' ]
-        spring-boot: [
+        spring-cloud: [
           '2022.0.5' , '2022.0.4' , '2022.0.3' , '2022.0.2' , '2022.0.1' , '2022.0.0' ,
           '2023.0.5' , '2023.0.4' , '2023.0.3' , '2023.0.2' , '2023.0.1' , '2023.0.0' ,
           '2024.0.0'
@@ -33,8 +33,8 @@ jobs:
           java-version: ${{ matrix.java }}
           distribution: 'temurin'
 
-      - name: Build with Gradle - Spring Boot ${{ matrix.spring-boot }}
-        run: ./gradlew build test -Pspring-boot.version=${{ matrix.spring-boot }}
+      - name: Build with Gradle - Spring Cloud ${{ matrix.spring-cloud }}
+        run: ./gradlew build test -Pspring-cloud.version=${{ matrix.spring-cloud }}
 
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v5
