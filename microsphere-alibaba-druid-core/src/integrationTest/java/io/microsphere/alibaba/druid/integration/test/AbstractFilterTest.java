@@ -14,14 +14,26 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.test;
+package io.microsphere.alibaba.druid.integration.test;
+
+import com.alibaba.druid.filter.Filter;
+import com.alibaba.druid.pool.DruidDataSource;
+import io.microsphere.alibaba.druid.testfixtures.AbstractAlibabaDruidTest;
 
 /**
- * {@link AbstractAlibabaDruidTest} Test
+ * Abstract {@link Filter} Test
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see AbstractAlibabaDruidTest
+ * @see Filter
  * @since 1.0.0
  */
-public class DefaultAlibabaDruidTest extends AbstractAlibabaDruidTest {
+public abstract class AbstractFilterTest<F extends Filter> extends AbstractAlibabaDruidTest {
+
+    @Override
+    protected void customize(DruidDataSource dataSource) {
+        dataSource.getProxyFilters().add(createFilter());
+    }
+
+    protected abstract F createFilter();
+
 }
