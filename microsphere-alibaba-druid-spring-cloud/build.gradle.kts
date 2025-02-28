@@ -1,35 +1,43 @@
 plugins {
-    id("buildlogic.java-library-conventions")
+    `java-library`
+    `java-test-fixtures`
+    `jvm-test-suite`
 }
 
 description = "Microsphere Alibaba Druid Spring Cloud"
-
+val microsphereSpringCloudDependenciesVersion by extra {
+    project.findProperty("microsphere-spring-cloud-dependencies.version")
+}
+val springcloudVersion by extra {
+    project.findProperty("spring-cloud.version")
+}
 dependencies {
     // BOM
     // Microsphere Spring Cloud Dependencies (BOM)
-    implementation(platform(libs.microsphere.spring.cloud.dependencies))
+    implementation(platform("io.github.microsphere-projects:microsphere-spring-cloud-dependencies:$microsphereSpringCloudDependenciesVersion"))
     // Spring Cloud Dependencies (BOM)
-    implementation(platform(libs.spring.cloud.dependencies))
+    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:$springcloudVersion"))
 
     // Microsphere Alibaba Druid Spring Boot
-    api(project(":microsphere-alibaba-druid-spring-boot"))
+    implementation(project(":microsphere-alibaba-druid-spring-boot"))
 
     // Microsphere Spring Cloud Commons
-    api("io.github.microsphere-projects:microsphere-spring-cloud-commons")
+    implementation("io.github.microsphere-projects:microsphere-spring-cloud-commons")
 
     // Alibaba Druid
-    "optionalApi"(libs.druid)
+    implementation("com.alibaba:druid:1.2.20")
+
 
     // Spring Cloud
-    "optionalApi"("org.springframework.cloud:spring-cloud-commons")
+    implementation("org.springframework.cloud:spring-cloud-commons")
 
     // Spring Boot
-    "optionalApi"("org.springframework.boot:spring-boot-starter")
-    "optionalApi"("org.springframework.boot:spring-boot-starter-actuator")
-    "optionalApi"("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-configuration-processor")
 
     // Testing
-    testImplementation(project(":microsphere-alibaba-druid-spring-test"))
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-spring")))
 
     // Spring Boot Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")

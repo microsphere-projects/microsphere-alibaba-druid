@@ -1,31 +1,81 @@
 plugins {
-    id("buildlogic.java-library-conventions")
+    `java-library`
+    `java-test-fixtures`
+    `jvm-test-suite`
 }
 
 description = "Microsphere Alibaba Druid Spring"
-
+val microsphereJavaDependenciesVersion by extra {
+    project.findProperty("microsphere-java-dependencies.version")
+}
+val microsphereSpringDependenciesVersion by extra {
+    project.findProperty("microsphere-spring-dependencies.version")
+}
+val springFrameworkVersion by extra {
+    project.findProperty("spring.version")
+}
 dependencies {
     // BOM
+    // Microsphere Java Dependencies (BOM)
+    implementation(platform("io.github.microsphere-projects:microsphere-java-dependencies:$microsphereJavaDependenciesVersion"))
     // Microsphere Spring Dependencies (BOM)
-    implementation(platform(libs.microsphere.spring.dependencies))
+    implementation(platform("io.github.microsphere-projects:microsphere-spring-dependencies:$microsphereSpringDependenciesVersion"))
+    // Microsphere Java Code
     // Spring Framework BOM
-    implementation(platform(libs.spring.framework.bom))
+    implementation(platform("org.springframework:spring-framework-bom:$springFrameworkVersion"))
 
     // Microsphere Alibaba Druid
-    api(project(":microsphere-alibaba-druid-core"))
+    implementation(project(":microsphere-alibaba-druid-core"))
     // Microsphere Spring
-    api("io.github.microsphere-projects:microsphere-spring-context")
-
+    implementation("io.github.microsphere-projects:microsphere-java-core")
+    implementation("io.github.microsphere-projects:microsphere-spring-context")
     // Alibaba Druid
-    "optionalApi"(libs.druid)
+    implementation("com.alibaba:druid:1.2.20")
+
 
     // Spring Framework
-    "optionalApi"("org.springframework:spring-beans")
-    "optionalApi"("org.springframework:spring-context")
+    implementation("org.springframework:spring-beans")
+    implementation("org.springframework:spring-context")
 
-    // Testing
-    testImplementation(project(":microsphere-alibaba-druid-spring-test"))
 
     // Spring Framework Test
     testImplementation("org.springframework:spring-test")
+
+
+    testFixturesImplementation(platform("org.springframework:spring-framework-bom:$springFrameworkVersion"))
+
+    testFixturesImplementation("com.alibaba:druid:1.2.20")
+    testFixturesImplementation("org.springframework:spring-beans")
+    testFixturesImplementation("org.springframework:spring-context")
+
+}
+
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            useJUnitJupiter()
+        }
+
+        register<JvmTestSuite>("integrationTest") {
+            sources {
+
+            }
+            useJUnitJupiter()
+
+            dependencies {
+                implementation(project.sourceSets.main.get().compileClasspath)
+                runtimeOnly(project.sourceSets.test.get().runtimeClasspath)
+
+                implementation(testFixtures(project(path)))
+
+            }
+            targets {
+                all {
+                    testTask.configure() {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
 }

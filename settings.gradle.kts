@@ -22,10 +22,7 @@ dependencyResolutionManagement {
 
 include(
     "microsphere-alibaba-druid-core",
-//    "microsphere-alibaba-druid-spring",
-//    "microsphere-alibaba-druid-spring-boot",
-//    "microsphere-alibaba-druid-spring-cloud",
-//    "microsphere-alibaba-druid-test",
-//    "microsphere-alibaba-druid-spring-test",
-//    "microsphere-alibaba-druid-dependencies",
+    "microsphere-alibaba-druid-spring",
+    "microsphere-alibaba-druid-spring-boot",
+    "microsphere-alibaba-druid-spring-cloud",
 )
