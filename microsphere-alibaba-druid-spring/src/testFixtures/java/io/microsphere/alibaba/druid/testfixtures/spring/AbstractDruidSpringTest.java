@@ -17,7 +17,7 @@
 package io.microsphere.alibaba.druid.testfixtures.spring;
 
 import com.alibaba.druid.pool.DruidDataSource;
-import io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest;
+import io.microsphere.alibaba.druid.testfixtures.AbstractAlibabaDruidTest;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 

@@ -40,13 +40,18 @@ dependencies {
 
     // Spring Framework Test
     testImplementation("org.springframework:spring-test")
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-core")))
 
-
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+    testRuntimeOnly("com.h2database:h2:1.4.200")
+    testRuntimeOnly("ch.qos.logback:logback-classic:1.2.12")
     testFixturesImplementation(platform("org.springframework:spring-framework-bom:$springFrameworkVersion"))
 
     testFixturesImplementation("com.alibaba:druid:1.2.20")
     testFixturesImplementation("org.springframework:spring-beans")
     testFixturesImplementation("org.springframework:spring-context")
+
+    testFixturesImplementation(testFixtures(project(":microsphere-alibaba-druid-core")))
 
 }
 

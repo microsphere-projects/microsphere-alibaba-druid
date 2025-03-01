@@ -19,6 +19,7 @@ dependencies {
     implementation(platform("org.springframework.cloud:spring-cloud-dependencies:$springcloudVersion"))
 
     // Microsphere Alibaba Druid Spring Boot
+    implementation(project(":microsphere-alibaba-druid-core"))
     implementation(project(":microsphere-alibaba-druid-spring-boot"))
 
     // Microsphere Spring Cloud Commons
@@ -37,8 +38,44 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-configuration-processor")
 
     // Testing
+
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-core")))
     testImplementation(testFixtures(project(":microsphere-alibaba-druid-spring")))
 
     // Spring Boot Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+    testRuntimeOnly("com.h2database:h2:1.4.200")
+    testRuntimeOnly("ch.qos.logback:logback-classic:1.2.12")
+}
+
+testing {
+    suites {
+        val test by getting(JvmTestSuite::class) {
+            useJUnitJupiter()
+        }
+
+        register<JvmTestSuite>("integrationTest") {
+            sources {
+
+            }
+            useJUnitJupiter()
+
+            dependencies{
+                implementation(project.sourceSets.main.get().compileClasspath)
+                runtimeOnly(project.sourceSets.test.get().runtimeClasspath)
+
+                implementation(testFixtures(project(path)))
+
+            }
+            targets {
+                all {
+                    testTask.configure() {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
 }

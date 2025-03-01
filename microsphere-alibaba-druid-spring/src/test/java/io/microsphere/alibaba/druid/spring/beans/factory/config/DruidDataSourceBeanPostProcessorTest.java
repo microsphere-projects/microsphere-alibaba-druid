@@ -17,8 +17,8 @@
 package io.microsphere.alibaba.druid.spring.beans.factory.config;
 
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
-import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
-import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
+import io.microsphere.alibaba.druid.testfixtures.spring.AbstractDruidSpringTest;
+import io.microsphere.alibaba.druid.testfixtures.spring.DruidDataSourceTestConfiguration;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;

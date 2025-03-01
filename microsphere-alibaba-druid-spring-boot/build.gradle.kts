@@ -30,6 +30,8 @@ dependencies {
 
 
     // Microsphere Alibaba Druid Spring
+    implementation(project(":microsphere-alibaba-druid-core"))
+
     implementation(project(":microsphere-alibaba-druid-spring"))
     // Microsphere Spring
     implementation("io.github.microsphere-projects:microsphere-spring-boot-core")
@@ -44,7 +46,14 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-configuration-processor")
 
     // Spring Boot Test
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-core")))
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-spring")))
+
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
+    testRuntimeOnly("com.h2database:h2:1.4.200")
+    testRuntimeOnly("ch.qos.logback:logback-classic:1.2.12")
 }
 
 testing {
