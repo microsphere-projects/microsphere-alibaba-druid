@@ -1,37 +1,20 @@
 plugins {
-    `java-library`
-    `java-test-fixtures`
-    `jvm-test-suite`
+    id("io.microsphere.component.java-library")
+    id("io.microsphere.base.maven-publish")
 }
 
 description = "Microsphere Alibaba Druid Spring Cloud"
-val microsphereSpringCloudDependenciesVersion by extra {
-    project.findProperty("microsphere-spring-cloud-dependencies.version")
-}
-val springcloudVersion by extra {
-    project.findProperty("spring-cloud.version")
-}
-dependencies {
-    // BOM
-    // Microsphere Spring Cloud Dependencies (BOM)
-    implementation(platform("io.github.microsphere-projects:microsphere-spring-cloud-dependencies:$microsphereSpringCloudDependenciesVersion"))
-    // Spring Cloud Dependencies (BOM)
-    implementation(platform("org.springframework.cloud:spring-cloud-dependencies:$springcloudVersion"))
 
+dependencies {
     // Microsphere Alibaba Druid Spring Boot
     implementation(project(":microsphere-alibaba-druid-core"))
     implementation(project(":microsphere-alibaba-druid-spring-boot"))
-
+    // Alibaba Druid
+    implementation(libs.druid)
     // Microsphere Spring Cloud Commons
     implementation("io.github.microsphere-projects:microsphere-spring-cloud-commons")
-
-    // Alibaba Druid
-    implementation("com.alibaba:druid:1.2.20")
-
-
     // Spring Cloud
     implementation("org.springframework.cloud:spring-cloud-commons")
-
     // Spring Boot
     implementation("org.springframework.boot:spring-boot-starter")
     implementation("org.springframework.boot:spring-boot-starter-actuator")
@@ -45,37 +28,7 @@ dependencies {
     // Spring Boot Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
 
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.2")
-    testRuntimeOnly("com.h2database:h2:1.4.200")
-    testRuntimeOnly("ch.qos.logback:logback-classic:1.2.12")
-}
-
-testing {
-    suites {
-        val test by getting(JvmTestSuite::class) {
-            useJUnitJupiter()
-        }
-
-        register<JvmTestSuite>("integrationTest") {
-            sources {
-
-            }
-            useJUnitJupiter()
-
-            dependencies{
-                implementation(project.sourceSets.main.get().compileClasspath)
-                runtimeOnly(project.sourceSets.test.get().runtimeClasspath)
-
-                implementation(testFixtures(project(path)))
-
-            }
-            targets {
-                all {
-                    testTask.configure() {
-                        shouldRunAfter(test)
-                    }
-                }
-            }
-        }
-    }
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly(libs.h2)
+    testRuntimeOnly(libs.logback.classic)
 }
