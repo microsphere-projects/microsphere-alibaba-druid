@@ -18,8 +18,8 @@ package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
-import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
-import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
+import io.microsphere.alibaba.druid.testfixtures.spring.AbstractDruidSpringTest;
+import io.microsphere.alibaba.druid.testfixtures.spring.DruidDataSourceTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;

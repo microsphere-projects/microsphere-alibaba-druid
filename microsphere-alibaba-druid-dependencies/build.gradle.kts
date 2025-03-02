@@ -1,6 +1,7 @@
-
+plugins {
+    `java-platform`
+}
 description = "Microsphere Alibaba Druid Dependencies"
-
 dependencies {
     constraints {
         project.rootProject.subprojects.forEach {

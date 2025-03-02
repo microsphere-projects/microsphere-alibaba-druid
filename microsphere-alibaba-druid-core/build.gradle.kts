@@ -1,20 +1,23 @@
 plugins {
-    id("buildlogic.java-library-conventions")
+    id("io.microsphere.component.java-library")
+    id("io.microsphere.base.maven-publish")
 }
 
 project.description = "Microsphere Alibaba Druid Code"
 
 dependencies {
-    // BOM
-    // Microsphere Java Dependencies (BOM)
-    implementation(platform(libs.microsphere.java.dependencies))
 
-    // Microsphere Java Code
-    api("io.github.microsphere-projects:microsphere-java-core")
+    implementation(libs.druid)
+    implementation("io.github.microsphere-projects:microsphere-java-core")
 
-    // Alibaba Druid
-    "optionalApi"(libs.druid)
+    testImplementation("org.junit.jupiter:junit-jupiter-api")
+    testRuntimeOnly(libs.h2)
+    testRuntimeOnly(libs.logback.classic)
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
 
-    // Testing
-    testImplementation(project(":microsphere-alibaba-druid-test"))
+    testFixturesImplementation(libs.druid)
+    testFixturesImplementation("org.junit.jupiter:junit-jupiter-api")
+    testFixturesImplementation("io.github.microsphere-projects:microsphere-java-core")
+
 }
+

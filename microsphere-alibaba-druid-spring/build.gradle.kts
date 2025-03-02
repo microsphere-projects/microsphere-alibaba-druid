@@ -1,31 +1,35 @@
 plugins {
-    id("buildlogic.java-library-conventions")
+    id("io.microsphere.component.java-library")
+    id("io.microsphere.base.maven-publish")
+
 }
 
 description = "Microsphere Alibaba Druid Spring"
 
 dependencies {
-    // BOM
-    // Microsphere Spring Dependencies (BOM)
-    implementation(platform(libs.microsphere.spring.dependencies))
-    // Spring Framework BOM
-    implementation(platform(libs.spring.framework.bom))
-
     // Microsphere Alibaba Druid
-    api(project(":microsphere-alibaba-druid-core"))
+    implementation(project(":microsphere-alibaba-druid-core"))
     // Microsphere Spring
-    api("io.github.microsphere-projects:microsphere-spring-context")
-
+    implementation("io.github.microsphere-projects:microsphere-java-core")
+    implementation("io.github.microsphere-projects:microsphere-spring-context")
     // Alibaba Druid
-    "optionalApi"(libs.druid)
-
+    implementation(libs.druid)
     // Spring Framework
-    "optionalApi"("org.springframework:spring-beans")
-    "optionalApi"("org.springframework:spring-context")
+    implementation("org.springframework:spring-beans")
+    implementation("org.springframework:spring-context")
 
-    // Testing
-    testImplementation(project(":microsphere-alibaba-druid-spring-test"))
 
     // Spring Framework Test
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-core")))
     testImplementation("org.springframework:spring-test")
+
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly(libs.h2)
+    testRuntimeOnly(libs.logback.classic)
+
+
+    testFixturesImplementation(testFixtures(project(":microsphere-alibaba-druid-core")))
+    testFixturesImplementation(libs.druid)
+    testFixturesImplementation("org.springframework:spring-beans")
+    testFixturesImplementation("org.springframework:spring-context")
 }

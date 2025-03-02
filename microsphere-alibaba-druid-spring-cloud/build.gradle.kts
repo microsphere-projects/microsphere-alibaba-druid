@@ -1,36 +1,34 @@
 plugins {
-    id("buildlogic.java-library-conventions")
+    id("io.microsphere.component.java-library")
+    id("io.microsphere.base.maven-publish")
 }
 
 description = "Microsphere Alibaba Druid Spring Cloud"
 
 dependencies {
-    // BOM
-    // Microsphere Spring Cloud Dependencies (BOM)
-    implementation(platform(libs.microsphere.spring.cloud.dependencies))
-    // Spring Cloud Dependencies (BOM)
-    implementation(platform(libs.spring.cloud.dependencies))
-
     // Microsphere Alibaba Druid Spring Boot
-    api(project(":microsphere-alibaba-druid-spring-boot"))
-
-    // Microsphere Spring Cloud Commons
-    api("io.github.microsphere-projects:microsphere-spring-cloud-commons")
-
+    implementation(project(":microsphere-alibaba-druid-core"))
+    implementation(project(":microsphere-alibaba-druid-spring-boot"))
     // Alibaba Druid
-    "optionalApi"(libs.druid)
-
+    implementation(libs.druid)
+    // Microsphere Spring Cloud Commons
+    implementation("io.github.microsphere-projects:microsphere-spring-cloud-commons")
     // Spring Cloud
-    "optionalApi"("org.springframework.cloud:spring-cloud-commons")
-
+    implementation("org.springframework.cloud:spring-cloud-commons")
     // Spring Boot
-    "optionalApi"("org.springframework.boot:spring-boot-starter")
-    "optionalApi"("org.springframework.boot:spring-boot-starter-actuator")
-    "optionalApi"("org.springframework.boot:spring-boot-configuration-processor")
+    implementation("org.springframework.boot:spring-boot-starter")
+    implementation("org.springframework.boot:spring-boot-starter-actuator")
+    implementation("org.springframework.boot:spring-boot-configuration-processor")
 
     // Testing
-    testImplementation(project(":microsphere-alibaba-druid-spring-test"))
+
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-core")))
+    testImplementation(testFixtures(project(":microsphere-alibaba-druid-spring")))
 
     // Spring Boot Test
     testImplementation("org.springframework.boot:spring-boot-starter-test")
+
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine")
+    testRuntimeOnly(libs.h2)
+    testRuntimeOnly(libs.logback.classic)
 }
