@@ -78,13 +78,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- Microsphere Alibaba Druid Test -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-druid-test</artifactId>
-            <version>${revision}</version>
-        </dependency>
-
     </dependencies>
 
 </project>
