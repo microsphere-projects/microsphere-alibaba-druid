@@ -105,6 +105,7 @@ public abstract class AbstractAlibabaDruidTest {
             assertArrayEquals(new int[]{1, 1}, statement.executeBatch());
             ResultSet resultSet = statement.executeQuery("SELECT id,name FROM users");
             assertNotNull(resultSet);
+            assertEquals(1, statement.executeUpdate("UPDATE users set name = 'Z' WHERE id = 5"));
             statement.execute("DELETE FROM users WHERE id = 1");
             statement.execute("DELETE FROM users WHERE id = 2", new String[0]);
             statement.execute("DELETE FROM users WHERE id = 3", new int[0]);

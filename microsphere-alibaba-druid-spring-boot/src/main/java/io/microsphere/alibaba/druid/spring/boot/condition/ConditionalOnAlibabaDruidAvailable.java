@@ -29,8 +29,9 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * The composite {@link Conditional} for Alibaba Druid : {@link ConditionalOnAlibabaDruidEnabled} and
- * {@link @ConditionalOnClass} for {@link DruidDataSource}.
+ * The composite {@link Conditional} for Alibaba Druid :
+ * {@link ConditionalOnAlibabaDruidEnabled @ConditionalOnAlibabaDruidEnabled} and
+ * {@link ConditionalOnClass @ConditionalOnClass} for {@link DruidDataSource}.
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see ConditionalOnProperty

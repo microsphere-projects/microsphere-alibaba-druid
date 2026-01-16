@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.alibaba.druid.sql.SQLUtils.parseStatements;
+import static io.microsphere.collection.ListUtils.first;
 import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.util.ExceptionUtils.wrap;
 
@@ -77,9 +78,7 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
             DruidDataSource druidDataSource = (DruidDataSource) dataSource;
             this.validationSQL = druidDataSource.getValidationQuery();
         }
-        if (logger.isTraceEnabled()) {
-            logger.trace("DataSourceProxy({}) was initialized with validation SQL : {}", this.dataSource, this.validationSQL);
-        }
+        logger.trace("DataSourceProxy({}) was initialized with validation SQL : {}", this.dataSource, this.validationSQL);
     }
 
     @Override
@@ -158,13 +157,7 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
             failure = e;
             throw wrap(e, SQLException.class);
         } finally {
-            if (logger.isTraceEnabled()) {
-                if (result != null) {
-                    logger.trace("Execute statement [value : {} , resource name : '{}'] : {}", statement.getLastExecuteSql(), resourceName, result);
-                } else if (failure != null) {
-                    logger.trace("It's failed to execute Statement[value : {} , resource name : '{}'] : {}", statement.getLastExecuteSql(), resourceName, failure);
-                }
-            }
+            logger.trace("Execute statement [value : {} , resource name : '{}'] : {}", statement.getLastExecuteSql(), resourceName, result, failure);
             afterExecute(statement, resourceName, result, failure);
         }
         return result;
@@ -177,8 +170,7 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
      * @param resourceName the resource name
      * @throws Throwable if any error
      */
-    protected void beforeExecute(StatementProxy statement, String resourceName) throws Throwable {
-    }
+    protected abstract void beforeExecute(StatementProxy statement, String resourceName) throws Throwable;
 
     /**
      * Execute after call of intercepted method.
@@ -188,8 +180,7 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
      * @param result       the result of intercepted method
      * @param failure      the failure of intercepted method
      */
-    protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
-    }
+    protected abstract void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure);
 
     /**
      * Build resource name
@@ -204,11 +195,8 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         }
         String dbType = dataSource.getDbType();
         List<SQLStatement> statementList = parseStatements(sql, dbType);
-        String resourceName = null;
-        if (statementList.size() > 0) {
-            SQLStatement sqlStatement = statementList.get(0);
-            resourceName = buildResourceName(sqlStatement);
-        }
+        SQLStatement sqlStatement = first(statementList);
+        String resourceName = buildResourceName(sqlStatement);
         if (resourceName == null) {
             logger.debug("The JDBC statement can't be recognized, sql : '{}' , dbType : '{}'", sql, dbType);
             resourceName = "UNRECOGNIZED";
@@ -216,7 +204,7 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         return resourceName;
     }
 
-    private String buildResourceName(SQLStatement sqlStatement) {
+    protected String buildResourceName(SQLStatement sqlStatement) {
         try {
             if (sqlStatement instanceof SQLSelectStatement) {
                 return buildResourceName((SQLSelectStatement) sqlStatement);
@@ -233,27 +221,24 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         return null;
     }
 
-    private String buildResourceName(SQLSelectStatement selectStatement) {
+    protected String buildResourceName(SQLSelectStatement selectStatement) {
         SQLSelect sqlSelect = selectStatement.getSelect();
         SQLSelectQueryBlock sqlSelectQueryBlock = sqlSelect.getFirstQueryBlock();
-        if (sqlSelectQueryBlock == null) {
-            return null;
-        }
         SQLTableSource sqlTableSource = sqlSelectQueryBlock.getFrom();
         return "SELECT " + sqlTableSource.computeAlias();
     }
 
-    private String buildResourceName(SQLUpdateStatement updateStatement) {
-        SQLTableSource sqlTableSource = updateStatement.getFrom();
+    protected String buildResourceName(SQLUpdateStatement updateStatement) {
+        SQLTableSource sqlTableSource = updateStatement.getTableSource();
         return "UPDATE " + sqlTableSource.computeAlias();
     }
 
-    private String buildResourceName(SQLInsertStatement insertStatement) {
+    protected String buildResourceName(SQLInsertStatement insertStatement) {
         SQLExprTableSource sqlTableSource = insertStatement.getTableSource();
         return "INSERT " + sqlTableSource.computeAlias();
     }
 
-    private String buildResourceName(SQLDeleteStatement deleteStatement) {
+    protected String buildResourceName(SQLDeleteStatement deleteStatement) {
         SQLTableSource sqlTableSource = deleteStatement.getTableSource();
         return "DELETE " + sqlTableSource.computeAlias();
     }

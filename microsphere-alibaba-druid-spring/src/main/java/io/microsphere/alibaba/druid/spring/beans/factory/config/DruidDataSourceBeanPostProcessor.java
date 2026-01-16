@@ -29,8 +29,8 @@ import java.util.List;
 
 import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.spring.beans.BeanUtils.getSortedBeans;
+import static io.microsphere.util.ArrayUtils.arrayToString;
 import static io.microsphere.util.ArrayUtils.of;
-import static java.util.Arrays.asList;
 import static org.springframework.core.annotation.AnnotationAwareOrderComparator.sort;
 
 /**
@@ -63,9 +63,7 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
 
     public DruidDataSourceBeanPostProcessor(Class<? extends Filter>[] filterBeanClasses) {
         this.filterBeanClasses = filterBeanClasses;
-        if (logger.isTraceEnabled()) {
-            logger.trace("The classes of Filter Bean to be added : {}", asList(filterBeanClasses));
-        }
+        logger.trace("The classes of Filter Bean to be added : {}", arrayToString(filterBeanClasses));
     }
 
     @Override
@@ -79,9 +77,7 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
             filterBeans.addAll(getSortedBeans(this.beanFactory, filterBeanClass));
         }
         sort(filterBeans);
-        if (logger.isTraceEnabled()) {
-            logger.trace("The {} Filter Beans[{}] will be added into DruidDataSource[{}]", filterBeans.size(), filterBeans, druidDataSource);
-        }
+        logger.trace("The {} Filter Beans[{}] will be added into DruidDataSource[{}]", filterBeans.size(), filterBeans, druidDataSource);
         druidDataSource.getProxyFilters().addAll(filterBeans);
     }
 

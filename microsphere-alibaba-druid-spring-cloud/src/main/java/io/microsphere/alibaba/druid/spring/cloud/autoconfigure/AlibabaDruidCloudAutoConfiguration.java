@@ -20,7 +20,6 @@ import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.spring.boot.condition.ConditionalOnAlibabaDruidAvailable;
-import io.microsphere.spring.beans.BeanUtils;
 import io.microsphere.spring.cloud.client.condition.ConditionalOnFeaturesEnabled;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.cloud.client.actuator.HasFeatures;
@@ -31,10 +30,11 @@ import org.springframework.context.annotation.Import;
 import java.util.List;
 import java.util.Set;
 
-import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME;
+import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME_PREFIX;
 import static io.microsphere.collection.ListUtils.newArrayList;
 import static io.microsphere.collection.SetUtils.of;
-import static io.microsphere.constants.SymbolConstants.DOT;
+import static io.microsphere.constants.SymbolConstants.DOT_CHAR;
+import static io.microsphere.spring.beans.BeanUtils.isBeanPresent;
 import static java.util.Collections.emptyList;
 
 /**
@@ -50,11 +50,6 @@ public class AlibabaDruidCloudAutoConfiguration {
 
     @ConditionalOnFeaturesEnabled
     public static class FeaturesConfiguration {
-
-        /**
-         * The prefix of {@link HasFeatures}
-         */
-        public final static String ALIBABA_DRUID_FEATURE_PREFIX = ALIBABA_DRUID_PROPERTY_NAME + DOT;
 
         /**
          * The bean name of {@link HasFeatures}
@@ -73,14 +68,12 @@ public class AlibabaDruidCloudAutoConfiguration {
         public HasFeatures alibabaDruidFeatures(ListableBeanFactory beanFactory) {
             List<NamedFeature> namedFeatures = newArrayList(typeFeatures.size());
             for (Class<?> type : typeFeatures) {
-                if (BeanUtils.isBeanPresent(beanFactory, type)) {
-                    String name = ALIBABA_DRUID_FEATURE_PREFIX + type.getSimpleName();
+                if (isBeanPresent(beanFactory, type)) {
+                    String name = ALIBABA_DRUID_PROPERTY_NAME_PREFIX + DOT_CHAR + type.getSimpleName();
                     namedFeatures.add(new NamedFeature(name, type));
                 }
             }
             return new HasFeatures(emptyList(), namedFeatures);
         }
-
     }
-
 }

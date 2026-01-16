@@ -28,6 +28,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import static io.microsphere.util.ArrayUtils.of;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 /**
  * {@link AlibabaDruidAutoConfiguration} Test
@@ -42,10 +43,10 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
                 DruidDataSourceTestConfiguration.class,
                 AlibabaDruidAutoConfigurationTest.class
         },
-        webEnvironment = SpringBootTest.WebEnvironment.NONE,
+        webEnvironment = NONE,
         properties = {
-                "microsphere.spring.boot.alibaba.druid.enabled=true",
-                "microsphere.spring.boot.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
+                "microsphere.alibaba.druid.enabled=true",
+                "microsphere.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
         })
 @EnableAutoConfiguration
 public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
