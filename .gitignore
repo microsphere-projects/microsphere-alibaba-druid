@@ -32,6 +32,7 @@ target/
 !gradle/wrapper/*
 ## Ignore Gradle build output directory
 build
+out
 
 # eclipse ignore
 .settings/

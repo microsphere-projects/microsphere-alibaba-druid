@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <parent>
+        <groupId>io.github.microsphere-projects</groupId>
+        <artifactId>microsphere-alibaba-druid-parent</artifactId>
+        <version>${revision}</version>
+        <relativePath>../microsphere-alibaba-druid-parent/pom.xml</relativePath>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.microsphere-projects</groupId>
+    <artifactId>microsphere-alibaba-druid-spring-cloud</artifactId>
+    <version>${revision}</version>
+    <packaging>jar</packaging>
+
+    <name>Microsphere :: Alibaba Druid :: Spring Cloud</name>
+    <description>Microsphere Alibaba Druid Spring Cloud</description>
+
+    <dependencies>
+
+        <!-- Microsphere Alibaba Druid -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-druid-spring-boot</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+        <!-- Microsphere Spring Cloud -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-spring-cloud-commons</artifactId>
+        </dependency>
+
+        <!-- Alibaba Druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Cloud -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-commons</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Spring Boot -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Testing -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Testing -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Spring Boot Testing -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- H2 -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Microsphere Alibaba Druid Spring Test -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-druid-spring-test</artifactId>
+            <version>${revision}</version>
+        </dependency>
+
+    </dependencies>
+
+</project>

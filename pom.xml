@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>io.github.microsphere-projects</groupId>
+        <artifactId>microsphere-build</artifactId>
+        <version>0.2.3</version>
+    </parent>
+
+    <groupId>io.github.microsphere-projects</groupId>
+    <artifactId>microsphere-alibaba-druid</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>Microsphere :: Alibaba Druid</name>
+    <description>Microsphere Projects for Alibaba Druid</description>
+    <url>https://github.com/microsphere-projects/microsphere-alibaba-druid</url>
+
+    <organization>
+        <name>Microsphere</name>
+        <url>https://github.com/microsphere-projects</url>
+    </organization>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <developers>
+        <developer>
+            <id>mercyblitz</id>
+            <name>Mercy Ma</name>
+            <email>mercyblitz@gmail.com</email>
+            <organization>Microsphere</organization>
+            <roles>
+                <role>lead</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+
+    <scm>
+        <url>git@github.com/microsphere-projects/microsphere-alibaba-druid.git</url>
+        <connection>scm:git:${project.scm.url}</connection>
+        <developerConnection>scm:git:ssh://${project.scm.url}</developerConnection>
+    </scm>
+
+    <properties>
+        <revision>2.0.0-SNAPSHOT</revision>
+        <java.version>17</java.version>
+    </properties>
+
+    <modules>
+        <module>microsphere-alibaba-druid-parent</module>
+        <module>microsphere-alibaba-druid-dependencies</module>
+        <module>microsphere-alibaba-druid-core</module>
+        <module>microsphere-alibaba-druid-test</module>
+        <module>microsphere-alibaba-druid-spring</module>
+        <module>microsphere-alibaba-druid-spring-test</module>
+        <module>microsphere-alibaba-druid-spring-boot</module>
+        <module>microsphere-alibaba-druid-spring-cloud</module>
+    </modules>
+</project>

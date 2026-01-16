@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>io.github.microsphere-projects</groupId>
+        <artifactId>microsphere-alibaba-druid</artifactId>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>io.github.microsphere-projects</groupId>
+    <artifactId>microsphere-alibaba-druid-parent</artifactId>
+    <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <name>Microsphere :: Alibaba Druid :: Parent</name>
+    <description>Microsphere Alibaba Druid Parent</description>
+
+    <properties>
+        <!-- BOM -->
+        <microsphere-spring-cloud.version>0.2.5</microsphere-spring-cloud.version>
+        <!-- Libraries -->
+        <druid.version>1.2.27</druid.version>
+        <h2.version>2.4.240</h2.version>
+        <!-- Testing-->
+        <junit.version>6.0.2</junit.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <!-- Alibaba Druid -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+
+            <!-- H2 -->
+            <dependency>
+                <groupId>com.h2database</groupId>
+                <artifactId>h2</artifactId>
+                <version>${h2.version}</version>
+            </dependency>
+
+            <!-- JUnit BOM -->
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Boot Dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Dependencies -->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Alibaba Dependencies -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Microsphere Spring Cloud Dependencies -->
+            <dependency>
+                <groupId>io.github.microsphere-projects</groupId>
+                <artifactId>microsphere-spring-cloud-dependencies</artifactId>
+                <version>${microsphere-spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <profiles>
+
+        <!-- Spring Cloud Profiles -->
+        <profile>
+            <id>spring-cloud-2022</id>
+            <properties>
+                <spring-boot.version>3.0.13</spring-boot.version>
+                <spring-cloud.version>2022.0.5</spring-cloud.version>
+                <spring-cloud-alibaba.version>2022.0.0.2</spring-cloud-alibaba.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>spring-cloud-2023</id>
+            <properties>
+                <spring-boot.version>3.3.13</spring-boot.version>
+                <spring-cloud.version>2023.0.6</spring-cloud.version>
+                <spring-cloud-alibaba.version>2023.0.3.4</spring-cloud-alibaba.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>spring-cloud-2024</id>
+            <properties>
+                <spring-boot.version>3.4.12</spring-boot.version>
+                <spring-cloud.version>2024.0.3</spring-cloud.version>
+                <spring-cloud-alibaba.version>2023.0.3.4</spring-cloud-alibaba.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>spring-cloud-2025</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <spring-boot.version>3.5.8</spring-boot.version>
+                <spring-cloud.version>2025.0.1</spring-cloud.version>
+                <spring-cloud-alibaba.version>2025.0.0.0</spring-cloud-alibaba.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>spring-cloud-2025.1</id>
+            <properties>
+                <spring-boot.version>4.0.0</spring-boot.version>
+                <spring-cloud.version>2025.1.0</spring-cloud.version>
+                <spring-cloud-alibaba.version>2025.0.0.0</spring-cloud-alibaba.version>
+            </properties>
+        </profile>
+
+    </profiles>
+</project>
