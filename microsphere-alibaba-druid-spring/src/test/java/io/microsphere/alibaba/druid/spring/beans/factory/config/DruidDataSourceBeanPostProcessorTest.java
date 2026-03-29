@@ -19,6 +19,7 @@ package io.microsphere.alibaba.druid.spring.beans.factory.config;
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
+import io.microsphere.spring.test.junit.jupiter.SpringLoggingTest;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -30,6 +31,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @see DruidDataSourceBeanPostProcessor
  * @since 1.0.0
  */
+@SpringLoggingTest
 @ExtendWith(value = SpringExtension.class)
 @ContextConfiguration(classes = {
         LoggingStatementFilter.class,
