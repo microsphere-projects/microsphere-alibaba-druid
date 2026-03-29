@@ -63,7 +63,9 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
 
     public DruidDataSourceBeanPostProcessor(Class<? extends Filter>[] filterBeanClasses) {
         this.filterBeanClasses = filterBeanClasses;
-        logger.trace("The classes of Filter Bean to be added : {}", arrayToString(filterBeanClasses));
+        if (logger.isTraceEnabled()) {
+            logger.trace("The classes of Filter Bean to be added : {}", arrayToString(filterBeanClasses));
+        }
     }
 
     @Override
@@ -77,7 +79,9 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
             filterBeans.addAll(getSortedBeans(this.beanFactory, filterBeanClass));
         }
         sort(filterBeans);
-        logger.trace("The {} Filter Beans[{}] will be added into DruidDataSource[{}]", filterBeans.size(), filterBeans, druidDataSource);
+        if (logger.isTraceEnabled()) {
+            logger.trace("The {} Filter Beans[{}] will be added into DruidDataSource[{}]", filterBeans.size(), filterBeans, druidDataSource);
+        }
         druidDataSource.getProxyFilters().addAll(filterBeans);
     }
 
