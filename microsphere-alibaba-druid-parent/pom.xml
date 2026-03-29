@@ -20,16 +20,25 @@
 
     <properties>
         <!-- BOM -->
-        <microsphere-spring-cloud.version>0.1.5</microsphere-spring-cloud.version>
+        <microsphere-spring-cloud.version>0.1.6</microsphere-spring-cloud.version>
         <!-- Libraries -->
         <druid.version>1.2.27</druid.version>
         <h2.version>2.4.240</h2.version>
         <!-- Testing-->
-        <junit.version>5.14.1</junit.version>
+        <junit.version>5.14.3</junit.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
+            <!-- JUnit BOM -->
+            <dependency>
+                <groupId>org.junit</groupId>
+                <artifactId>junit-bom</artifactId>
+                <version>${junit.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
 
             <!-- Alibaba Druid -->
             <dependency>
@@ -43,15 +52,6 @@
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
-            </dependency>
-
-            <!-- JUnit BOM -->
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>${junit.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
             </dependency>
 
             <!-- Spring Boot Dependencies -->
@@ -68,6 +68,15 @@
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
                 <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- Spring Cloud Alibaba Dependencies -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -92,6 +101,7 @@
             <properties>
                 <spring-boot.version>2.3.12.RELEASE</spring-boot.version>
                 <spring-cloud.version>Hoxton.SR12</spring-cloud.version>
+                <spring-cloud-alibaba.version>2.2.10</spring-cloud-alibaba.version>
             </properties>
         </profile>
 
@@ -100,6 +110,7 @@
             <properties>
                 <spring-boot.version>2.4.13</spring-boot.version>
                 <spring-cloud.version>2020.0.5</spring-cloud.version>
+                <spring-cloud-alibaba.version>2021.1</spring-cloud-alibaba.version>
             </properties>
         </profile>
 
@@ -111,6 +122,7 @@
             <properties>
                 <spring-boot.version>2.6.15</spring-boot.version>
                 <spring-cloud.version>2021.0.9</spring-cloud.version>
+                <spring-cloud-alibaba.version>2021.0.6.1</spring-cloud-alibaba.version>
             </properties>
         </profile>
 

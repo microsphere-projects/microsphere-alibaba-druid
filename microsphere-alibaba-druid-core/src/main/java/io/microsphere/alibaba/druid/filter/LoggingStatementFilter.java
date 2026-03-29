@@ -32,12 +32,16 @@ public class LoggingStatementFilter extends AbstractStatementFilter {
 
     @Override
     protected void beforeExecute(StatementProxy statement, String resourceName) throws Throwable {
-        logger.debug("beforeExecute(statement : {} , resource name : '{}') : {}", statement.getLastExecuteSql(), resourceName);
+        if (logger.isDebugEnabled()) {
+            logger.debug("beforeExecute(statement : {} , resource name : '{}') : {}", statement.getLastExecuteSql(), resourceName);
+        }
     }
 
     @Override
     protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
-        logger.debug("afterExecute(statement : {} , resource name : '{}' , result : {} , failure : {})",
-                statement.getLastExecuteSql(), resourceName, result, failure);
+        if (logger.isDebugEnabled()) {
+            logger.debug("afterExecute(statement : {} , resource name : '{}' , result : {} , failure : {})",
+                    statement.getLastExecuteSql(), resourceName, result, failure);
+        }
     }
 }

@@ -16,6 +16,8 @@
  */
 package io.microsphere.alibaba.druid.filter;
 
+import io.microsphere.spring.test.junit.jupiter.SpringLoggingTest;
+
 /**
  * {@link LoggingStatementFilter} Test
  *
@@ -23,6 +25,7 @@ package io.microsphere.alibaba.druid.filter;
  * @see LoggingStatementFilter
  * @since 1.0.0
  */
+@SpringLoggingTest
 public class LoggingStatementFilterTest extends AbstractFilterTest<LoggingStatementFilter> {
 
     @Override

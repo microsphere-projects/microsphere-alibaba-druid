@@ -78,7 +78,9 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
             DruidDataSource druidDataSource = (DruidDataSource) dataSource;
             this.validationSQL = druidDataSource.getValidationQuery();
         }
-        logger.trace("DataSourceProxy({}) was initialized with validation SQL : {}", this.dataSource, this.validationSQL);
+        if (logger.isTraceEnabled()) {
+            logger.trace("DataSourceProxy({}) was initialized with validation SQL : {}", this.dataSource, this.validationSQL);
+        }
     }
 
     @Override
@@ -157,7 +159,9 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
             failure = e;
             throw wrap(e, SQLException.class);
         } finally {
-            logger.trace("Execute statement [value : {} , resource name : '{}'] : {}", statement.getLastExecuteSql(), resourceName, result, failure);
+            if (logger.isTraceEnabled()) {
+                logger.trace("Execute statement [value : {} , resource name : '{}'] : {}", statement.getLastExecuteSql(), resourceName, result, failure);
+            }
             afterExecute(statement, resourceName, result, failure);
         }
         return result;
@@ -198,7 +202,9 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         SQLStatement sqlStatement = first(statementList);
         String resourceName = buildResourceName(sqlStatement);
         if (resourceName == null) {
-            logger.debug("The JDBC statement can't be recognized, sql : '{}' , dbType : '{}'", sql, dbType);
+            if (logger.isDebugEnabled()) {
+                logger.debug("The JDBC statement can't be recognized, sql : '{}' , dbType : '{}'", sql, dbType);
+            }
             resourceName = "UNRECOGNIZED";
         }
         return resourceName;
@@ -216,7 +222,9 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
                 return buildResourceName((SQLDeleteStatement) sqlStatement);
             }
         } catch (Throwable e) {
-            logger.debug("The JDBC statement can't be parsed, sql : '{}'", sqlStatement, e);
+            if (logger.isDebugEnabled()) {
+                logger.debug("The JDBC statement can't be parsed, sql : '{}'", sqlStatement, e);
+            }
         }
         return null;
     }
