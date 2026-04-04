@@ -19,12 +19,15 @@
     <description>Microsphere Alibaba Druid Parent</description>
 
     <properties>
+        <!-- BOM versions -->
+        <microsphere-spring-cloud.version>0.2.7</microsphere-spring-cloud.version>
         <druid.version>1.2.28</druid.version>
         <h2.version>2.4.240</h2.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
+
             <!-- Alibaba Druid -->
             <dependency>
                 <groupId>com.alibaba</groupId>
@@ -38,6 +41,16 @@
                 <artifactId>h2</artifactId>
                 <version>${h2.version}</version>
             </dependency>
+
+            <!-- Microsphere Spring Cloud Dependencies -->
+            <dependency>
+                <groupId>io.github.microsphere-projects</groupId>
+                <artifactId>microsphere-spring-cloud-dependencies</artifactId>
+                <version>${microsphere-spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 </project>
