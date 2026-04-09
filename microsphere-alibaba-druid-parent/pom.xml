@@ -20,10 +20,9 @@
 
     <properties>
         <!-- BOM -->
-        <microsphere-spring-cloud.version>0.1.7</microsphere-spring-cloud.version>
+        <microsphere-spring-cloud.version>0.1.9</microsphere-spring-cloud.version>
         <!-- Libraries -->
         <druid.version>1.2.27</druid.version>
-        <h2.version>2.4.240</h2.version>
     </properties>
 
     <dependencyManagement>
@@ -34,13 +33,6 @@
                 <groupId>com.alibaba</groupId>
                 <artifactId>druid</artifactId>
                 <version>${druid.version}</version>
-            </dependency>
-
-            <!-- H2 -->
-            <dependency>
-                <groupId>com.h2database</groupId>
-                <artifactId>h2</artifactId>
-                <version>${h2.version}</version>
             </dependency>
 
             <!-- Microsphere Spring Cloud Dependencies -->
@@ -54,18 +46,4 @@
 
         </dependencies>
     </dependencyManagement>
-
-    <profiles>
-
-        <profile>
-            <id>java8</id>
-            <activation>
-                <jdk>(,1.8]</jdk>
-            </activation>
-            <properties>
-                <h2.version>1.4.200</h2.version>
-            </properties>
-        </profile>
-
-    </profiles>
 </project>
