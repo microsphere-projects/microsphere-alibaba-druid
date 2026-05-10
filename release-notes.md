@@ -18,3 +18,21 @@
 
 *This release focuses on dependency updates, CI/CD improvements, and maintenance-related updates.*
 
+## v0.1.6
+
+# Release Notes - Version 0.1.6
+
+## Dependency Updates
+- Bumped `microsphere-spring-cloud` version to `0.1.11`. (#daed34a)
+- Updated parent POM version to `0.1.11`. (#e13d7a1)
+
+## Bug Fixes
+- Fixed YAML indentation in Dependabot configuration. (#2a242a7)
+
+## Build and Workflow Enhancements
+- Improved release notes and release creation process. (#3d8029c)
+- Merged `release-1.x` into `dev-1.x` for better branch alignment. (#2707f87)
+
+---
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.5...0.1.6
