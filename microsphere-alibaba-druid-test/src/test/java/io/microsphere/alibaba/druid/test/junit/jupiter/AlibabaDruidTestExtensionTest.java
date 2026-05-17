@@ -29,6 +29,7 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
 
+import static io.microsphere.alibaba.druid.test.junit.jupiter.AlibabaDruidTestExtension.close;
 import static io.microsphere.alibaba.druid.test.junit.jupiter.AlibabaDruidTestExtension.getAlibabaDruidTest;
 import static io.microsphere.alibaba.druid.test.junit.jupiter.AlibabaDruidTestExtension.isCandidateParameter;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -73,6 +74,9 @@ class AlibabaDruidTestExtensionTest {
         @Test
         void test() {
             assertObjects(druidDataSource, dataSource);
+
+            close(druidDataSource);
+            close(druidDataSource);
         }
     }
 
