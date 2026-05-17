@@ -20,7 +20,9 @@ import com.alibaba.druid.pool.DruidDataSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
 
-import static io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest.createDruidDataSource;
+import java.io.IOException;
+
+import static io.microsphere.alibaba.druid.test.AlibabaDruidTestUtils.buildDefaultDruidDataSource;
 import static org.springframework.beans.factory.config.BeanDefinition.SCOPE_PROTOTYPE;
 
 /**
@@ -34,7 +36,7 @@ public class DruidDataSourceTestConfiguration {
 
     @Bean(initMethod = "init", destroyMethod = "close")
     @Scope(SCOPE_PROTOTYPE)
-    public DruidDataSource dataSource() {
-        return createDruidDataSource();
+    public DruidDataSource dataSource() throws IOException {
+        return buildDefaultDruidDataSource();
     }
 }
