@@ -42,4 +42,33 @@ For a full list of changes, please check the [commit history](https://github.com
 --- 
 For a comprehensive changelog, refer to the repository.
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.5...0.2.6
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.5...0.2.6## v0.2.7
+
+# Release Notes - Version 0.2.7
+
+## New Features
+- **Alibaba Druid Support**: Added a JUnit 5 test extension and utility functions for Alibaba Druid. (#5bc0a4f)
+
+## Bug Fixes
+- Properly close `druidDataSource` in tests to prevent resource leaks. (#50f12c1)
+
+## Documentation
+- Updated README:
+  - Added a link to Alibaba Druid.
+  - Reformatted the introduction for improved clarity. (#ef3d2ab, #ee31178)
+
+## Dependency Updates
+- Switched to the `microsphere-java-test` dependency. (#3eaf4b3)
+
+## Test Improvements
+- Introduced separate class and method stores in the test extension for better organization. (#a8eb118)
+
+## Build and Workflow Enhancements
+- Added OSSRH credentials for CI publishing. (#91ed6fe)
+- Updated Maven workflows in GitHub Actions to improve CI/CD processes. (#25e457f)
+
+---
+
+*Full Changelog*: [v0.2.6...v0.2.7](https://github.com/your-repo/compare/v0.2.6...v0.2.7)
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.6...0.2.7
