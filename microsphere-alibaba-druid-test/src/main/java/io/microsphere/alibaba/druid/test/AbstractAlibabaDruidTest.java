@@ -24,11 +24,13 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import javax.sql.DataSource;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
+import static io.microsphere.alibaba.druid.test.AlibabaDruidTestUtils.buildDefaultDruidDataSource;
 import static java.sql.ResultSet.CONCUR_UPDATABLE;
 import static java.sql.ResultSet.TYPE_FORWARD_ONLY;
 import static java.sql.Statement.NO_GENERATED_KEYS;
@@ -61,8 +63,8 @@ public abstract class AbstractAlibabaDruidTest {
      *
      * @return non-null
      */
-    protected DruidDataSource buildDruidDataSource() {
-        return createDruidDataSource();
+    protected DruidDataSource buildDruidDataSource() throws IOException {
+        return buildDefaultDruidDataSource();
     }
 
     /**
@@ -176,13 +178,5 @@ public abstract class AbstractAlibabaDruidTest {
         executeStatement(statement -> {
             statement.execute("DROP TABLE users");
         });
-    }
-
-    public static DruidDataSource createDruidDataSource() {
-        DruidDataSource dataSource = new DruidDataSource();
-        dataSource.setUrl("jdbc:h2:mem:test_mem");
-        dataSource.setDriverClassName("org.h2.Driver");
-        dataSource.setUsername("sa");
-        return dataSource;
     }
 }
