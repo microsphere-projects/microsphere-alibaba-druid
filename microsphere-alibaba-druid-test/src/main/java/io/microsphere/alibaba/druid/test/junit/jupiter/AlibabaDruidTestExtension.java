@@ -69,7 +69,9 @@ import static org.junit.jupiter.api.extension.ExtensionContext.StoreScope.EXTENS
 class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, TestInstancePostProcessor,
         AfterEachCallback, ParameterResolver {
 
-    private static final Namespace NAMESPACE = create(AlibabaDruidTestExtension.class);
+    private static final Namespace METHOD_NAMESPACE = create(AlibabaDruidTestExtension.class, "METHOD");
+
+    private static final Namespace CLASS_NAMESPACE = create(AlibabaDruidTestExtension.class, "CLASS");
 
     static List<Class<?>> candidateTypes = findAllClasses(DruidDataSource.class, AlibabaDruidTestExtension::isAlibabaDruidClass);
 
@@ -80,7 +82,7 @@ class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, 
 
     @Override
     public void afterAll(ExtensionContext context) throws Exception {
-        DruidDataSource druidDataSource = get(context, DruidDataSource.class, true);
+        DruidDataSource druidDataSource = get(context, DruidDataSource.class, true, true);
         close(druidDataSource);
     }
 
@@ -91,7 +93,7 @@ class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, 
 
     @Override
     public void afterEach(ExtensionContext context) throws Exception {
-        DruidDataSource druidDataSource = get(context, DruidDataSource.class, true);
+        DruidDataSource druidDataSource = get(context, DruidDataSource.class, false, true);
         close(druidDataSource);
     }
 
@@ -103,7 +105,7 @@ class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, 
 
     @Override
     public @Nullable Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) throws ParameterResolutionException {
-        return execute(() -> getDruidDataSource(extensionContext, false));
+        return execute(() -> getDruidDataSource(extensionContext, false, false));
     }
 
     void injectFields(ExtensionContext context, @Nullable Object testInstance) throws Exception {
@@ -115,15 +117,16 @@ class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, 
     }
 
     private void injectField(Field field, ExtensionContext context, @Nullable Object testInstance) throws Exception {
-        DruidDataSource druidDataSource = getDruidDataSource(context, false);
+        boolean forClass = testInstance == null;
+        DruidDataSource druidDataSource = getDruidDataSource(context, forClass, false);
         setFieldValue(testInstance, field, druidDataSource);
     }
 
-    static DruidDataSource getDruidDataSource(ExtensionContext context, boolean forRemoval) throws SQLException, IOException {
-        DruidDataSource druidDataSource = get(context, DruidDataSource.class, forRemoval);
+    static DruidDataSource getDruidDataSource(ExtensionContext context, boolean forClass, boolean forRemoval) throws SQLException, IOException {
+        DruidDataSource druidDataSource = get(context, DruidDataSource.class, forClass, forRemoval);
         if (druidDataSource == null) {
             druidDataSource = buildDruidDataSource(context);
-            store(context, druidDataSource);
+            store(context, druidDataSource, forClass);
         }
         return druidDataSource;
     }
@@ -200,14 +203,8 @@ class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, 
         }
     }
 
-    /**
-     * Store the component
-     *
-     * @param context   {@link ExtensionContext}
-     * @param component the component
-     */
-    static void store(ExtensionContext context, Object component) {
-        Store store = getStore(context);
+    static void store(ExtensionContext context, Object component, boolean forClass) {
+        Store store = getStore(context, forClass);
         Object key = buildKey(context, component.getClass());
         store.put(key, component);
     }
@@ -225,22 +222,14 @@ class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, 
         return keyBuilder.toString();
     }
 
-    /**
-     * Get the component by component type
-     *
-     * @param <T>           the type of component
-     * @param context       {@link ExtensionContext}
-     * @param componentType the component type
-     * @param forRemoval    {@code true} if the component is for removal , otherwise {@code false}
-     * @return the component , if not found , return {@code null}
-     */
-    static <T> T get(ExtensionContext context, Class<T> componentType, boolean forRemoval) {
+    static <T> T get(ExtensionContext context, Class<T> componentType, boolean forClass, boolean forRemoval) {
         Object key = buildKey(context, componentType);
-        Store store = getStore(context);
+        Store store = getStore(context, forClass);
         return forRemoval ? store.remove(key, componentType) : store.get(key, componentType);
     }
 
-    static Store getStore(ExtensionContext context) {
-        return context.getStore(EXTENSION_CONTEXT, NAMESPACE);
+    static Store getStore(ExtensionContext context, boolean forClass) {
+        Namespace namespace = forClass ? CLASS_NAMESPACE : METHOD_NAMESPACE;
+        return context.getStore(EXTENSION_CONTEXT, namespace);
     }
 }
