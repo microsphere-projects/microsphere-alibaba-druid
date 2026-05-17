@@ -35,4 +35,24 @@
 
 ---
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.5...0.1.6
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.5...0.1.6## v0.1.7
+
+# Release Notes - Version 0.1.7
+
+## New Features
+- Added Alibaba Druid JUnit test utilities for enhanced database testing. ([f81c49c](https://github.com/mercyblitz/project/commit/f81c49c))
+
+## Documentation
+- Updated README.md with the latest versions and setup details. ([03f1b7a](https://github.com/mercyblitz/project/commit/03f1b7a))
+
+## Test Improvements
+- Enhanced CI by fixing Java setup and Maven wrapper issues. ([8df92b5](https://github.com/mercyblitz/project/commit/8df92b5))
+
+## Build and Workflow Enhancements
+- Configured Maven publishing with server credentials for streamlined deployment. ([95437ac](https://github.com/mercyblitz/project/commit/95437ac))
+
+## Other Changes
+- Merged `release-1.x` into `dev-1.x` for branch consolidation. ([3cd44ab](https://github.com/mercyblitz/project/commit/3cd44ab))
+- Set up post-release version bump after publishing 0.1.6. ([85976a7](https://github.com/mercyblitz/project/commit/85976a7))
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.6...0.1.7
