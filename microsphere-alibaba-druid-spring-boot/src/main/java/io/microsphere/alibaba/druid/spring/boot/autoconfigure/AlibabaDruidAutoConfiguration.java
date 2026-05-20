@@ -16,12 +16,20 @@
  */
 package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
+import com.alibaba.druid.pool.DruidDataSource;
+import com.alibaba.druid.pool.DruidDataSourceMBean;
 import io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
+import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties.Filter;
 import io.microsphere.alibaba.druid.spring.boot.condition.ConditionalOnAlibabaDruidAvailable;
+import io.microsphere.alibaba.druid.spring.boot.metadata.DruidDataSourcePoolMetadata;
 import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.context.annotation.Bean;
+
+import static org.springframework.boot.jdbc.DataSourceUnwrapper.unwrap;
 
 /**
  * The Auto-Configuration for Alibaba Druid
@@ -36,7 +44,16 @@ public class AlibabaDruidAutoConfiguration {
 
     @Bean
     public BeanPostProcessor druidDataSourceBeanPostProcessor(AlibabaDruidProperties alibabaDruidProperties) {
-        AlibabaDruidProperties.Filter filter = alibabaDruidProperties.getFilter();
+        Filter filter = alibabaDruidProperties.getFilter();
         return new DruidDataSourceBeanPostProcessor(filter.getClasses());
+    }
+
+    @Bean
+    @ConditionalOnBean(DruidDataSource.class)
+    public DataSourcePoolMetadataProvider druidDataSourcePoolMetadataProvider() {
+        return dataSource -> {
+            DruidDataSource druidDataSource = unwrap(dataSource, DruidDataSourceMBean.class, DruidDataSource.class);
+            return druidDataSource == null ? null : new DruidDataSourcePoolMetadata(druidDataSource);
+        };
     }
 }

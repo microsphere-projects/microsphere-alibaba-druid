@@ -18,15 +18,21 @@ package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
+import io.microsphere.alibaba.druid.spring.boot.metadata.DruidDataSourcePoolMetadata;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadata;
+import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.boot.test.context.SpringBootTest;
+
+import javax.sql.DataSource;
 
 import static io.microsphere.util.ArrayUtils.of;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
@@ -57,6 +63,12 @@ public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
     @Autowired
     private LoggingStatementFilter loggingStatementFilter;
 
+    @Autowired
+    private DataSourcePoolMetadataProvider dataSourcePoolMetadataProvider;
+
+    @Autowired
+    private DataSource dataSource;
+
     @Test
     public void test() throws Throwable {
         super.test();
@@ -69,6 +81,9 @@ public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
         Class<? extends com.alibaba.druid.filter.Filter>[] classes = filter.getClasses();
         assertNotNull(classes);
         assertArrayEquals(of(LoggingStatementFilter.class), classes);
+
+        DataSourcePoolMetadata dataSourcePoolMetadata = dataSourcePoolMetadataProvider.getDataSourcePoolMetadata(dataSource);
+        assertInstanceOf(DruidDataSourcePoolMetadata.class, dataSourcePoolMetadata);
     }
 }
 
