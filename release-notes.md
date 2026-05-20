@@ -72,4 +72,13 @@
 
 ---
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.7...0.2.8
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.7...0.2.8## v0.1.9
+
+```markdown
+# Release Notes - Version 0.1.9
+
+## Other Changes
+- **chore**: Bumped version to next patch after publishing 0.2.8.
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.8...0.1.9

@@ -53,7 +53,7 @@
     </scm>
 
     <properties>
-        <revision>0.2.9-SNAPSHOT</revision>
+        <revision>0.1.10-SNAPSHOT</revision>
     </properties>
 
     <modules>
