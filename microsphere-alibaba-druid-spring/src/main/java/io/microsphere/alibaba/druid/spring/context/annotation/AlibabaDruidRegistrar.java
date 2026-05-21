@@ -31,6 +31,15 @@ import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
 /**
  * {@link BeanCapableImportCandidate}
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   // AlibabaDruidRegistrar is automatically activated via @EnableAlibabaDruid
+ *   @Configuration
+ *   @EnableAlibabaDruid(filterBeanClasses = LoggingStatementFilter.class)
+ *   public class AppConfig { }
+ *   // AlibabaDruidRegistrar registers DruidDataSourceBeanPostProcessor with the given filter classes
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see EnableAlibabaDruid
  * @see BeanCapableImportCandidate
@@ -42,6 +51,22 @@ class AlibabaDruidRegistrar extends BeanCapableImportCandidate implements Import
 
     private static final String ANNOTATION_CLASS_NAME = EnableAlibabaDruid.class.getName();
 
+    /**
+     * Register {@link DruidDataSourceBeanPostProcessor} bean definition with filter bean classes
+     * extracted from the {@link EnableAlibabaDruid} annotation metadata.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // Invoked automatically by Spring when @EnableAlibabaDruid is present on a @Configuration class
+     *   @EnableAlibabaDruid(filterBeanClasses = LoggingStatementFilter.class)
+     *   @Configuration
+     *   public class AppConfig { }
+     *   // A DruidDataSourceBeanPostProcessor bean is registered with LoggingStatementFilter class
+     * }</pre>
+     *
+     * @param metadata the annotation metadata of the importing class
+     * @param registry the bean definition registry
+     */
     @Override
     public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
         AnnotationAttributes attributes = fromMap(metadata.getAnnotationAttributes(ANNOTATION_CLASS_NAME));
