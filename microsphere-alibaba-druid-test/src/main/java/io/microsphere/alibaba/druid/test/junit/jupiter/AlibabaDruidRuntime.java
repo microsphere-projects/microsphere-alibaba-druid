@@ -66,6 +66,27 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  *     </tr>
  * </table>
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   @AlibabaDruidTest
+ *   class MyTest {
+ *
+ *       // Instance field injection
+ *       @AlibabaDruidRuntime
+ *       private DruidDataSource druidDataSource;
+ *
+ *       // Static field injection
+ *       @AlibabaDruidRuntime
+ *       private static DataSource dataSource;
+ *
+ *       // Method parameter injection
+ *       @Test
+ *       void test(@AlibabaDruidRuntime DruidDataSource ds) {
+ *           assertNotNull(ds);
+ *       }
+ *   }
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see AlibabaDruidTest
  * @see DataSourceProxy

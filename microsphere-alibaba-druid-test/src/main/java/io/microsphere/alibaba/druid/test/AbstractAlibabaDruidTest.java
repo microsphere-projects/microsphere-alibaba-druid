@@ -41,6 +41,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Abstract Test for Alibaba Druid
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   // Extend AbstractAlibabaDruidTest to create a custom Druid filter test
+ *   public class MyFilterTest extends AbstractAlibabaDruidTest {
+ *
+ *       @Override
+ *       protected void customize(DruidDataSource dataSource) {
+ *           dataSource.getProxyFilters().add(new LoggingStatementFilter());
+ *       }
+ *   }
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see Filter
  * @since 1.0.0
@@ -61,6 +73,13 @@ public abstract class AbstractAlibabaDruidTest {
     /**
      * Build an instance of {@link DruidDataSource}
      *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // Default implementation returns a DruidDataSource configured with H2 properties
+     *   DruidDataSource dataSource = buildDruidDataSource();
+     *   // dataSource is configured from META-INF/druid/h2.properties
+     * }</pre>
+     *
      * @return non-null
      */
     protected DruidDataSource buildDruidDataSource() throws IOException {
@@ -70,6 +89,14 @@ public abstract class AbstractAlibabaDruidTest {
     /**
      * Customize the {@link DruidDataSource}
      *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   @Override
+     *   protected void customize(DruidDataSource dataSource) {
+     *       dataSource.getProxyFilters().add(new LoggingStatementFilter());
+     *   }
+     * }</pre>
+     *
      * @param dataSource the {@link DruidDataSource}
      */
     protected void customize(DruidDataSource dataSource) {
@@ -77,6 +104,14 @@ public abstract class AbstractAlibabaDruidTest {
 
     /**
      * Get the {@link DataSource}
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   DruidDataSource dataSource = getDruidDataSource();
+     *   Connection connection = dataSource.getConnection();
+     *   // use connection ...
+     *   connection.close();
+     * }</pre>
      *
      * @return non-null
      */
@@ -96,6 +131,18 @@ public abstract class AbstractAlibabaDruidTest {
         testExecutePreparedStatement();
     }
 
+    /**
+     * Execute DML and DQL operations against the {@link #getDruidDataSource() DruidDataSource}
+     * using a plain {@link Statement}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // Called automatically in test() to verify Statement-based SQL execution
+     *   testExecuteStatement();
+     * }</pre>
+     *
+     * @throws Throwable if any SQL or connection error occurs
+     */
     protected void testExecuteStatement() throws Throwable {
         executeStatement(statement -> {
             assertEquals(1, statement.executeUpdate("INSERT INTO users (id, name) VALUES (1, 'Mercy')"));
@@ -116,6 +163,18 @@ public abstract class AbstractAlibabaDruidTest {
         });
     }
 
+    /**
+     * Execute DML and DQL operations against the {@link #getDruidDataSource() DruidDataSource}
+     * using {@link PreparedStatement}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // Called automatically in test() to verify PreparedStatement-based SQL execution
+     *   testExecutePreparedStatement();
+     * }</pre>
+     *
+     * @throws Throwable if any SQL or connection error occurs
+     */
     protected void testExecutePreparedStatement() throws Throwable {
         executePreparedStatement("INSERT INTO users (id, name) VALUES (?, ?)", preparedStatement -> {
             preparedStatement.setInt(1, 1);
@@ -135,6 +194,23 @@ public abstract class AbstractAlibabaDruidTest {
         });
     }
 
+    /**
+     * Obtain a {@link Connection} from the data source, prepare a {@link PreparedStatement} for the
+     * given SQL, apply the consumer, and close both resources in a {@code finally} block.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   executePreparedStatement("INSERT INTO users (id, name) VALUES (?, ?)", ps -> {
+     *       ps.setInt(1, 1);
+     *       ps.setString(2, "Mercy");
+     *       assertEquals(1, ps.executeUpdate());
+     *   });
+     * }</pre>
+     *
+     * @param sql      the SQL string for the {@link PreparedStatement}
+     * @param consumer the consumer that uses the prepared statement
+     * @throws Throwable if any SQL or connection error occurs
+     */
     protected void executePreparedStatement(String sql, ThrowableConsumer<PreparedStatement> consumer) throws Throwable {
         executeConnection(connection -> {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -146,6 +222,21 @@ public abstract class AbstractAlibabaDruidTest {
         });
     }
 
+    /**
+     * Obtain a {@link Connection} from the data source, create a plain {@link Statement},
+     * apply the consumer, and close both resources in a {@code finally} block.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   executeStatement(statement -> {
+     *       statement.execute("CREATE TABLE users (id INT, name VARCHAR(50))");
+     *       assertEquals(1, statement.executeUpdate("INSERT INTO users (id, name) VALUES (1, 'Mercy')"));
+     *   });
+     * }</pre>
+     *
+     * @param consumer the consumer that uses the statement
+     * @throws Throwable if any SQL or connection error occurs
+     */
     protected void executeStatement(ThrowableConsumer<Statement> consumer) throws Throwable {
         executeConnection(connection -> {
             Statement statement = connection.createStatement();
@@ -157,6 +248,23 @@ public abstract class AbstractAlibabaDruidTest {
         });
     }
 
+    /**
+     * Obtain a {@link Connection} from the {@link #getDruidDataSource() DruidDataSource},
+     * apply the consumer, and close the connection in a {@code finally} block.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   executeConnection(connection -> {
+     *       PreparedStatement ps = connection.prepareStatement("SELECT id, name FROM users WHERE id=?");
+     *       ps.setInt(1, 1);
+     *       assertNotNull(ps.executeQuery());
+     *       ps.close();
+     *   });
+     * }</pre>
+     *
+     * @param consumer the consumer that uses the connection
+     * @throws Throwable if any SQL or connection error occurs
+     */
     protected void executeConnection(ThrowableConsumer<Connection> consumer) throws Throwable {
         DataSource dataSource = getDruidDataSource();
         Connection connection = dataSource.getConnection();

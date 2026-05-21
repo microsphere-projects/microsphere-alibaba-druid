@@ -24,6 +24,13 @@ import static io.microsphere.util.ArrayUtils.of;
 /**
  * The Spring Boot Properties class for Alibaba Druid
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   # application.properties
+ *   microsphere.alibaba.druid.enabled=true
+ *   microsphere.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see ConfigurationProperties
  * @since 1.0.0
@@ -35,18 +42,66 @@ public class AlibabaDruidProperties {
 
     private Filter filter = new Filter();
 
+    /**
+     * Return whether Alibaba Druid auto-configuration is enabled.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   AlibabaDruidProperties props = new AlibabaDruidProperties();
+     *   assertTrue(props.isEnabled()); // default is true
+     * }</pre>
+     *
+     * @return {@code true} if Alibaba Druid is enabled
+     */
     public boolean isEnabled() {
         return enabled;
     }
 
+    /**
+     * Set whether Alibaba Druid auto-configuration is enabled.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   AlibabaDruidProperties props = new AlibabaDruidProperties();
+     *   props.setEnabled(false);
+     *   assertFalse(props.isEnabled());
+     * }</pre>
+     *
+     * @param enabled {@code true} to enable, {@code false} to disable
+     */
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
 
+    /**
+     * Return the nested {@link Filter} properties for Alibaba Druid.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   AlibabaDruidProperties props = new AlibabaDruidProperties();
+     *   Filter filterProps = props.getFilter();
+     *   // filterProps.getClasses() returns [Filter.class] by default
+     * }</pre>
+     *
+     * @return the {@link Filter} properties
+     */
     public Filter getFilter() {
         return filter;
     }
 
+    /**
+     * Set the nested {@link Filter} properties for Alibaba Druid.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   AlibabaDruidProperties props = new AlibabaDruidProperties();
+     *   Filter filterProps = new AlibabaDruidProperties.Filter();
+     *   filterProps.setClasses(new Class[]{ LoggingStatementFilter.class });
+     *   props.setFilter(filterProps);
+     * }</pre>
+     *
+     * @param filter the {@link Filter} properties to set
+     */
     public void setFilter(Filter filter) {
         this.filter = filter;
     }
@@ -58,10 +113,33 @@ public class AlibabaDruidProperties {
 
         private Class<? extends com.alibaba.druid.filter.Filter>[] classes = of(com.alibaba.druid.filter.Filter.class);
 
+        /**
+         * Return the filter bean classes to be added to each {@link DruidDataSource}.
+         *
+         * <h3>Example Usage</h3>
+         * <pre>{@code
+         *   AlibabaDruidProperties.Filter filterProps = new AlibabaDruidProperties.Filter();
+         *   Class<?>[] classes = filterProps.getClasses();
+         *   // classes == [Filter.class] by default
+         * }</pre>
+         *
+         * @return the filter classes
+         */
         public Class<? extends com.alibaba.druid.filter.Filter>[] getClasses() {
             return classes;
         }
 
+        /**
+         * Set the filter bean classes to be added to each {@link DruidDataSource}.
+         *
+         * <h3>Example Usage</h3>
+         * <pre>{@code
+         *   AlibabaDruidProperties.Filter filterProps = new AlibabaDruidProperties.Filter();
+         *   filterProps.setClasses(new Class[]{ LoggingStatementFilter.class });
+         * }</pre>
+         *
+         * @param classes the filter classes
+         */
         public void setClasses(Class<? extends com.alibaba.druid.filter.Filter>[] classes) {
             this.classes = classes;
         }
