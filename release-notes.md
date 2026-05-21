@@ -71,4 +71,21 @@ For a comprehensive changelog, refer to the repository.
 
 *Full Changelog*: [v0.2.6...v0.2.7](https://github.com/your-repo/compare/v0.2.6...v0.2.7)
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.6...0.2.7
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.6...0.2.7## v0.2.9
+
+# Release Notes: Version 0.2.9
+
+## New Features
+- Add `DruidDataSourcePoolMetadata` and its provider. (#fd688cb)
+
+## Test Improvements
+- Add unit tests for `DruidDataSourcePoolMetadata`. (#9262384)
+
+## Other Changes
+- Internal version bump post-0.2.7 release. (#23b1d5c)
+
+---
+
+**Note**: Changes labeled with `[skip ci]` were related to branch merges and do not introduce functional updates.
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.7...0.2.9

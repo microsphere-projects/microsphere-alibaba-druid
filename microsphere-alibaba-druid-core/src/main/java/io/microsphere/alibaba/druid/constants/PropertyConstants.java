@@ -22,6 +22,13 @@ import static io.microsphere.constants.SymbolConstants.DOT;
 /**
  * The constants of Alibaba Druid Properties
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   // Access the property name prefix for Alibaba Druid
+ *   String prefix = PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME_PREFIX;
+ *   // prefix == "microsphere.alibaba.druid"
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see io.microsphere.constants.PropertyConstants
  * @since 1.0.0

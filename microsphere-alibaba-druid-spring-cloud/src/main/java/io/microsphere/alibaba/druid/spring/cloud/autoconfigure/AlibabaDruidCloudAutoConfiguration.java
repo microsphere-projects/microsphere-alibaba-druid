@@ -40,6 +40,15 @@ import static java.util.Collections.emptyList;
 /**
  * The Spring Cloud Auto-Configuration for Alibaba Druid
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   # application.properties
+ *   microsphere.alibaba.druid.enabled=true
+ *
+ *   # When Spring Cloud is on the classpath and Alibaba Druid is available,
+ *   # this auto-configuration registers Druid features with Spring Cloud Actuator.
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see AlibabaDruidProperties
  * @since 1.0.0
@@ -64,6 +73,20 @@ public class AlibabaDruidCloudAutoConfiguration {
                 Filter.class
         );
 
+        /**
+         * Register a {@link HasFeatures} bean that exposes the Alibaba Druid features
+         * ({@link DruidDataSource} and {@link Filter}) present in the application context.
+         *
+         * <h3>Example Usage</h3>
+         * <pre>{@code
+         *   // Registered automatically by Spring Cloud when features are enabled
+         *   // Exposes "microsphere.alibaba.druid.DruidDataSource" and
+         *   // "microsphere.alibaba.druid.Filter" named features if the beans are present
+         * }</pre>
+         *
+         * @param beanFactory the {@link ListableBeanFactory} used to check for bean presence
+         * @return a {@link HasFeatures} containing the named Druid features
+         */
         @Bean(name = ALIBABA_DRUID_FEATURES_BEAN_NAME)
         public HasFeatures alibabaDruidFeatures(ListableBeanFactory beanFactory) {
             List<NamedFeature> namedFeatures = newArrayList(typeFeatures.size());
