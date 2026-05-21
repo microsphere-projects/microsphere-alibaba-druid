@@ -81,4 +81,23 @@
 - **chore**: Bumped version to next patch after publishing 0.2.8.
 ```
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.8...0.1.9
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.8...0.1.9## v0.1.10
+
+# Release Notes - v0.1.10
+
+## Documentations
+- Updated README branch version numbers and names in the table for improved clarity. ([855da9a](...), [ad32e94](...))
+
+## Dependency Updates
+- Bumped `microsphere-spring-cloud` dependency to version 0.1.12. ([32bbd16](...))
+
+## Test Improvements
+- Removed `logback.xml` from test resources to streamline configurations. ([1372c3d](...))
+
+## Build and Workflow Enhancements
+- Merged `release-1.x` into `dev-1.x` for workflow consistency. ([712e02e](...), [af3b9ec](...))
+- Bumped version to next patch after publishing v0.1.9. ([703cb71](...))
+
+---
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.9...0.1.10
