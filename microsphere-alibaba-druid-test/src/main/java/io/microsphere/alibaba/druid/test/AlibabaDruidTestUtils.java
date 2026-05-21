@@ -36,6 +36,18 @@ import static io.microsphere.util.ClassLoaderUtils.getResource;
 /**
  * The utils class of Alibaba Druid Test.
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   // Load the default H2 properties and build a DruidDataSource
+ *   Properties properties = AlibabaDruidTestUtils.getDefaultProperties();
+ *   DruidDataSource dataSource = AlibabaDruidTestUtils.buildDruidDataSource(properties);
+ *   dataSource.init();
+ *
+ *   // Or use the convenience method directly
+ *   DruidDataSource defaultDataSource = AlibabaDruidTestUtils.buildDefaultDruidDataSource();
+ *   defaultDataSource.init();
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
@@ -64,6 +76,15 @@ public abstract class AlibabaDruidTestUtils {
     /**
      * Load {@link Properties} from the {@link #DEFAULT_PROPERTIES_RESOURCE}
      *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   Properties properties = AlibabaDruidTestUtils.getDefaultProperties();
+     *   // properties.getProperty("druid.name")           == "h2"
+     *   // properties.getProperty("druid.url")            == "jdbc:h2:mem:test_mem"
+     *   // properties.getProperty("druid.username")       == "sa"
+     *   // properties.getProperty("druid.driverClassName")== "org.h2.Driver"
+     * }</pre>
+     *
      * @return {@link Properties}
      * @throws IOException if any I/O error
      */
@@ -74,6 +95,12 @@ public abstract class AlibabaDruidTestUtils {
 
     /**
      * Load {@link Properties} from the specified resource name
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   Properties properties = AlibabaDruidTestUtils.loadProperties("META-INF/druid/h2.properties");
+     *   assertEquals("h2", properties.getProperty("druid.name"));
+     * }</pre>
      *
      * @param resourceName resource name
      * @return {@link Properties}
@@ -91,6 +118,13 @@ public abstract class AlibabaDruidTestUtils {
 
     /**
      * Load {@link Properties} from the specified key-value pairs
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   Properties properties = AlibabaDruidTestUtils.loadProperties(new String[]{"name = value", "key = data"});
+     *   assertEquals("value", properties.getProperty("name"));
+     *   assertEquals("data", properties.getProperty("key"));
+     * }</pre>
      *
      * @param keyValuePairs key-value pairs
      * @return {@link Properties}
@@ -122,7 +156,17 @@ public abstract class AlibabaDruidTestUtils {
     }
 
     /**
-     * Build the defaultt {@link DruidDataSource} from the {@link #getDefaultProperties()}
+     * Build the default {@link DruidDataSource} from the {@link #getDefaultProperties()}
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   DruidDataSource dataSource = AlibabaDruidTestUtils.buildDefaultDruidDataSource();
+     *   dataSource.init();
+     *   Connection connection = dataSource.getConnection();
+     *   // use connection ...
+     *   connection.close();
+     *   dataSource.close();
+     * }</pre>
      *
      * @return {@link DruidDataSource}
      * @throws RuntimeException if any I/O error or {@link NullPointerException}
@@ -135,6 +179,14 @@ public abstract class AlibabaDruidTestUtils {
 
     /**
      * Build {@link DruidDataSource} from the {@link #getDefaultProperties()}
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   Properties properties = AlibabaDruidTestUtils.getDefaultProperties();
+     *   DruidDataSource dataSource = AlibabaDruidTestUtils.buildDruidDataSource(properties);
+     *   dataSource.init();
+     *   dataSource.close();
+     * }</pre>
      *
      * @param properties {@link Properties}
      * @return {@link DruidDataSource}
