@@ -156,7 +156,7 @@ public abstract class AlibabaDruidTestUtils {
     }
 
     /**
-     * Build the defaultt {@link DruidDataSource} from the {@link #getDefaultProperties()}
+     * Build the default {@link DruidDataSource} from the {@link #getDefaultProperties()}
      *
      * <h3>Example Usage</h3>
      * <pre>{@code
