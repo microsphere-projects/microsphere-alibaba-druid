@@ -57,6 +57,29 @@ import static io.microsphere.util.ExceptionUtils.wrap;
  *     </li>
  * </ul>
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   // Create a custom filter by extending AbstractStatementFilter
+ *   public class MyStatementFilter extends AbstractStatementFilter {
+ *
+ *       @Override
+ *       protected void beforeExecute(StatementProxy statement, String resourceName) {
+ *           System.out.println("Before executing: " + resourceName);
+ *       }
+ *
+ *       @Override
+ *       protected void afterExecute(StatementProxy statement, String resourceName,
+ *                                   Object result, Throwable failure) {
+ *           System.out.println("After executing: " + resourceName + ", result: " + result);
+ *       }
+ *   }
+ *
+ *   // Register the filter with a DruidDataSource
+ *   DruidDataSource dataSource = new DruidDataSource();
+ *   dataSource.getProxyFilters().add(new MyStatementFilter());
+ *   dataSource.init();
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see Filter
  * @see FilterAdapter
@@ -71,6 +94,21 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
 
     protected String validationSQL;
 
+    /**
+     * Initialize this filter with the given {@link DataSourceProxy}.
+     * Extracts and caches the validation SQL query from the data source if it is a {@link DruidDataSource}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   DruidDataSource druidDataSource = new DruidDataSource();
+     *   druidDataSource.setValidationQuery("SELECT 1");
+     *   druidDataSource.getProxyFilters().add(new MyStatementFilter());
+     *   // init() is called internally by DruidDataSource during initialization
+     *   druidDataSource.init();
+     * }</pre>
+     *
+     * @param dataSource the {@link DataSourceProxy} to initialize with
+     */
     @Override
     public final void init(DataSourceProxy dataSource) {
         this.dataSource = dataSource;
@@ -148,6 +186,22 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         return execute(statement, () -> super.statement_executeUpdate(chain, statement, sql, columnNames));
     }
 
+    /**
+     * Execute the given {@link ThrowableSupplier callback} for the provided {@link StatementProxy},
+     * invoking {@link #beforeExecute} and {@link #afterExecute} around the actual execution.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // Typically called internally; subclasses may override to customize execution
+     *   T result = execute(statement, () -> chain.preparedStatement_execute(statement));
+     * }</pre>
+     *
+     * @param statement the {@link StatementProxy} being executed
+     * @param callback  the {@link ThrowableSupplier} that performs the actual JDBC operation
+     * @param <T>       the result type
+     * @return the result of the callback
+     * @throws SQLException if the callback throws or wraps any exception
+     */
     protected <T> T execute(StatementProxy statement, ThrowableSupplier<T> callback) throws SQLException {
         String resourceName = buildResourceName(statement);
         T result = null;
@@ -210,6 +264,20 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         return resourceName;
     }
 
+    /**
+     * Build a resource name from the given {@link SQLStatement} by dispatching to the appropriate
+     * overloaded method for SELECT, UPDATE, INSERT, or DELETE statement types.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   List<SQLStatement> stmts = SQLUtils.parseStatements("SELECT id FROM users", "h2");
+     *   String name = buildResourceName(stmts.get(0));
+     *   // name == "SELECT users"
+     * }</pre>
+     *
+     * @param sqlStatement the parsed {@link SQLStatement}, may be {@code null}
+     * @return the resource name, or {@code null} if the statement type is unrecognized
+     */
     protected String buildResourceName(SQLStatement sqlStatement) {
         try {
             if (sqlStatement instanceof SQLSelectStatement) {
@@ -229,6 +297,18 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         return null;
     }
 
+    /**
+     * Build the resource name for a {@link SQLSelectStatement}, in the form {@code "SELECT <table>"}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // For SQL: "SELECT id, name FROM users"
+     *   // returns: "SELECT users"
+     * }</pre>
+     *
+     * @param selectStatement the {@link SQLSelectStatement}
+     * @return the resource name
+     */
     protected String buildResourceName(SQLSelectStatement selectStatement) {
         SQLSelect sqlSelect = selectStatement.getSelect();
         SQLSelectQueryBlock sqlSelectQueryBlock = sqlSelect.getFirstQueryBlock();
@@ -236,16 +316,52 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         return "SELECT " + sqlTableSource.computeAlias();
     }
 
+    /**
+     * Build the resource name for a {@link SQLUpdateStatement}, in the form {@code "UPDATE <table>"}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // For SQL: "UPDATE users SET name = 'Z' WHERE id = 5"
+     *   // returns: "UPDATE users"
+     * }</pre>
+     *
+     * @param updateStatement the {@link SQLUpdateStatement}
+     * @return the resource name
+     */
     protected String buildResourceName(SQLUpdateStatement updateStatement) {
         SQLTableSource sqlTableSource = updateStatement.getTableSource();
         return "UPDATE " + sqlTableSource.computeAlias();
     }
 
+    /**
+     * Build the resource name for a {@link SQLInsertStatement}, in the form {@code "INSERT <table>"}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // For SQL: "INSERT INTO users (id, name) VALUES (1, 'Mercy')"
+     *   // returns: "INSERT users"
+     * }</pre>
+     *
+     * @param insertStatement the {@link SQLInsertStatement}
+     * @return the resource name
+     */
     protected String buildResourceName(SQLInsertStatement insertStatement) {
         SQLExprTableSource sqlTableSource = insertStatement.getTableSource();
         return "INSERT " + sqlTableSource.computeAlias();
     }
 
+    /**
+     * Build the resource name for a {@link SQLDeleteStatement}, in the form {@code "DELETE <table>"}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // For SQL: "DELETE FROM users WHERE id = 1"
+     *   // returns: "DELETE users"
+     * }</pre>
+     *
+     * @param deleteStatement the {@link SQLDeleteStatement}
+     * @return the resource name
+     */
     protected String buildResourceName(SQLDeleteStatement deleteStatement) {
         SQLTableSource sqlTableSource = deleteStatement.getTableSource();
         return "DELETE " + sqlTableSource.computeAlias();
