@@ -16,12 +16,11 @@
  */
 package io.microsphere.alibaba.druid.spring.context.annotation;
 
+import io.microsphere.alibaba.druid.filter.AbstractStatementFilter;
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
+import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
 /**
  * {@link EnableAlibabaDruid} Test
@@ -30,12 +29,11 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @see EnableAlibabaDruid
  * @since 1.0.0
  */
-@ExtendWith(value = SpringExtension.class)
-@ContextConfiguration(classes = {
+@SpringJUnitConfig(classes = {
         LoggingStatementFilter.class,
         DruidDataSourceTestConfiguration.class,
         EnableAlibabaDruidTest.class,
 })
-@EnableAlibabaDruid(filterBeanClasses = LoggingStatementFilter.class)
+@EnableAlibabaDruid(filterBeanClasses = AbstractStatementFilter.class)
 public class EnableAlibabaDruidTest extends AbstractDruidSpringTest {
 }

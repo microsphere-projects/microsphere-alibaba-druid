@@ -88,4 +88,24 @@ For a comprehensive changelog, refer to the repository.
 
 **Note**: Changes labeled with `[skip ci]` were related to branch merges and do not introduce functional updates.
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.7...0.2.9
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.7...0.2.9## v0.2.10
+
+# Release Notes for Version 0.2.10
+
+### Documentation
+- Added comprehensive JavaDoc with examples to all main source files. [#86](https://github.com/microsphere-projects/microsphere-alibaba-druid)  
+- Fixed typo in `AlibabaDruidTestUtils` JavaDoc (`defaultt` → `default`).  
+
+### Dependency Updates
+- Bumped `microsphere-spring-cloud` to version 0.2.12.  
+
+### Test Improvements
+- Removed `logback.xml` from test resources to streamline test configurations.  
+
+### Other Changes
+- Updated branches and version information in `README`.  
+- Routine merges between `main` and `release` branches to ensure consistency.  
+
+**Note:** This release is primarily focused on documentation improvements and minor configurations.
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.9...0.2.10
