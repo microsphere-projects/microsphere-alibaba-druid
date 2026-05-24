@@ -29,7 +29,26 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * The Spring annotation enables the features of Alibaba Druid
+ * The Spring annotation enables the features of Alibaba Druid.
+ * <p>
+ * The {@link Filter} implementations will be initialized and added into {@link DruidDataSource} if they are defined in
+ * Spring Factories config {@code META-INF/spring.factories}.
+ *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   @Configuration
+ *   @EnableAlibabaDruid(filterBeanClasses = LoggingStatementFilter.class)
+ *   public class AppConfig {
+ *
+ *       @Bean(initMethod = "init", destroyMethod = "close")
+ *       public DruidDataSource dataSource() {
+ *           DruidDataSource ds = new DruidDataSource();
+ *           ds.setUrl("jdbc:h2:mem:test");
+ *           ds.setDriverClassName("org.h2.Driver");
+ *           return ds;
+ *       }
+ *   }
+ * }</pre>
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see AlibabaDruidRegistrar
@@ -43,6 +62,12 @@ public @interface EnableAlibabaDruid {
 
     /**
      * The classes of {@link Filter} beans to be added into {@link DruidDataSource}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   @EnableAlibabaDruid(filterBeanClasses = { LoggingStatementFilter.class })
+     *   public class AppConfig { }
+     * }</pre>
      *
      * @return The default value is the class of {@link Filter}, it indicates all {@link Filter} beans
      * should be added.

@@ -22,6 +22,24 @@ import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadata;
 /**
  * Druid {@link DataSourcePoolMetadata}
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   @AlibabaDruidTest
+ *   class MyTest {
+ *
+ *       @AlibabaDruidRuntime
+ *       private DruidDataSource druidDataSource;
+ *
+ *       @Test
+ *       void testMetadata() {
+ *           DruidDataSourcePoolMetadata metadata = new DruidDataSourcePoolMetadata(druidDataSource);
+ *           assertNotNull(metadata.getUsage());
+ *           assertEquals(Integer.valueOf(0), metadata.getActive());
+ *           assertEquals(Integer.valueOf(8), metadata.getMax());
+ *       }
+ *   }
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see DataSourcePoolMetadata
  * @see DruidDataSource

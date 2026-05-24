@@ -36,6 +36,18 @@ import static io.microsphere.util.ClassLoaderUtils.getResource;
 /**
  * The utils class of Alibaba Druid Test.
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   // Load the default H2 properties and build a DruidDataSource
+ *   Properties properties = AlibabaDruidTestUtils.getDefaultProperties();
+ *   DruidDataSource dataSource = AlibabaDruidTestUtils.buildDruidDataSource(properties);
+ *   dataSource.init();
+ *
+ *   // Or use the convenience method directly
+ *   DruidDataSource defaultDataSource = AlibabaDruidTestUtils.buildDefaultDruidDataSource();
+ *   defaultDataSource.init();
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since 1.0.0
  */
