@@ -33,6 +33,17 @@ import java.lang.annotation.Target;
  * {@link ConditionalOnAlibabaDruidEnabled @ConditionalOnAlibabaDruidEnabled} and
  * {@link ConditionalOnClass @ConditionalOnClass} for {@link DruidDataSource}.
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   @ConditionalOnAlibabaDruidAvailable
+ *   @Configuration
+ *   public class MyDruidConfiguration {
+ *       // Beans in this class are only registered when:
+ *       // 1. DruidDataSource is on the classpath, AND
+ *       // 2. microsphere.alibaba.druid.enabled=true (or not set)
+ *   }
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see ConditionalOnProperty
  * @see ConditionalOnClass
