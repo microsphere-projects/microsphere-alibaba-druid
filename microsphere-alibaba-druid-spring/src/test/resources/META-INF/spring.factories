@@ -1,0 +1,2 @@
+com.alibaba.druid.filter.Filter=\
+io.microsphere.alibaba.druid.filter.TestStatementFilter

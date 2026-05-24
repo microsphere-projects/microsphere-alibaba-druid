@@ -29,7 +29,10 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * The Spring annotation enables the features of Alibaba Druid
+ * The Spring annotation enables the features of Alibaba Druid.
+ * <p>
+ * The {@link Filter} implementations will be initialized and added into {@link DruidDataSource} if they are defined in
+ * Spring Factories config {@code META-INF/spring.factories}.
  *
  * <h3>Example Usage</h3>
  * <pre>{@code
