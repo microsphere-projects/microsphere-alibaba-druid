@@ -108,4 +108,19 @@ For a comprehensive changelog, refer to the repository.
 
 **Note:** This release is primarily focused on documentation improvements and minor configurations.
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.9...0.2.10
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.9...0.2.10## v0.2.11
+
+# Release Notes - Version 0.2.11
+
+## New Features
+- **Druid Integration**: Automatically register Druid Filters using `spring.factories`. (#79ad584)
+
+## Build and Workflow Enhancements
+- Merged `main` into `release` and vice versa to maintain branch consistency. (#87770cf, #0844fae)
+- Bumped version post-release to prepare for the next development cycle. (#219d481)
+
+---
+
+**Note**: Full changelog available in the repository.
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.10...0.2.11
