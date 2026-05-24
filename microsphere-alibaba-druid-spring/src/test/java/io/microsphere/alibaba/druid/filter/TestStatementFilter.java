@@ -14,29 +14,29 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.constants;
 
-import static io.microsphere.constants.PropertyConstants.MICROSPHERE_PROPERTY_NAME_PREFIX;
-import static io.microsphere.constants.SymbolConstants.DOT;
+package io.microsphere.alibaba.druid.filter;
+
+import com.alibaba.druid.proxy.jdbc.StatementProxy;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 /**
- * The constants of Alibaba Druid Properties
+ * {@link AbstractStatementFilter} for Testing
  *
- * <h3>Example Usage</h3>
- * <pre>{@code
- *   // Access the property name prefix for Alibaba Druid
- *   String prefix = PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME_PREFIX;
- *   // prefix == "microsphere.alibaba.druid"
- * }</pre>
- *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see io.microsphere.constants.PropertyConstants
+ * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * @see AbstractStatementFilter
  * @since 1.0.0
  */
-public interface PropertyConstants {
+public class TestStatementFilter extends AbstractStatementFilter {
 
-    /**
-     * The property name of Alibaba Druid
-     */
-    String ALIBABA_DRUID_PROPERTY_NAME_PREFIX = MICROSPHERE_PROPERTY_NAME_PREFIX + "alibaba.druid";
+    @Override
+    protected void beforeExecute(StatementProxy statement, String resourceName) throws Throwable {
+        assertNotNull(statement);
+    }
+
+    @Override
+    protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
+        assertNotNull(statement);
+    }
 }

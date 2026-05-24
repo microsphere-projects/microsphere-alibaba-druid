@@ -34,6 +34,15 @@ import static org.springframework.boot.jdbc.DataSourceUnwrapper.unwrap;
 /**
  * The Auto-Configuration for Alibaba Druid
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   # application.properties
+ *   microsphere.alibaba.druid.enabled=true
+ *
+ *   # The auto-configuration registers a DruidDataSourceBeanPostProcessor and
+ *   # a DataSourcePoolMetadataProvider automatically when DruidDataSource is on the classpath.
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see AlibabaDruidProperties
  * @since 1.0.0
@@ -42,12 +51,37 @@ import static org.springframework.boot.jdbc.DataSourceUnwrapper.unwrap;
 @EnableConfigurationProperties(AlibabaDruidProperties.class)
 public class AlibabaDruidAutoConfiguration {
 
+    /**
+     * Register a {@link DruidDataSourceBeanPostProcessor} bean configured with filter classes
+     * from {@link AlibabaDruidProperties}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // Registered automatically by Spring Boot auto-configuration
+     *   // Adds configured Filter beans to every DruidDataSource bean before initialization
+     * }</pre>
+     *
+     * @param alibabaDruidProperties the Alibaba Druid properties
+     * @return the configured {@link DruidDataSourceBeanPostProcessor}
+     */
     @Bean
     public BeanPostProcessor druidDataSourceBeanPostProcessor(AlibabaDruidProperties alibabaDruidProperties) {
         Filter filter = alibabaDruidProperties.getFilter();
         return new DruidDataSourceBeanPostProcessor(filter.getClasses());
     }
 
+    /**
+     * Register a {@link DataSourcePoolMetadataProvider} that unwraps a {@link DruidDataSource} and
+     * returns a {@link DruidDataSourcePoolMetadata}.
+     *
+     * <h3>Example Usage</h3>
+     * <pre>{@code
+     *   // Registered automatically when a DruidDataSource bean is present
+     *   // Enables Spring Boot Actuator pool metrics for Druid data sources
+     * }</pre>
+     *
+     * @return the {@link DataSourcePoolMetadataProvider} for Druid
+     */
     @Bean
     @ConditionalOnBean(DruidDataSource.class)
     public DataSourcePoolMetadataProvider druidDataSourcePoolMetadataProvider() {

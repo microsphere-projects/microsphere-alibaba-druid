@@ -32,6 +32,16 @@ import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
  * The {@link ConditionalOnProperty @ConditionalOnProperty} variant for Alibaba Druid :
  * "microsphere.spring.boot.alibaba.druid.enabled" .
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   @ConditionalOnAlibabaDruidEnabled
+ *   @Configuration
+ *   public class MyDruidConfiguration {
+ *       // Beans in this class are only registered when:
+ *       // microsphere.alibaba.druid.enabled=true (or property is absent)
+ *   }
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see ConditionalOnProperty
  * @since 1.0.0

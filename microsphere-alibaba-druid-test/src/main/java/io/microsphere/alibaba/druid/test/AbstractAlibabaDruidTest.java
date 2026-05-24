@@ -41,6 +41,18 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 /**
  * Abstract Test for Alibaba Druid
  *
+ * <h3>Example Usage</h3>
+ * <pre>{@code
+ *   // Extend AbstractAlibabaDruidTest to create a custom Druid filter test
+ *   public class MyFilterTest extends AbstractAlibabaDruidTest {
+ *
+ *       @Override
+ *       protected void customize(DruidDataSource dataSource) {
+ *           dataSource.getProxyFilters().add(new LoggingStatementFilter());
+ *       }
+ *   }
+ * }</pre>
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see Filter
  * @since 1.0.0
