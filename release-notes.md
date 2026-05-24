@@ -100,4 +100,18 @@
 
 ---
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.9...0.1.10
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.9...0.1.10## v0.1.11
+
+# Release Notes - Version 0.1.11
+
+## 🚀 New Features
+- Register filters from `spring.factories`. ([#88](https://github.com/mercyblitz/dev-1.x))
+
+## 📝 Documentation
+- Added documentation for filter registration.
+
+## 🔧 Other Changes
+- Merged `release-1.x` into `dev-1.x` for branch maintenance.  
+- Bumped version to prepare for the next patch release.  
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.10...0.1.11
