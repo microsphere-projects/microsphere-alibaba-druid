@@ -114,4 +114,18 @@
 - Merged `release-1.x` into `dev-1.x` for branch maintenance.  
 - Bumped version to prepare for the next patch release.  
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.10...0.1.11
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.10...0.1.11## v0.1.12
+
+# Release Notes: Version 0.1.12
+
+## Build and Workflow Enhancements
+- Added `.github` AI prompt templates for improved contribution guidance. (#54d7212)  
+
+## Documentation
+- Updated `README.md` to reflect the latest version numbers and branch updates. (#e8d8af4, #ae92dcd)  
+
+## Other Changes
+- Merged `release-1.x` and `dev-1.x` branches for consistency and integration. (#6d74801, #8e74d1a)  
+- Updated project version to 0.1.13 post-release of 0.1.11. (#4608310, #6acedcd)  
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.11...0.1.12
