@@ -123,4 +123,28 @@ For a comprehensive changelog, refer to the repository.
 
 **Note**: Full changelog available in the repository.
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.10...0.2.11
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.10...0.2.11## v0.2.12
+
+# Release Notes - Version 0.2.12
+
+## New Features
+- Add `.github` prompt templates for common development tasks. ([5561bba](#))
+
+## Bug Fixes
+- Fix badge links and formatting in `README.md`. ([5fb714d](#))
+
+## Documentation
+- Update `README.md` branch versions to 0.2.12 and 0.1.12. ([5c480bd](#))
+
+## Dependency Updates
+- Bump `microsphere spring-cloud` to version 0.2.13. ([4196424](#))
+
+## Build and Workflow Enhancements
+- Various merges between `main` and `release` branches to keep branches in sync. ([211177f](#), [84ccb93](#), [8916ebd](#))
+
+## Other Changes
+- Chore: Version bump to next patch after publishing 0.2.11. ([2db277a](#))
+
+---
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.11...0.2.12
