@@ -86,5 +86,3 @@ public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
         assertInstanceOf(DruidDataSourcePoolMetadata.class, dataSourcePoolMetadata);
     }
 }
-
-
