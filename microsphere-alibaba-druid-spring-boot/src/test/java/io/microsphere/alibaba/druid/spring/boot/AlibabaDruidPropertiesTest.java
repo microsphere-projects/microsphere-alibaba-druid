@@ -17,7 +17,6 @@
 
 package io.microsphere.alibaba.druid.spring.boot;
 
-
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties.Filter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

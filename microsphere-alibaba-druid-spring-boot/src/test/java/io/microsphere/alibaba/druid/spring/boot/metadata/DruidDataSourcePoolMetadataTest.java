@@ -17,7 +17,6 @@
 
 package io.microsphere.alibaba.druid.spring.boot.metadata;
 
-
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.test.junit.jupiter.AlibabaDruidRuntime;
 import io.microsphere.alibaba.druid.test.junit.jupiter.AlibabaDruidTest;
