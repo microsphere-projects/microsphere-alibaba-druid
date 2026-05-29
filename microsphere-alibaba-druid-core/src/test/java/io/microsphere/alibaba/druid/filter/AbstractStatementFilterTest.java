@@ -17,7 +17,6 @@
 
 package io.microsphere.alibaba.druid.filter;
 
-
 import com.alibaba.druid.proxy.jdbc.DataSourceProxy;
 import com.alibaba.druid.proxy.jdbc.StatementProxy;
 import com.alibaba.druid.sql.ast.SQLStatement;

@@ -17,7 +17,6 @@
 
 package io.microsphere.alibaba.druid.test.junit.jupiter;
 
-
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.test.AbstractAlibabaDruidTest;
 import org.junit.jupiter.api.DisplayName;
