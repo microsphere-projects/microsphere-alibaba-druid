@@ -128,4 +128,24 @@
 - Merged `release-1.x` and `dev-1.x` branches for consistency and integration. (#6d74801, #8e74d1a)  
 - Updated project version to 0.1.13 post-release of 0.1.11. (#4608310, #6acedcd)  
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.11...0.1.12
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.11...0.1.12## v0.1.13
+
+# Release Notes for Version 0.1.13
+
+## New Features
+- **Support multiple filter sources**: Added functionality to support multiple filter sources for enhanced flexibility. ([fbd74cd](https://example.com/commit/fbd74cd))
+
+## Bug Fixes
+- **Code cleanup**: Removed duplicated line separators and trailing whitespace. ([bcf7b93](https://example.com/commit/bcf7b93))
+
+## Test Improvements
+- Added comprehensive tests for multiple filter sources feature. ([fbd74cd](https://example.com/commit/fbd74cd))
+
+## Build and Workflow Enhancements
+- **Version management**: Bumped parent version to `0.1.14` for future development. ([1cb6723](https://example.com/commit/1cb6723))
+- **Branch management**: Merged `release-1.x` into `dev-1.x` to ensure branch consistency. ([a9e27c0](https://example.com/commit/a9e27c0))
+- Updated to next patch version `0.1.13` after publishing `0.1.12`. ([a734f2d](https://example.com/commit/a734f2d))
+
+--- 
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.12...0.1.13
