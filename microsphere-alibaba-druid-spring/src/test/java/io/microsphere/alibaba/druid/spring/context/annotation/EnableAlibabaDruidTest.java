@@ -22,6 +22,10 @@ import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
 
+import static io.microsphere.spring.beans.BeanSource.BEAN_FACTORY;
+import static io.microsphere.spring.beans.BeanSource.JAVA_SERVICE_PROVIDER;
+import static io.microsphere.spring.beans.BeanSource.SPRING_FACTORIES;
+
 /**
  * {@link EnableAlibabaDruid} Test
  *
@@ -34,6 +38,13 @@ import org.springframework.test.context.junit.jupiter.SpringJUnitConfig;
         DruidDataSourceTestConfiguration.class,
         EnableAlibabaDruidTest.class,
 })
-@EnableAlibabaDruid(filterBeanClasses = AbstractStatementFilter.class)
+@EnableAlibabaDruid(
+        filterClasses = AbstractStatementFilter.class,
+        sources = {
+                BEAN_FACTORY,
+                SPRING_FACTORIES,
+                JAVA_SERVICE_PROVIDER
+        }
+)
 public class EnableAlibabaDruidTest extends AbstractDruidSpringTest {
 }
