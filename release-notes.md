@@ -147,4 +147,26 @@ For a comprehensive changelog, refer to the repository.
 
 ---
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.11...0.2.12
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.11...0.2.12## v0.2.13
+
+# Release Notes - Version 0.2.13
+
+## New Features
+- **BeanSource Support**: Added support for `BeanSource` and renamed `filterClasses` for improved functionality. ([81b8043](https://github.com/microsphere-projects/microsphere/commit/81b8043))
+
+## Bug Fixes
+- Removed duplicated line separators and resolved trailing whitespace issues across the Java source codebase. ([1657100](https://github.com/microsphere-projects/microsphere/commit/1657100))
+
+## Documentation
+- Updated README to reflect the latest branch versions. ([7ccbb75](https://github.com/microsphere-projects/microsphere/commit/7ccbb75))
+
+## Dependency Updates
+- Upgraded `microsphere-spring-cloud` to version `0.2.14`. ([bfa0583](https://github.com/microsphere-projects/microsphere/commit/bfa0583))
+
+## Build and Workflow Enhancements
+- Multiple merges and version bumps to synchronize branches and prepare for the next release cycle. ([67b650d](https://github.com/microsphere-projects/microsphere/commit/67b650d), [6a8716c](https://github.com/microsphere-projects/microsphere/commit/6a8716c), [f47e1e5](https://github.com/microsphere-projects/microsphere/commit/f47e1e5), [90b53cf](https://github.com/microsphere-projects/microsphere/commit/90b53cf), [836c067](https://github.com/microsphere-projects/microsphere/commit/836c067))
+- Incremented project version to `0.2.14` post-release. ([f35e50b](https://github.com/microsphere-projects/microsphere/commit/f35e50b), [388c780](https://github.com/microsphere-projects/microsphere/commit/388c780)) 
+
+---
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.12...0.2.13
