@@ -14,14 +14,30 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.microsphere.alibaba.druid.test;
+
+package io.microsphere.alibaba.druid.filter;
+
+import com.alibaba.druid.filter.AutoLoad;
+import com.alibaba.druid.filter.Filter;
+import com.alibaba.druid.proxy.jdbc.StatementProxy;
 
 /**
- * {@link AbstractAlibabaDruidTest} Test
+ * {@link Filter} class annotated {@link AutoLoad}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
- * @see AbstractAlibabaDruidTest
+ * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ * @see Filter
+ * @see AutoLoad
  * @since 1.0.0
  */
-public class DefaultAlibabaDruidTest extends AbstractAlibabaDruidTest {
+@AutoLoad
+public class AutoLoadFilter extends AbstractStatementFilter {
+    @Override
+    protected void beforeExecute(StatementProxy statement, String resourceName) throws Throwable {
+
+    }
+
+    @Override
+    protected void afterExecute(StatementProxy statement, String resourceName, Object result, Throwable failure) {
+
+    }
 }

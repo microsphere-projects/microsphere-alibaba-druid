@@ -16,22 +16,22 @@
  */
 package io.microsphere.alibaba.druid.spring.context.annotation;
 
+import com.alibaba.druid.filter.AutoLoad;
 import com.alibaba.druid.filter.Filter;
 import io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor;
+import io.microsphere.spring.beans.BeanSource;
 import io.microsphere.spring.context.annotation.BeanCapableImportCandidate;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
 import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 
-import java.util.List;
+import java.util.Set;
 
 import static io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor.BEAN_NAME;
-import static io.microsphere.collection.ListUtils.forEach;
-import static io.microsphere.spring.beans.factory.support.BeanRegistrar.registerBean;
 import static io.microsphere.spring.beans.factory.support.BeanRegistrar.registerBeanDefinition;
-import static io.microsphere.spring.core.io.support.SpringFactoriesLoaderUtils.loadFactories;
-import static io.microsphere.util.StringUtils.uncapitalize;
+import static io.microsphere.spring.beans.factory.support.BeanRegistrar.registerSpringFactoriesBeans;
+import static io.microsphere.util.ServiceLoaderUtils.getServiceClasses;
 import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
 
 /**
@@ -41,7 +41,7 @@ import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
  * <pre>{@code
  *   // AlibabaDruidRegistrar is automatically activated via @EnableAlibabaDruid
  *   @Configuration
- *   @EnableAlibabaDruid(filterBeanClasses = AbstractStatementFilter.class)
+ *   @EnableAlibabaDruid(filterClasses = AbstractStatementFilter.class)
  *   public class AppConfig { }
  *   // AlibabaDruidRegistrar registers DruidDataSourceBeanPostProcessor with the given filter classes
  * }</pre>
@@ -57,42 +57,50 @@ class AlibabaDruidRegistrar extends BeanCapableImportCandidate implements Import
 
     private static final String ANNOTATION_CLASS_NAME = EnableAlibabaDruid.class.getName();
 
-    /**
-     * Register {@link DruidDataSourceBeanPostProcessor} bean definition with filter bean classes
-     * extracted from the {@link EnableAlibabaDruid} annotation metadata.
-     *
-     * <h3>Example Usage</h3>
-     * <pre>{@code
-     *   // Invoked automatically by Spring when @EnableAlibabaDruid is present on a @Configuration class
-     *   @EnableAlibabaDruid(filterBeanClasses = LoggingStatementFilter.class)
-     *   @Configuration
-     *   public class AppConfig { }
-     *   // A DruidDataSourceBeanPostProcessor bean is registered with LoggingStatementFilter class
-     * }</pre>
-     *
-     * @param metadata the annotation metadata of the importing class
-     * @param registry the bean definition registry
-     */
     @Override
     public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
         AnnotationAttributes attributes = fromMap(metadata.getAnnotationAttributes(ANNOTATION_CLASS_NAME));
-        registerDruidDataSourceBeanPostProcessor(registry, attributes);
-        registerFiltersBySpringFactories(registry);
+        Class<? extends Filter>[] filterClasses = (Class<? extends Filter>[]) attributes.getClassArray("filterClasses");
+        BeanSource[] sources = (BeanSource[]) attributes.get("sources");
+        registerFilterBeans(registry, filterClasses, sources);
     }
 
-    private void registerDruidDataSourceBeanPostProcessor(BeanDefinitionRegistry registry, AnnotationAttributes attributes) {
-        Class<? extends Filter>[] filterBeanClasses = (Class<? extends Filter>[]) attributes.getClassArray("filterBeanClasses");
+    private void registerFilterBeans(BeanDefinitionRegistry registry, Class<? extends Filter>[] filterClasses, BeanSource[] sources) {
+        for (BeanSource source : sources) {
+            switch (source) {
+                case SPRING_FACTORIES:
+                    registerFiltersBySpringFactories(registry, filterClasses);
+                case JAVA_SERVICE_PROVIDER:
+                    registerFiltersByJavaServiceProvider(registry, filterClasses);
+                case BEAN_FACTORY:
+                default:
+                    registerDruidDataSourceBeanPostProcessor(registry, filterClasses);
+            }
+        }
+    }
+
+    private void registerFiltersBySpringFactories(BeanDefinitionRegistry registry, Class<? extends Filter>[] filterClasses) {
+        registerSpringFactoriesBeans(registry, filterClasses);
+    }
+
+    private void registerFiltersByJavaServiceProvider(BeanDefinitionRegistry registry, Class<? extends Filter>[] filterClasses) {
+        for (Class<? extends Filter> filterClass : filterClasses) {
+            Set<? extends Class<? extends Filter>> serviceClasses = getServiceClasses(filterClass, classLoader);
+            for (Class<? extends Filter> serviceClass : serviceClasses) {
+                if (serviceClass.isAnnotationPresent(AutoLoad.class)) {
+                    // Any filter class annotated @AutoLoad will be added into DruidDataSource automatically,
+                    // so it will be ignored here.
+                    continue;
+                }
+                registerBeanDefinition(registry, serviceClass);
+            }
+        }
+    }
+
+    private void registerDruidDataSourceBeanPostProcessor(BeanDefinitionRegistry registry, Class<? extends Filter>[] filterClasses) {
         String beanName = BEAN_NAME;
         Class<?> beanClass = DruidDataSourceBeanPostProcessor.class;
-        Object argument = filterBeanClasses;
+        Object argument = filterClasses;
         registerBeanDefinition(registry, beanName, beanClass, argument);
-    }
-
-    private void registerFiltersBySpringFactories(BeanDefinitionRegistry registry) {
-        List<Filter> filters = loadFactories(getApplicationContext(), Filter.class);
-        forEach(filters, filter -> {
-            String beanName = uncapitalize(filter.getClass().getSimpleName());
-            registerBean(registry, beanName, filter);
-        });
     }
 }

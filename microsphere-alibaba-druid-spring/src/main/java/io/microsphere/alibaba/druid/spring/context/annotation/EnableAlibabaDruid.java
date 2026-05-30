@@ -18,12 +18,15 @@ package io.microsphere.alibaba.druid.spring.context.annotation;
 
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
+import io.microsphere.spring.beans.BeanSource;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
+import static io.microsphere.spring.beans.BeanSource.BEAN_FACTORY;
+import static io.microsphere.spring.beans.BeanSource.SPRING_FACTORIES;
 import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
 import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
@@ -37,7 +40,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * <h3>Example Usage</h3>
  * <pre>{@code
  *   @Configuration
- *   @EnableAlibabaDruid(filterBeanClasses = LoggingStatementFilter.class)
+ *   @EnableAlibabaDruid(filterClasses = LoggingStatementFilter.class)
  *   public class AppConfig {
  *
  *       @Bean(initMethod = "init", destroyMethod = "close")
@@ -61,17 +64,25 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 public @interface EnableAlibabaDruid {
 
     /**
-     * The classes of {@link Filter} beans to be added into {@link DruidDataSource}.
+     * The classes of {@link Filter} are searched in the {@link #sources() scopes}, whose instances will be registered
+     * as the Spring Beans, and then be added into {@link {@link DruidDataSource#getProxyFilters() DruidDataSource}.
      *
      * <h3>Example Usage</h3>
      * <pre>{@code
-     *   @EnableAlibabaDruid(filterBeanClasses = { LoggingStatementFilter.class })
+     *   @EnableAlibabaDruid(filterClasses = { LoggingStatementFilter.class })
      *   public class AppConfig { }
      * }</pre>
      *
-     * @return The default value is the class of {@link Filter}, it indicates all {@link Filter} beans
-     * should be added.
+     * @return The default value is the class of {@link Filter}, it indicates all searched
+     * {@link Filter filters} should be added.
      */
-    Class<? extends Filter>[] filterBeanClasses() default {Filter.class};
+    Class<? extends Filter>[] filterClasses() default {Filter.class};
 
+    /**
+     * The sources to search the instance of {@link Filter Filters} by {@link #filterClasses() the specified types}.
+     *
+     * @return The default value is {@code {BEAN_FACTORY, SPRING_FACTORIES}},
+     * it indicates to search in Spring Bean Factory and Spring Factories config.
+     */
+    BeanSource[] sources() default {BEAN_FACTORY, SPRING_FACTORIES};
 }
