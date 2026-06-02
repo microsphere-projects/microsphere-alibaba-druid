@@ -148,4 +148,19 @@
 
 --- 
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.12...0.1.13
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.12...0.1.13## v0.1.14
+
+# Release Notes - Version 0.1.14  
+
+## Dependency Updates  
+- Upgraded `microsphere-spring-cloud` to version `0.1.15` (fddea29).  
+
+## Code Maintenance  
+- Bumped versions and tidied imports for improved project consistency (97e7d48).  
+- Merged `release-1.x` into `dev-1.x` to synchronize branches (fa85b1b).  
+- Updated project version to prepare for the next patch release (4f16f4b).  
+
+## Other Changes  
+- Integrated changes from `dev-1.x` branch into the project (97223de).  
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.13...0.1.14
