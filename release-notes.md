@@ -169,4 +169,25 @@ For a comprehensive changelog, refer to the repository.
 
 ---
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.12...0.2.13
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.12...0.2.13## v0.2.24
+
+# Release Notes - Version 0.2.24
+
+## New Features
+- Added `DruidDataSource` for enhanced data source capabilities. ([98c4a15](#))
+
+## Dependency Updates
+- Bumped `microsphere-spring-cloud` to version `0.2.15`. ([549fde2](#))
+
+## Documentation
+- Updated README with branch version number updates. ([7e6782a](#))
+
+## Build and Workflow Enhancements
+- Merged `main` into `release`. ([5eb471a](#), [d2ebef0](#), [f25c410](#))
+- Bumped to the next patch version post-publishing `0.2.13`. ([35a5116](#))
+- Merged `release` into `main`. ([dcfdbbd](#))
+
+## Other Changes
+- Removed unused imports. ([98c4a15](#))
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.13...0.2.24
