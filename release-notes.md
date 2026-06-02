@@ -163,4 +163,11 @@
 ## Other Changes  
 - Integrated changes from `dev-1.x` branch into the project (97223de).  
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.13...0.1.14
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.13...0.1.14## v0.1.15
+
+# Release Notes - Version 0.1.15
+
+## Other Changes
+- **Chore**: Bumped version to next patch after publishing 0.1.14 (`eeadf70`)
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.14...0.1.15
