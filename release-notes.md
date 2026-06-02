@@ -190,4 +190,15 @@ For a comprehensive changelog, refer to the repository.
 ## Other Changes
 - Removed unused imports. ([98c4a15](#))
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.13...0.2.24
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.13...0.2.24## v0.2.15
+
+```markdown
+# Release Notes - Version 0.2.15
+
+## Changelog
+
+### Other Changes
+- chore: bump version to next patch after publishing 0.2.24 (ee3338d)
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.24...0.2.15
