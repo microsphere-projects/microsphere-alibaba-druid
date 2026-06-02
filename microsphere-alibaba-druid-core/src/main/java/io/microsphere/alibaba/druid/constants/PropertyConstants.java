@@ -17,7 +17,6 @@
 package io.microsphere.alibaba.druid.constants;
 
 import static io.microsphere.constants.PropertyConstants.MICROSPHERE_PROPERTY_NAME_PREFIX;
-import static io.microsphere.constants.SymbolConstants.DOT;
 
 /**
  * The constants of Alibaba Druid Properties
