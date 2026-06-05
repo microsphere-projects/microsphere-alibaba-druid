@@ -170,4 +170,19 @@
 ## Other Changes
 - **Chore**: Bumped version to next patch after publishing 0.1.14 (`eeadf70`)
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.14...0.1.15
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.14...0.1.15## v0.1.16
+
+# Release Notes - Version 0.1.16
+
+## Build and Workflow Enhancements
+- Merged `release-1.x` into `dev-1.x` to sync branches. [#94]  
+- Bumped version to `0.1.16` and updated project parent POM.  
+
+## Documentation
+- Updated `README` to reflect changes in version `0.1.16`.  
+
+---
+
+Full Changelog: [v0.1.15...v0.1.16](https://github.com/mercyblitz/your-repo/compare/v0.1.15...v0.1.16)
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.15...0.1.16
