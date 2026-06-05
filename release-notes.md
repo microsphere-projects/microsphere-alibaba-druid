@@ -201,4 +201,17 @@ For a comprehensive changelog, refer to the repository.
 - chore: bump version to next patch after publishing 0.2.24 (ee3338d)
 ```
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.24...0.2.15
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.24...0.2.15## v0.2.16
+
+# Release Notes - Version 0.2.16
+
+### Build and Workflow Enhancements
+- Merged main into release and release into main. [skip ci]
+- Bumped version to next patch after publishing 0.2.15.
+
+### Dependency Updates
+- Updated Microsphere versions to `0.2.16` / `0.1.16`. 
+
+---
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.15...0.2.16
