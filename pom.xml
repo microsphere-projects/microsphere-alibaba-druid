@@ -8,7 +8,7 @@
         <groupId>io.github.microsphere-projects</groupId>
         <artifactId>microsphere-spring-cloud-parent</artifactId>
         <version>0.1.19</version>
-    </parent>`
+    </parent>
 
     <groupId>io.github.microsphere-projects</groupId>
     <artifactId>microsphere-alibaba-druid</artifactId>
