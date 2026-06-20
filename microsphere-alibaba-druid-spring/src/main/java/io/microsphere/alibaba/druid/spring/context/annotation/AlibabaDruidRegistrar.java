@@ -20,10 +20,12 @@ import com.alibaba.druid.filter.AutoLoad;
 import com.alibaba.druid.filter.Filter;
 import io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor;
 import io.microsphere.spring.beans.BeanSource;
+import io.microsphere.spring.context.annotation.AnnotatedBeanCapableImportBeanDefinitionRegistrar;
 import io.microsphere.spring.context.annotation.BeanCapableImportCandidate;
+import io.microsphere.spring.core.annotation.ResolvablePlaceholderAnnotationAttributes;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
+import org.springframework.beans.factory.support.BeanNameGenerator;
 import org.springframework.context.annotation.ImportBeanDefinitionRegistrar;
-import org.springframework.core.annotation.AnnotationAttributes;
 import org.springframework.core.type.AnnotationMetadata;
 
 import java.util.Set;
@@ -32,10 +34,9 @@ import static io.microsphere.alibaba.druid.spring.beans.factory.config.DruidData
 import static io.microsphere.spring.beans.factory.support.BeanRegistrar.registerBeanDefinition;
 import static io.microsphere.spring.beans.factory.support.BeanRegistrar.registerSpringFactoriesBeans;
 import static io.microsphere.util.ServiceLoaderUtils.getServiceClasses;
-import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
 
 /**
- * {@link BeanCapableImportCandidate}
+ * {@link AnnotatedBeanCapableImportBeanDefinitionRegistrar} class for Alibaba Druid
  *
  * <h3>Example Usage</h3>
  * <pre>{@code
@@ -48,20 +49,19 @@ import static org.springframework.core.annotation.AnnotationAttributes.fromMap;
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see EnableAlibabaDruid
- * @see BeanCapableImportCandidate
+ * @see AnnotatedBeanCapableImportBeanDefinitionRegistrar
  * @see ImportBeanDefinitionRegistrar
  * @see DruidDataSourceBeanPostProcessor
  * @since 1.0.0
  */
-class AlibabaDruidRegistrar extends BeanCapableImportCandidate implements ImportBeanDefinitionRegistrar {
-
-    private static final String ANNOTATION_CLASS_NAME = EnableAlibabaDruid.class.getName();
+class AlibabaDruidRegistrar extends AnnotatedBeanCapableImportBeanDefinitionRegistrar<EnableAlibabaDruid> {
 
     @Override
-    public void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry) {
-        AnnotationAttributes attributes = fromMap(metadata.getAnnotationAttributes(ANNOTATION_CLASS_NAME));
-        Class<? extends Filter>[] filterClasses = (Class<? extends Filter>[]) attributes.getClassArray("filterClasses");
-        BeanSource[] sources = (BeanSource[]) attributes.get("sources");
+    protected void registerBeanDefinitions(AnnotationMetadata metadata, BeanDefinitionRegistry registry,
+                                           BeanNameGenerator importBeanNameGenerator,
+                                           ResolvablePlaceholderAnnotationAttributes<EnableAlibabaDruid> annotationAttributes) {
+        Class<? extends Filter>[] filterClasses = (Class<? extends Filter>[]) annotationAttributes.getClassArray("filterClasses");
+        BeanSource[] sources = (BeanSource[]) annotationAttributes.get("sources");
         registerFilterBeans(registry, filterClasses, sources);
     }
 
