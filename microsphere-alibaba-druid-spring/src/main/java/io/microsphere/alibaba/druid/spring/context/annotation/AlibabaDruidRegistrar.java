@@ -21,7 +21,6 @@ import com.alibaba.druid.filter.Filter;
 import io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor;
 import io.microsphere.spring.beans.BeanSource;
 import io.microsphere.spring.context.annotation.AnnotatedBeanCapableImportBeanDefinitionRegistrar;
-import io.microsphere.spring.context.annotation.BeanCapableImportCandidate;
 import io.microsphere.spring.core.annotation.ResolvablePlaceholderAnnotationAttributes;
 import org.springframework.beans.factory.support.BeanDefinitionRegistry;
 import org.springframework.beans.factory.support.BeanNameGenerator;
@@ -36,7 +35,7 @@ import static io.microsphere.spring.beans.factory.support.BeanRegistrar.register
 import static io.microsphere.util.ServiceLoaderUtils.getServiceClasses;
 
 /**
- * {@link BeanCapableImportCandidate}
+ * {@link AnnotatedBeanCapableImportBeanDefinitionRegistrar} class for Alibaba Druid
  *
  * <h3>Example Usage</h3>
  * <pre>{@code
