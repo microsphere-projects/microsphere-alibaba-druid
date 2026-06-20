@@ -20,7 +20,7 @@ import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.spring.boot.condition.ConditionalOnAlibabaDruidAvailable;
-import io.microsphere.spring.cloud.client.condition.ConditionalOnFeaturesEnabled;
+import io.microsphere.spring.cloud.client.condition.ConditionalOnFeaturesAvailable;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.cloud.client.actuator.HasFeatures;
 import org.springframework.cloud.client.actuator.NamedFeature;
@@ -57,7 +57,7 @@ import static java.util.Collections.emptyList;
 @Import(AlibabaDruidCloudAutoConfiguration.FeaturesConfiguration.class)
 public class AlibabaDruidCloudAutoConfiguration {
 
-    @ConditionalOnFeaturesEnabled
+    @ConditionalOnFeaturesAvailable
     public static class FeaturesConfiguration {
 
         /**
