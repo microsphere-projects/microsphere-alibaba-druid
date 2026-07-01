@@ -19,14 +19,13 @@ package io.microsphere.alibaba.druid.spring.cloud.autoconfigure;
 import com.alibaba.druid.filter.Filter;
 import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
-import io.microsphere.alibaba.druid.spring.cloud.autoconfigure.AlibabaDruidCloudAutoConfiguration.FeaturesConfiguration;
 import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
 import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.client.actuator.FeaturesEndpoint;
 import org.springframework.cloud.client.actuator.HasFeatures;
 import org.springframework.cloud.client.actuator.NamedFeature;
 
@@ -36,6 +35,7 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 /**
  * {@link AlibabaDruidCloudAutoConfiguration} Test
@@ -48,9 +48,10 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
         LoggingStatementFilter.class,
         DruidDataSourceTestConfiguration.class,
         AlibabaDruidCloudAutoConfigurationTest.class
-}, webEnvironment = SpringBootTest.WebEnvironment.NONE,
+}, webEnvironment = NONE,
         properties = {
                 "microsphere.alibaba.druid.enabled=true",
+                "management.endpoints.web.exposure.include=features",
                 "spring.cloud.features.enabled=true",
                 "microsphere.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
         })
@@ -61,23 +62,21 @@ public class AlibabaDruidCloudAutoConfigurationTest extends AbstractDruidSpringT
     private Map<String, HasFeatures> hasFeaturesMap;
 
     @Autowired
-    private FeaturesConfiguration featuresConfiguration;
+    private FeaturesEndpoint featuresEndpoint;
 
     @Test
     public void test() {
         assertTrue(this.hasFeaturesMap.size() > 0);
-        HasFeatures hadFeatures = this.hasFeaturesMap.get("alibabaDruidFeatures");
+        HasFeatures hadFeatures = this.hasFeaturesMap.get("microsphere-alibaba-druid-core.features");
         assertNotNull(hadFeatures);
 
         List<NamedFeature> namedFeatures = hadFeatures.getNamedFeatures();
         assertEquals(2, namedFeatures.size());
 
-        assertNamedFeature(namedFeatures, 0, "microsphere.alibaba.druid.DruidDataSource", DruidDataSource.class);
-        assertNamedFeature(namedFeatures, 1, "microsphere.alibaba.druid.Filter", Filter.class);
+        assertNamedFeature(namedFeatures, 0, "microsphere-alibaba-druid-core:DruidDataSource", DruidDataSource.class);
+        assertNamedFeature(namedFeatures, 1, "microsphere-alibaba-druid-core:LoggingStatementFilter", LoggingStatementFilter.class);
 
-        HasFeatures hasFeatures = this.featuresConfiguration.alibabaDruidFeatures(new DefaultListableBeanFactory());
-        assertTrue(hasFeatures.getAbstractFeatures().isEmpty());
-        assertTrue(hasFeatures.getNamedFeatures().isEmpty());
+        assertNotNull(featuresEndpoint.features());
     }
 
     private void assertNamedFeature(List<NamedFeature> namedFeatures, int index, String name, Class<?> type) {
