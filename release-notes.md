@@ -185,4 +185,29 @@
 
 Full Changelog: [v0.1.15...v0.1.16](https://github.com/mercyblitz/your-repo/compare/v0.1.15...v0.1.16)
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.15...0.1.16
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.15...0.1.16## v0.1.17
+
+# Release Notes for Version 0.1.17
+
+## 📦 New Features
+- **AlibabaDruidRegistrar**: Refactored base class for improved architecture. (#670e9ae)
+- **DruidDataSourceBeanPostProcessor**: Set bean name to enhance bean registration process. (#e0472f9)
+- Introduced conditional configuration with `@ConditionalOnFeaturesAvailable`. (#846307d)
+
+## 📚 Documentation
+- Updated README to reflect latest branch versions. (#efedb95)
+- Cleaned up redundant blank lines in README. (#2ec99bf)
+
+## 🔗 Dependency Updates
+- Upgraded `microsphere-spring-cloud` to version 0.1.21. (#06e86c8)
+- Previous incremental updates of `microsphere-spring-cloud` to 0.1.19 and 0.1.20. (#6811888, #67e0e72)
+
+## 🛠️ Other Changes
+- Removed stray backtick from `pom.xml`. (#304bcfb)
+- Merged release branch updates into development branch. (#169c8d1)
+
+---
+
+**Note**: This version includes both functional enhancements and cleanup efforts to improve project maintainability.
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.16...0.1.17

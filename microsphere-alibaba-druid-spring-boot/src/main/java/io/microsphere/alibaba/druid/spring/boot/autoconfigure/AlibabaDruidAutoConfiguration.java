@@ -29,6 +29,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
 import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
 import org.springframework.context.annotation.Bean;
 
+import static io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor.BEAN_NAME;
 import static org.springframework.boot.jdbc.DataSourceUnwrapper.unwrap;
 
 /**
@@ -64,7 +65,7 @@ public class AlibabaDruidAutoConfiguration {
      * @param alibabaDruidProperties the Alibaba Druid properties
      * @return the configured {@link DruidDataSourceBeanPostProcessor}
      */
-    @Bean
+    @Bean(name = BEAN_NAME)
     public BeanPostProcessor druidDataSourceBeanPostProcessor(AlibabaDruidProperties alibabaDruidProperties) {
         Filter filter = alibabaDruidProperties.getFilter();
         return new DruidDataSourceBeanPostProcessor(filter.getClasses());
