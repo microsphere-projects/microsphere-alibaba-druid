@@ -3,7 +3,6 @@
 > Microsphere Projects for [Alibaba Druid](https://github.com/alibaba/druid)
 
 [![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/microsphere-projects/microsphere-alibaba-druid)
-
 [![Maven Build](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/maven-build.yml/badge.svg)](https://github.com/microsphere-projects/microsphere-alibaba-druid/actions/workflows/maven-build.yml)
 [![Codecov](https://codecov.io/gh/microsphere-projects/microsphere-alibaba-druid/branch/dev-1.x/graph/badge.svg)](https://app.codecov.io/gh/microsphere-projects/microsphere-alibaba-druid)
 ![Maven](https://img.shields.io/maven-central/v/io.github.microsphere-projects/microsphere-alibaba-druid-dependencies.svg)
@@ -63,8 +62,8 @@ pom.xml:
 
 | **Branches** | **Purpose**                                      | **Latest Version** |
 |--------------|--------------------------------------------------|--------------------|
-| **main**     | Compatible with Spring Cloud 2022.0.x - 2025.0.x | `0.2.16`           |
-| **1.x**      | Compatible with Spring Cloud Hoxton - 2021.0.x   | `0.1.16`           |
+| **main**     | Compatible with Spring Cloud 2022.0.x - 2025.0.x | `0.2.17`           |
+| **1.x**      | Compatible with Spring Cloud Hoxton - 2021.0.x   | `0.1.17`           |
 
 Then add the specific modules you need.
 

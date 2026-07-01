@@ -1,0 +1,8 @@
+microsphere:
+  spring:
+    cloud:
+      features:
+        abstract:
+          microsphere-alibaba-druid-core:
+            - com.alibaba.druid.pool.DruidDataSource
+            - com.alibaba.druid.filter.Filter
