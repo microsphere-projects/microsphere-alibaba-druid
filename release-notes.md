@@ -214,4 +214,31 @@ For a comprehensive changelog, refer to the repository.
 
 ---
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.15...0.2.16
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.15...0.2.16## v0.2.17
+
+# Release Notes - Version 0.2.17
+
+## New Features
+- Migrated Druid features to YAML-based registration for improved configuration flexibility. (#31f3d91)
+- Introduced `ConditionalOnFeaturesAvailable` for conditional bean processing. (#c8f9b38)
+- Switched `AlibabaDruidRegistrar` to annotation-based implementation. (#f262b82)
+
+## Dependency Updates
+- Updated `microsphere-spring-cloud` to `v0.2.20`. (#696a28d)
+- Bumped `microsphere-spring-cloud` to `v0.2.19`. (#c39d6c4)
+
+## Bug Fixes
+- Set explicit `@Bean` name for `DruidDataSourceBeanPostProcessor` to avoid conflicts. (#b265a3c)
+- Used explicit `name` attribute in `@Bean` to ensure clarity and avoid potential bean naming issues. (#001000c)
+
+## Documentation
+- Updated README to reflect accurate branch version numbers. (#6ed4b31)
+
+## Other Changes
+- Removed unused imports and improved Javadoc for better code clarity. (#4807fed)
+
+---
+
+**Note:** Internal chore commits related to merging branches and post-publish version bumps were omitted for brevity.
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.16...0.2.17
