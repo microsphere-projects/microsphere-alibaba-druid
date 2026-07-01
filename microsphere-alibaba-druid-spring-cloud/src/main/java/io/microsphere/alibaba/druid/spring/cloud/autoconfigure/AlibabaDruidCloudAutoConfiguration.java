@@ -16,26 +16,8 @@
  */
 package io.microsphere.alibaba.druid.spring.cloud.autoconfigure;
 
-import com.alibaba.druid.filter.Filter;
-import com.alibaba.druid.pool.DruidDataSource;
 import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
 import io.microsphere.alibaba.druid.spring.boot.condition.ConditionalOnAlibabaDruidAvailable;
-import io.microsphere.spring.cloud.client.condition.ConditionalOnFeaturesAvailable;
-import org.springframework.beans.factory.ListableBeanFactory;
-import org.springframework.cloud.client.actuator.HasFeatures;
-import org.springframework.cloud.client.actuator.NamedFeature;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Import;
-
-import java.util.List;
-import java.util.Set;
-
-import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME_PREFIX;
-import static io.microsphere.collection.ListUtils.newArrayList;
-import static io.microsphere.collection.SetUtils.of;
-import static io.microsphere.constants.SymbolConstants.DOT_CHAR;
-import static io.microsphere.spring.beans.BeanUtils.isBeanPresent;
-import static java.util.Collections.emptyList;
 
 /**
  * The Spring Cloud Auto-Configuration for Alibaba Druid
@@ -54,49 +36,5 @@ import static java.util.Collections.emptyList;
  * @since 1.0.0
  */
 @ConditionalOnAlibabaDruidAvailable
-@Import(AlibabaDruidCloudAutoConfiguration.FeaturesConfiguration.class)
 public class AlibabaDruidCloudAutoConfiguration {
-
-    @ConditionalOnFeaturesAvailable
-    public static class FeaturesConfiguration {
-
-        /**
-         * The bean name of {@link HasFeatures}
-         *
-         * @see #alibabaDruidFeatures(ListableBeanFactory)
-         */
-        public final static String ALIBABA_DRUID_FEATURES_BEAN_NAME = "alibabaDruidFeatures";
-
-        // TODO : Add more features, e.g: WebStatFilter
-        private static Set<Class<?>> typeFeatures = of(
-                DruidDataSource.class,
-                Filter.class
-        );
-
-        /**
-         * Register a {@link HasFeatures} bean that exposes the Alibaba Druid features
-         * ({@link DruidDataSource} and {@link Filter}) present in the application context.
-         *
-         * <h3>Example Usage</h3>
-         * <pre>{@code
-         *   // Registered automatically by Spring Cloud when features are enabled
-         *   // Exposes "microsphere.alibaba.druid.DruidDataSource" and
-         *   // "microsphere.alibaba.druid.Filter" named features if the beans are present
-         * }</pre>
-         *
-         * @param beanFactory the {@link ListableBeanFactory} used to check for bean presence
-         * @return a {@link HasFeatures} containing the named Druid features
-         */
-        @Bean(name = ALIBABA_DRUID_FEATURES_BEAN_NAME)
-        public HasFeatures alibabaDruidFeatures(ListableBeanFactory beanFactory) {
-            List<NamedFeature> namedFeatures = newArrayList(typeFeatures.size());
-            for (Class<?> type : typeFeatures) {
-                if (isBeanPresent(beanFactory, type)) {
-                    String name = ALIBABA_DRUID_PROPERTY_NAME_PREFIX + DOT_CHAR + type.getSimpleName();
-                    namedFeatures.add(new NamedFeature(name, type));
-                }
-            }
-            return new HasFeatures(emptyList(), namedFeatures);
-        }
-    }
 }
