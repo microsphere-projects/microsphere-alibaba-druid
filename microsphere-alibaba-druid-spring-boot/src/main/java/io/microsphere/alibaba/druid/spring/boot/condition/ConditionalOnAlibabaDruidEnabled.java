@@ -19,14 +19,12 @@ package io.microsphere.alibaba.druid.spring.boot.condition;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
-import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME_PREFIX;
-import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
+import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_ENABLED_PROPERTY_NAME;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * The {@link ConditionalOnProperty @ConditionalOnProperty} variant for Alibaba Druid :
@@ -46,10 +44,9 @@ import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
  * @see ConditionalOnProperty
  * @since 1.0.0
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
+@Target(TYPE)
+@Retention(RUNTIME)
 @Documented
-@Inherited
-@ConditionalOnProperty(prefix = ALIBABA_DRUID_PROPERTY_NAME_PREFIX, name = ENABLED_PROPERTY_NAME, matchIfMissing = true)
+@ConditionalOnProperty(name = ALIBABA_DRUID_ENABLED_PROPERTY_NAME, matchIfMissing = true)
 public @interface ConditionalOnAlibabaDruidEnabled {
 }
