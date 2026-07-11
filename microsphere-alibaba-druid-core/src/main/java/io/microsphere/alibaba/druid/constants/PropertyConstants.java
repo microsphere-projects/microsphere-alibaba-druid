@@ -16,7 +16,12 @@
  */
 package io.microsphere.alibaba.druid.constants;
 
+import io.microsphere.annotation.ConfigurationProperty;
+
+import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
+import static io.microsphere.constants.PropertyConstants.ENABLED_PROPERTY_NAME;
 import static io.microsphere.constants.PropertyConstants.MICROSPHERE_PROPERTY_NAME_PREFIX;
+import static io.microsphere.constants.SymbolConstants.DOT;
 
 /**
  * The constants of Alibaba Druid Properties
@@ -35,7 +40,22 @@ import static io.microsphere.constants.PropertyConstants.MICROSPHERE_PROPERTY_NA
 public interface PropertyConstants {
 
     /**
-     * The property name of Alibaba Druid
+     * The property name prefix of Alibaba Druid : "microsphere.alibaba.druid"
      */
     String ALIBABA_DRUID_PROPERTY_NAME_PREFIX = MICROSPHERE_PROPERTY_NAME_PREFIX + "alibaba.druid";
+
+    /**
+     * The default property value of Alibaba Druid enabled : "true"
+     */
+    String DEFAULT_ALIBABA_DRUID_ENABLED_PROPERTY_VALUE = "true";
+
+    /**
+     * The property name of Alibaba Druid enabled : "microsphere.alibaba.druid.enabled"
+     */
+    @ConfigurationProperty(
+            type = boolean.class,
+            defaultValue = DEFAULT_ALIBABA_DRUID_ENABLED_PROPERTY_VALUE,
+            source = APPLICATION_SOURCE
+    )
+    String ALIBABA_DRUID_ENABLED_PROPERTY_NAME = ALIBABA_DRUID_PROPERTY_NAME_PREFIX + DOT + ENABLED_PROPERTY_NAME;
 }

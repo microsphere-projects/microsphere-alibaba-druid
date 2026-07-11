@@ -18,6 +18,7 @@ package io.microsphere.alibaba.druid.constants;
 
 import org.junit.jupiter.api.Test;
 
+import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_ENABLED_PROPERTY_NAME;
 import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME_PREFIX;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -33,5 +34,6 @@ public class PropertyConstantsTest {
     @Test
     public void testConstants() {
         assertEquals("microsphere.alibaba.druid", ALIBABA_DRUID_PROPERTY_NAME_PREFIX);
+        assertEquals("microsphere.alibaba.druid.enabled", ALIBABA_DRUID_ENABLED_PROPERTY_NAME);
     }
 }
