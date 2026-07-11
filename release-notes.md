@@ -241,4 +241,30 @@ For a comprehensive changelog, refer to the repository.
 
 **Note:** Internal chore commits related to merging branches and post-publish version bumps were omitted for brevity.
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.16...0.2.17
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.16...0.2.17## v0.2.18
+
+# Release Notes for Version 0.2.18
+
+## New Features
+- Introduced explicit property constant for enabling Druid configurations. [2cb820a]
+
+## Test Improvements
+- Added test dependencies for `microsphere-logback`. [87d2f6a, acbedb3, 18cbdcf, 93fa8d6]
+- Refactored cloud and Druid auto-config tests to improve coverage and readability. [b19cabd, 29b3db0]
+
+## Dependency Updates
+- Bumped `microsphere-spring-cloud` to version 0.2.23. [341a2c7]
+- Adjusted and refined Maven dependencies across modules. [a865cb7, c2de4ba]
+
+## Documentation
+- Updated branch version numbers in the README. [af4b238]
+
+## Other Changes
+- Normalized Druid property prefix constants for consistency. [597aa88]
+- Removed unused imports and streamlined test setups. [aa8b349, 4bc7ce8, 5b71598]
+
+---
+
+For a complete list of changes, please refer to the [Full Changelog](https://github.com/your-repo/compare/0.2.17...0.2.18).
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.17...0.2.18
