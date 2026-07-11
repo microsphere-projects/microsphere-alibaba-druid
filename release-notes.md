@@ -210,4 +210,30 @@ Full Changelog: [v0.1.15...v0.1.16](https://github.com/mercyblitz/your-repo/comp
 
 **Note**: This version includes both functional enhancements and cleanup efforts to improve project maintainability.
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.16...0.1.17
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.16...0.1.17## v0.1.18
+
+# Release Notes - Version 0.1.18
+
+## New Features
+- Added `druid.enabled` property metadata for enhanced configuration flexibility. ([6ff0686](commit-link))
+
+## Bug Fixes
+- Fixed Druid property prefix constant. ([b2346ad](commit-link))
+- Updated comment for the Druid property prefix to improve clarity. ([b49c673](commit-link))
+
+## Dependency Updates
+- Bumped Microsphere Spring Cloud version. ([d7b8488](commit-link))
+- Adopted Microsphere logging test dependencies for improved compatibility. ([1d6842b](commit-link))
+
+## Test Improvements
+- Refined Druid auto-configuration tests for better coverage and robustness. ([d687fef](commit-link))
+
+## Other Changes
+- Removed unused `Inherited` import to clean up code. ([103748f](commit-link))
+- Addressed merge and version bump housekeeping tasks. ([e69c69d](commit-link), [bf1e58f](commit-link), [b765c72](commit-link))
+
+---
+
+**Full Changelog**: [v0.1.17...v0.1.18](changelog-link)
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.17...0.1.18
