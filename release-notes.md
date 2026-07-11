@@ -267,4 +267,18 @@ For a comprehensive changelog, refer to the repository.
 
 For a complete list of changes, please refer to the [Full Changelog](https://github.com/your-repo/compare/0.2.17...0.2.18).
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.17...0.2.18
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.17...0.2.18## v0.2.19
+
+# Release Notes - Version 0.2.19
+
+### Dependency Updates
+- Upgraded to version `0.2.24` with an optional core dependency. ([ab9a26c](#))
+
+### Documentation
+- Updated README to reflect updated branch version numbers. ([0d7adde](#))
+
+### Build and Workflow Enhancements
+- Merged `main` into `release` and back into `main` to synchronize branches. ([4f8bb7e](#), [8788117](#), [f02c63e](#))
+- Bumped version for the next patch release after publishing `0.2.18`. ([5e66153](#))
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.18...0.2.19
