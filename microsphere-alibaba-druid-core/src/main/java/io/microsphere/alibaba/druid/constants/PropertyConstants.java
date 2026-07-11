@@ -42,7 +42,7 @@ public interface PropertyConstants {
     /**
      * The property name prefix of Alibaba Druid : "microsphere.alibaba.druid."
      */
-    String ALIBABA_DRUID_PROPERTY_NAME_PREFIX = MICROSPHERE_PROPERTY_NAME_PREFIX + "alibaba.druid" + DOT;
+    String ALIBABA_DRUID_PROPERTY_NAME_PREFIX = MICROSPHERE_PROPERTY_NAME_PREFIX + "alibaba.druid";
 
     /**
      * The default property value of Alibaba Druid enabled : "true"
@@ -57,5 +57,5 @@ public interface PropertyConstants {
             defaultValue = DEFAULT_ALIBABA_DRUID_ENABLED_PROPERTY_VALUE,
             source = APPLICATION_SOURCE
     )
-    String ALIBABA_DRUID_ENABLED_PROPERTY_NAME = ALIBABA_DRUID_PROPERTY_NAME_PREFIX + ENABLED_PROPERTY_NAME;
+    String ALIBABA_DRUID_ENABLED_PROPERTY_NAME = ALIBABA_DRUID_PROPERTY_NAME_PREFIX + DOT + ENABLED_PROPERTY_NAME;
 }
