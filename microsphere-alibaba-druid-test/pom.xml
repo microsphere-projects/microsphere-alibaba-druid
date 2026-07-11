@@ -43,6 +43,20 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Microsphere Logging Test -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-logging-test</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Microsphere Logback -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-logback</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Alibaba Druid -->
         <dependency>
             <groupId>com.alibaba</groupId>
