@@ -236,4 +236,22 @@ Full Changelog: [v0.1.15...v0.1.16](https://github.com/mercyblitz/your-repo/comp
 
 **Full Changelog**: [v0.1.17...v0.1.18](changelog-link)
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.17...0.1.18
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.17...0.1.18## v0.1.19
+
+# Release Notes - Version 0.1.19
+
+## Dependency Updates
+- Updated parent BOM to version `0.1.24`. ([e30a6b9](https://example.com/commit/e30a6b9))
+
+## Documentation
+- Updated README to reflect branch version changes. ([e52dacd](https://example.com/commit/e52dacd))
+
+## Build and Workflow Enhancements
+- Merged `release-1.x` into `dev-1.x` to align branches. ([52b08af](https://example.com/commit/52b08af))
+- Bumped version to prepare for the next patch release. ([762a648](https://example.com/commit/762a648))
+
+---
+
+Checkout the [Full Changelog](https://example.com/changelog) for more details!
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.1.18...0.1.19
