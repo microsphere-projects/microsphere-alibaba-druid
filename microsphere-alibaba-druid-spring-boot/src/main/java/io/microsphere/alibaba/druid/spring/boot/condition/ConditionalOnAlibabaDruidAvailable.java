@@ -22,10 +22,11 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Conditional;
 
 import java.lang.annotation.Documented;
-import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * The composite {@link Conditional} for Alibaba Druid :
@@ -48,10 +49,12 @@ import java.lang.annotation.Target;
  * @see ConditionalOnClass
  * @since 1.0.0
  */
-@Target(ElementType.TYPE)
-@Retention(RetentionPolicy.RUNTIME)
+@Target(TYPE)
+@Retention(RUNTIME)
 @Documented
 @ConditionalOnAlibabaDruidEnabled
-@ConditionalOnClass(name = "com.alibaba.druid.pool.DruidDataSource")            // Alibaba Druid API
+@ConditionalOnClass(name = {
+        "com.alibaba.druid.pool.DruidDataSource"                   // Alibaba Druid API
+})
 public @interface ConditionalOnAlibabaDruidAvailable {
 }
