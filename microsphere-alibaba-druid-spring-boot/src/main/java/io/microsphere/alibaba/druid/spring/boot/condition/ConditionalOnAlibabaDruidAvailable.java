@@ -52,8 +52,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Inherited
 @ConditionalOnAlibabaDruidEnabled
-@ConditionalOnClass(name = "com.alibaba.druid.pool.DruidDataSource")
+@ConditionalOnClass(name = "com.alibaba.druid.pool.DruidDataSource")            // Alibaba Druid API
 public @interface ConditionalOnAlibabaDruidAvailable {
 }

@@ -22,6 +22,13 @@
 
     <dependencies>
 
+        <!-- Microsphere Annotation Processor -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-annotation-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Microsphere Alibaba Druid -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
@@ -33,6 +40,7 @@
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-spring-cloud-commons</artifactId>
+            <optional>true</optional>
         </dependency>
 
         <!-- Alibaba Druid -->
@@ -68,6 +76,12 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
         <!-- Testing -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -82,10 +96,11 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Spring Boot Testing -->
+        <!-- Microsphere Alibaba Druid Spring Test -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-test</artifactId>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-alibaba-druid-spring-test</artifactId>
+            <version>${revision}</version>
             <scope>test</scope>
         </dependency>
 
@@ -100,14 +115,6 @@
         <dependency>
             <groupId>ch.qos.logback</groupId>
             <artifactId>logback-classic</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Microsphere Alibaba Druid Spring Test -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-alibaba-druid-spring-test</artifactId>
-            <version>${revision}</version>
             <scope>test</scope>
         </dependency>
 

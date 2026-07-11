@@ -22,7 +22,14 @@
 
     <dependencies>
 
-        <!-- Microsphere -->
+        <!-- Microsphere Annotation Processor -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-annotation-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Microsphere Java Core -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-java-core</artifactId>
@@ -54,19 +61,6 @@
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-alibaba-druid-test</artifactId>
             <version>${revision}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Microsphere Spring Test -->
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-spring-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-logback</artifactId>
             <scope>test</scope>
         </dependency>
 
