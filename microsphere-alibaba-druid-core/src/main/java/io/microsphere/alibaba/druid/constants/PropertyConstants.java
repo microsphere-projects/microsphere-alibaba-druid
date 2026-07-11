@@ -40,7 +40,7 @@ import static io.microsphere.constants.SymbolConstants.DOT;
 public interface PropertyConstants {
 
     /**
-     * The property name prefix of Alibaba Druid : "microsphere.alibaba.druid."
+     * The property name prefix of Alibaba Druid : "microsphere.alibaba.druid"
      */
     String ALIBABA_DRUID_PROPERTY_NAME_PREFIX = MICROSPHERE_PROPERTY_NAME_PREFIX + "alibaba.druid";
 
