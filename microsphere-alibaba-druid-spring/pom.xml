@@ -99,6 +99,13 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- Microsphere Logback -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-logback</artifactId>
+            <scope>test</scope>
+        </dependency>
+
         <!-- Logback -->
         <dependency>
             <groupId>ch.qos.logback</groupId>

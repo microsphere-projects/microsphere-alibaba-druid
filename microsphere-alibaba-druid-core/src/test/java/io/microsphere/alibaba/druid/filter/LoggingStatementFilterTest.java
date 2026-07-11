@@ -16,7 +16,7 @@
  */
 package io.microsphere.alibaba.druid.filter;
 
-import io.microsphere.spring.test.junit.jupiter.SpringLoggingTest;
+import io.microsphere.logging.test.jupiter.LoggingLevelsClass;
 
 /**
  * {@link LoggingStatementFilter} Test
@@ -25,7 +25,7 @@ import io.microsphere.spring.test.junit.jupiter.SpringLoggingTest;
  * @see LoggingStatementFilter
  * @since 1.0.0
  */
-@SpringLoggingTest
+@LoggingLevelsClass(levels = {"TRACE", "INFO", "ERROR"})
 public class LoggingStatementFilterTest extends AbstractFilterTest<LoggingStatementFilter> {
 
     @Override
