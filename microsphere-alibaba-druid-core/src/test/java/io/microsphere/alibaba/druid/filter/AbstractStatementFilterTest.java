@@ -21,7 +21,7 @@ import com.alibaba.druid.proxy.jdbc.DataSourceProxy;
 import com.alibaba.druid.proxy.jdbc.StatementProxy;
 import com.alibaba.druid.sql.ast.SQLStatement;
 import com.alibaba.druid.sql.ast.statement.SQLSelectStatement;
-import io.microsphere.spring.test.junit.jupiter.SpringLoggingTest;
+import io.microsphere.logging.test.jupiter.LoggingLevelsClass;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -41,7 +41,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @see AbstractStatementFilter
  * @since 1.0.0
  */
-@SpringLoggingTest
+@LoggingLevelsClass(levels = {"TRACE", "INFO", "ERROR"})
 class AbstractStatementFilterTest {
 
     private AbstractStatementFilter filter;

@@ -14,75 +14,46 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package io.microsphere.alibaba.druid.spring.boot.autoconfigure;
 
-import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
-import io.microsphere.alibaba.druid.spring.boot.AlibabaDruidProperties;
-import io.microsphere.alibaba.druid.spring.boot.metadata.DruidDataSourcePoolMetadata;
-import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
-import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadata;
-import org.springframework.boot.jdbc.metadata.DataSourcePoolMetadataProvider;
+
+import com.alibaba.druid.pool.DruidDataSource;
+import io.microsphere.alibaba.druid.spring.beans.factory.config.DruidDataSourceBeanPostProcessor;
+import io.microsphere.spring.boot.test.AutoConfigurationTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import javax.sql.DataSource;
+import java.util.Set;
 
-import static io.microsphere.util.ArrayUtils.of;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 /**
  * {@link AlibabaDruidAutoConfiguration} Test
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see AlibabaDruidAutoConfiguration
  * @since 1.0.0
  */
 @SpringBootTest(
         classes = {
-                LoggingStatementFilter.class,
-                DruidDataSourceTestConfiguration.class,
                 AlibabaDruidAutoConfigurationTest.class
         },
-        webEnvironment = NONE,
-        properties = {
-                "microsphere.alibaba.druid.enabled=true",
-                "microsphere.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
-        })
-@EnableAutoConfiguration
-public class AlibabaDruidAutoConfigurationTest extends AbstractDruidSpringTest {
+        webEnvironment = NONE
+)
+class AlibabaDruidAutoConfigurationTest extends AutoConfigurationTest<AlibabaDruidAutoConfiguration> {
 
-    @Autowired
-    private AlibabaDruidProperties alibabaDruidProperties;
+    @Override
+    protected void configureAutoConfiguredClasses(Set<Class<?>> autoConfiguredClasses) {
+        autoConfiguredClasses.add(DruidDataSourceBeanPostProcessor.class);
+    }
 
-    @Autowired
-    private LoggingStatementFilter loggingStatementFilter;
+    @Override
+    protected void configureGlobalDisabledPropertyValues(Set<String> globalDisabledPropertyValues) {
+        globalDisabledPropertyValues.add("microsphere.alibaba.druid.enabled=false");
+    }
 
-    @Autowired
-    private DataSourcePoolMetadataProvider dataSourcePoolMetadataProvider;
-
-    @Autowired
-    private DataSource dataSource;
-
-    @Test
-    public void test() throws Throwable {
-        super.test();
-        assertNotNull(alibabaDruidProperties);
-        assertNotNull(loggingStatementFilter);
-
-        AlibabaDruidProperties.Filter filter = alibabaDruidProperties.getFilter();
-        assertNotNull(filter);
-
-        Class<? extends com.alibaba.druid.filter.Filter>[] classes = filter.getClasses();
-        assertNotNull(classes);
-        assertArrayEquals(of(LoggingStatementFilter.class), classes);
-
-        DataSourcePoolMetadata dataSourcePoolMetadata = dataSourcePoolMetadataProvider.getDataSourcePoolMetadata(dataSource);
-        assertInstanceOf(DruidDataSourcePoolMetadata.class, dataSourcePoolMetadata);
+    @Override
+    protected void configureGlobalMissingClasses(Set<Class<?>> globalMissingClasses) {
+        globalMissingClasses.add(DruidDataSource.class);
     }
 }

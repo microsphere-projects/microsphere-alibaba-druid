@@ -22,7 +22,14 @@
 
     <dependencies>
 
-        <!-- Microsphere -->
+        <!-- Microsphere Annotation Processor -->
+        <dependency>
+            <groupId>io.github.microsphere-projects</groupId>
+            <artifactId>microsphere-annotation-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Microsphere Java Core -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-java-core</artifactId>
@@ -57,13 +64,14 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Microsphere Spring Test -->
+        <!-- Microsphere Logging Test -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
-            <artifactId>microsphere-spring-test</artifactId>
+            <artifactId>microsphere-logging-test</artifactId>
             <scope>test</scope>
         </dependency>
 
+        <!-- Microsphere Logback -->
         <dependency>
             <groupId>io.github.microsphere-projects</groupId>
             <artifactId>microsphere-logback</artifactId>
