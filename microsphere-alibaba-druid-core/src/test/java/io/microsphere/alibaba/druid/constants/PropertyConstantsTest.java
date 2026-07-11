@@ -33,7 +33,7 @@ public class PropertyConstantsTest {
 
     @Test
     public void testConstants() {
-        assertEquals("microsphere.alibaba.druid.", ALIBABA_DRUID_PROPERTY_NAME_PREFIX);
+        assertEquals("microsphere.alibaba.druid", ALIBABA_DRUID_PROPERTY_NAME_PREFIX);
         assertEquals("microsphere.alibaba.druid.enabled", ALIBABA_DRUID_ENABLED_PROPERTY_NAME);
     }
 }
