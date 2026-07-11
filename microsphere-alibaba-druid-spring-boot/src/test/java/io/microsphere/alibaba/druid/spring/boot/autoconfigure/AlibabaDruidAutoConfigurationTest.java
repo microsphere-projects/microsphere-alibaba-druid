@@ -25,6 +25,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.Set;
 
+import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
+
 /**
  * {@link AlibabaDruidAutoConfiguration} Test
  *
@@ -35,7 +37,8 @@ import java.util.Set;
 @SpringBootTest(
         classes = {
                 AlibabaDruidAutoConfigurationTest.class
-        }
+        },
+        webEnvironment = NONE
 )
 class AlibabaDruidAutoConfigurationTest extends AutoConfigurationTest<AlibabaDruidAutoConfiguration> {
 

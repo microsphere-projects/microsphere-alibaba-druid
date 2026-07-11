@@ -14,73 +14,44 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
 package io.microsphere.alibaba.druid.spring.cloud.autoconfigure;
 
+
 import com.alibaba.druid.pool.DruidDataSource;
-import io.microsphere.alibaba.druid.filter.LoggingStatementFilter;
-import io.microsphere.alibaba.druid.test.spring.AbstractDruidSpringTest;
-import io.microsphere.alibaba.druid.test.spring.DruidDataSourceTestConfiguration;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import io.microsphere.spring.boot.test.AutoConfigurationTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.cloud.client.actuator.FeaturesEndpoint;
-import org.springframework.cloud.client.actuator.HasFeatures;
-import org.springframework.cloud.client.actuator.NamedFeature;
 
-import java.util.List;
-import java.util.Map;
+import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.NONE;
 
 /**
  * {@link AlibabaDruidCloudAutoConfiguration} Test
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
+ * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @see AlibabaDruidCloudAutoConfiguration
  * @since 1.0.0
  */
-@SpringBootTest(classes = {
-        LoggingStatementFilter.class,
-        DruidDataSourceTestConfiguration.class,
-        AlibabaDruidCloudAutoConfigurationTest.class
-}, webEnvironment = NONE,
-        properties = {
-                "microsphere.alibaba.druid.enabled=true",
-                "management.endpoints.web.exposure.include=features",
-                "spring.cloud.features.enabled=true",
-                "microsphere.alibaba.druid.filter.classes=io.microsphere.alibaba.druid.filter.LoggingStatementFilter"
-        })
-@EnableAutoConfiguration
-public class AlibabaDruidCloudAutoConfigurationTest extends AbstractDruidSpringTest {
+@SpringBootTest(
+        classes = {
+                AlibabaDruidCloudAutoConfigurationTest.class
+        },
+        webEnvironment = NONE
+)
+class AlibabaDruidCloudAutoConfigurationTest extends AutoConfigurationTest<AlibabaDruidCloudAutoConfiguration> {
 
-    @Autowired
-    private Map<String, HasFeatures> hasFeaturesMap;
-
-    @Autowired
-    private FeaturesEndpoint featuresEndpoint;
-
-    @Test
-    public void test() {
-        assertTrue(this.hasFeaturesMap.size() > 0);
-        HasFeatures hadFeatures = this.hasFeaturesMap.get("microsphere-alibaba-druid-core.features");
-        assertNotNull(hadFeatures);
-
-        List<NamedFeature> namedFeatures = hadFeatures.getNamedFeatures();
-        assertEquals(2, namedFeatures.size());
-
-        assertNamedFeature(namedFeatures, 0, "microsphere-alibaba-druid-core:DruidDataSource", DruidDataSource.class);
-        assertNamedFeature(namedFeatures, 1, "microsphere-alibaba-druid-core:LoggingStatementFilter", LoggingStatementFilter.class);
-
-        assertNotNull(featuresEndpoint.features());
+    @Override
+    protected void configureAutoConfiguredClasses(Set<Class<?>> autoConfiguredClasses) {
     }
 
-    private void assertNamedFeature(List<NamedFeature> namedFeatures, int index, String name, Class<?> type) {
-        NamedFeature namedFeature = namedFeatures.get(index);
-        assertEquals(name, namedFeature.getName());
-        assertEquals(type, namedFeature.getType());
+    @Override
+    protected void configureGlobalDisabledPropertyValues(Set<String> globalDisabledPropertyValues) {
+        globalDisabledPropertyValues.add("microsphere.alibaba.druid.enabled=false");
+    }
+
+    @Override
+    protected void configureGlobalMissingClasses(Set<Class<?>> globalMissingClasses) {
+        globalMissingClasses.add(DruidDataSource.class);
     }
 }
