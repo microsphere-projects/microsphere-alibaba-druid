@@ -12,7 +12,7 @@ Microsphere Alibaba Druid is a specialized integration project that
 enhances [Alibaba Druid](https://github.com/alibaba/druid), a high-performance JDBC connection pool, with powerful SQL
 statement interception capabilities. It enables developers to monitor, log, and control SQL execution at a granular
 level across different Spring ecosystems, which supports the extension features that would be used
-for [Microsphere Sentinel](https://github.com/microsphere-projects/microsphere-sentinel),[Microsphere Resilience4j](https://github.com/microsphere-projects/microsphere-resilience4j), [Microsphere Observability](https://github.com/microsphere-projects/microsphere-observability)
+for [Microsphere Sentinel](https://github.com/microsphere-projects/microsphere-alibaba-sentinel),[Microsphere Resilience4j](https://github.com/microsphere-projects/microsphere-resilience4j), [Microsphere Observability](https://github.com/microsphere-projects/microsphere-observability)
 and so on.
 
 ## Purpose and Scope
