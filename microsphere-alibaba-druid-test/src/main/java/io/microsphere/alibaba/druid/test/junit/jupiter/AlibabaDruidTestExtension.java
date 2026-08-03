@@ -149,7 +149,7 @@ class AlibabaDruidTestExtension implements BeforeAllCallback, AfterAllCallback, 
     private void injectField(Field field, ExtensionContext context, @Nullable Object testInstance) throws Exception {
         boolean forClass = testInstance == null;
         DruidDataSource druidDataSource = getDruidDataSource(context, forClass, false);
-        setFieldValue(testInstance, field, druidDataSource);
+        setFieldValue(true, testInstance, field, druidDataSource);
     }
 
     /**
