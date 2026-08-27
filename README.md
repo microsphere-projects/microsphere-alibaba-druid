@@ -62,8 +62,8 @@ pom.xml:
 
 | **Branches** | **Purpose**                                      | **Latest Version** |
 |--------------|--------------------------------------------------|--------------------|
-| **main**     | Compatible with Spring Cloud 2022.0.x - 2025.0.x | `0.2.19`           |
-| **1.x**      | Compatible with Spring Cloud Hoxton - 2021.0.x   | `0.1.19`           |
+| **main**     | Compatible with Spring Cloud 2022.0.x - 2025.0.x | `0.2.20`           |
+| **1.x**      | Compatible with Spring Cloud Hoxton - 2021.0.x   | `0.1.20`           |
 
 Then add the specific modules you need.
 

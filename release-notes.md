@@ -281,4 +281,18 @@ For a complete list of changes, please refer to the [Full Changelog](https://git
 - Merged `main` into `release` and back into `main` to synchronize branches. ([4f8bb7e](#), [8788117](#), [f02c63e](#))
 - Bumped version for the next patch release after publishing `0.2.18`. ([5e66153](#))
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.18...0.2.19
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.18...0.2.19## v0.2.20
+
+_Release notes generation failed. Raw commits since 0.2.19:_
+
+```
+d4983fe Update README.md
+36005e3 chore: merge main into release [skip ci]
+e5eced0 Fix reflective field injection in test extension
+0352f3f chore: merge main into release [skip ci]
+9116efb Bump spring cloud parent to 0.2.25
+f841838 chore: merge release into main [skip ci]
+3681269 chore: bump version to next patch after publishing 0.2.19
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.19...0.2.20
