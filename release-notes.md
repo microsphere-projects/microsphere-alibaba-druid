@@ -295,4 +295,19 @@ f841838 chore: merge release into main [skip ci]
 3681269 chore: bump version to next patch after publishing 0.2.19
 ```
 
-**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.19...0.2.20
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.19...0.2.20## v0.2.21
+
+_Release notes generation failed. Raw commits since 0.2.20:_
+
+```
+80c6f55 Update version numbers in README.md
+b690757 chore: merge main into release [skip ci]
+d3111b2 Bump microsphere-spring-cloud to 0.2.26
+c983a07 chore: merge main into release [skip ci]
+728a2c8 Merge pull request #107 from microsphere-projects/dependabot/maven/org.apache.maven-apache-maven-3.9.16
+06abb8c Bump org.apache.maven:apache-maven from 3.9.15 to 3.9.16
+76a5805 chore: merge release into main [skip ci]
+9af2ae7 chore: bump version to next patch after publishing 0.2.20
+```
+
+**Full Changelog**: https://github.com/microsphere-projects/microsphere-alibaba-druid/compare/0.2.20...0.2.21
