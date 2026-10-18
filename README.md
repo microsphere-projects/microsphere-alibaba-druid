@@ -127,6 +127,18 @@ We welcome your contributions! Please read [Code of Conduct](./CODE_OF_CONDUCT.m
 
 ## Documentation
 
+### Guides
+
+Bilingual (English + 中文) guides generated from the release branches:
+
+| **Branch Line** | **Version** | **User Guide** | **中文用户文档** | **Developer Guide** | **中文开发者文档** |
+|-----------------|-------------|----------------|------------------|---------------------|--------------------|
+| `release` → `docs/current` | `0.2.x` | [User Guide](./docs/current/user-guide/README.md) | [用户文档](./docs/current/user-guide/zh/README.md) | [Developer Guide](./docs/current/developer-guide/README.md) | [开发者文档](./docs/current/developer-guide/zh/README.md) |
+| `release-1.x` → `docs/1.x` | `0.1.x` | [User Guide](./docs/1.x/user-guide/README.md) | [用户文档](./docs/1.x/user-guide/zh/README.md) | [Developer Guide](./docs/1.x/developer-guide/README.md) | [开发者文档](./docs/1.x/developer-guide/zh/README.md) |
+
+- Documentation home (English): [docs/README.md](./docs/README.md)
+- 文档主页（中文）：[docs/zh/README.md](./docs/zh/README.md)
+
 ### User Guide
 
 [DeepWiki Host](https://deepwiki.com/microsphere-projects/microsphere-alibaba-druid)
