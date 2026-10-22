@@ -32,6 +32,15 @@ Each guide set contains one document per Maven module:
 | `microsphere-alibaba-druid-parent` | Parent POM: Druid version management and BOM import |
 | `microsphere-alibaba-druid-dependencies` | Bill of Materials (BOM) for the module family |
 
+## Source Diffs
+
+Per-module `src/main` / `src/test` comparisons between release tags, with Java 8 vs 17 syntax/API and Java EE vs
+Jakarta EE differences excluded:
+
+| **Tag Pair** | **src/main** | **src/test** |
+|--------------|--------------|--------------|
+| `0.2.21` vs `0.1.21` | [main-diff-0.2.21-vs-0.1.21.md](./diff/source/main-diff-0.2.21-vs-0.1.21.md) / [中文](./diff/source/zh/main-diff-0.2.21-vs-0.1.21.md) | [test-diff-0.2.21-vs-0.1.21.md](./diff/source/test-diff-0.2.21-vs-0.1.21.md) / [中文](./diff/source/zh/test-diff-0.2.21-vs-0.1.21.md) |
+
 ## Languages
 
 English is the default language and lives at the primary paths. Chinese mirrors are stored in a parallel `zh/`
