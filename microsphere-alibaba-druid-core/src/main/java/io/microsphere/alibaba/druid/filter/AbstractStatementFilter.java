@@ -33,6 +33,8 @@ import com.alibaba.druid.sql.ast.statement.SQLSelectQueryBlock;
 import com.alibaba.druid.sql.ast.statement.SQLSelectStatement;
 import com.alibaba.druid.sql.ast.statement.SQLTableSource;
 import com.alibaba.druid.sql.ast.statement.SQLUpdateStatement;
+import com.alibaba.druid.util.ConcurrentLruCache;
+import io.microsphere.annotation.ConfigurationProperty;
 import io.microsphere.lang.function.ThrowableSupplier;
 import io.microsphere.logging.Logger;
 
@@ -41,9 +43,13 @@ import java.util.List;
 import java.util.Objects;
 
 import static com.alibaba.druid.sql.SQLUtils.parseStatements;
+import static io.microsphere.alibaba.druid.constants.PropertyConstants.ALIBABA_DRUID_PROPERTY_NAME_PREFIX;
+import static io.microsphere.annotation.ConfigurationProperty.APPLICATION_SOURCE;
 import static io.microsphere.collection.ListUtils.first;
 import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.util.ExceptionUtils.wrap;
+import static java.lang.Integer.parseInt;
+import static java.lang.System.getProperty;
 
 /**
  * Abstract template class of Druid's {@link Filter} intercepts {@link StatementProxy}.
@@ -88,7 +94,29 @@ import static io.microsphere.util.ExceptionUtils.wrap;
  */
 public abstract class AbstractStatementFilter extends FilterAdapter {
 
+    /**
+     * The default property value of Alibaba Druid statement max cache size : "1024"
+     */
+    public static final String DEFAULT_STATEMENT_MAX_CACHE_SIZE_PROPERTY_VALUE = "1024";
+
+    /**
+     * The property name of Alibaba Druid statement max cache size : "microsphere.alibaba.druid.statement.max-cache-size"
+     */
+    @ConfigurationProperty(
+            type = int.class,
+            defaultValue = DEFAULT_STATEMENT_MAX_CACHE_SIZE_PROPERTY_VALUE,
+            source = APPLICATION_SOURCE
+    )
+    public static final String STATEMENT_MAX_CACHE_SIZE_PROPERTY_NAME = ALIBABA_DRUID_PROPERTY_NAME_PREFIX + "statement.max-cache-size";
+
+    /**
+     * The Alibaba Druid statement max cache size
+     */
+    public static final int STATEMENT_MAX_CACHE_SIZE = parseInt(getProperty(STATEMENT_MAX_CACHE_SIZE_PROPERTY_NAME, DEFAULT_STATEMENT_MAX_CACHE_SIZE_PROPERTY_VALUE));
+
     protected final Logger logger = getLogger(getClass());
+
+    private final ConcurrentLruCache<String, String> resourceNameCache = new ConcurrentLruCache(STATEMENT_MAX_CACHE_SIZE);
 
     protected DataSourceProxy dataSource;
 
@@ -251,17 +279,19 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
         if (Objects.equals(sql, validationSQL)) {
             return sql;
         }
-        String dbType = dataSource.getDbType();
-        List<SQLStatement> statementList = parseStatements(sql, dbType);
-        SQLStatement sqlStatement = first(statementList);
-        String resourceName = buildResourceName(sqlStatement);
-        if (resourceName == null) {
-            if (logger.isDebugEnabled()) {
-                logger.debug("The JDBC statement can't be recognized, sql : '{}' , dbType : '{}'", sql, dbType);
+        return this.resourceNameCache.computeIfAbsent(sql, key -> {
+            String dbType = this.dataSource.getDbType();
+            List<SQLStatement> statementList = parseStatements(sql, dbType);
+            SQLStatement sqlStatement = first(statementList);
+            String resourceName = buildResourceName(sqlStatement);
+            if (resourceName == null) {
+                if (logger.isDebugEnabled()) {
+                    logger.debug("The JDBC statement can't be recognized, sql : '{}' , dbType : '{}'", sql, dbType);
+                }
+                resourceName = "UNRECOGNIZED";
             }
-            resourceName = "UNRECOGNIZED";
-        }
-        return resourceName;
+            return resourceName;
+        });
     }
 
     /**
