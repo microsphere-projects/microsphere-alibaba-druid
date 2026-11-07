@@ -78,7 +78,7 @@ public class DruidDataSourcePoolMetadata implements DataSourcePoolMetadata {
      *   // usage == 0.0f when no connections are active
      * }</pre>
      *
-     * @return the pool usage ratio, never {@code null}
+     * @return the pool usage ratio, or {@code null} if the max pool size is not positive
      */
     @Override
     public Float getUsage() {
@@ -87,7 +87,11 @@ public class DruidDataSourcePoolMetadata implements DataSourcePoolMetadata {
             return ZERO;
         } else {
             int maxActive = dataSource.getMaxActive();
-            if (active == maxActive) {
+            if (maxActive <= 0) {
+                // The pool is misconfigured, the usage ratio can't be calculated
+                return null;
+            }
+            if (active >= maxActive) {
                 return ONE;
             }
             return active / (maxActive * ONE);
