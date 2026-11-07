@@ -29,6 +29,7 @@ import static io.microsphere.alibaba.druid.test.AlibabaDruidTestUtils.getDefault
 import static io.microsphere.alibaba.druid.test.AlibabaDruidTestUtils.loadProperties;
 import static io.microsphere.util.ArrayUtils.ofArray;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
  * {@link AlibabaDruidTestUtils} Test
@@ -69,5 +70,10 @@ class AlibabaDruidTestUtilsTest {
     void testLoadProperties() throws IOException {
         Properties properties = loadProperties(ofArray("name = value"));
         assertEquals("value", properties.getProperty("name"));
+    }
+
+    @Test
+    void testLoadPropertiesIfResourceIsNotFound() {
+        assertThrows(IOException.class, () -> loadProperties("META-INF/druid/unknown.properties"));
     }
 }
