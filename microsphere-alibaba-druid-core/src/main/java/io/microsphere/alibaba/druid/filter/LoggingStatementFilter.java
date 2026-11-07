@@ -37,6 +37,10 @@ import com.alibaba.druid.proxy.jdbc.StatementProxy;
  *   connection.close();
  * }</pre>
  *
+ * <p><b>Note</b>: The executed SQL (which may contain bound parameter values, i.e. potentially
+ * sensitive data) is logged at DEBUG/TRACE level. Ensure the log level is configured
+ * appropriately in production environments.
+ *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
  * @see AbstractStatementFilter
  * @see StatementProxy
