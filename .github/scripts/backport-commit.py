@@ -21,9 +21,9 @@ import urllib.parse
 import urllib.request
 import xml.etree.ElementTree as ET
 
-BASELINE = "05907b3f6ff5f0e7e095ba375b44b84e9bffcd8b"
+BASELINE = "232f9a60dd560fce076ca1a30d844d006aa30a31"
 TARGET = "dev-1.x"
-PROFILES = ("spring-framework-5.3", "spring-framework-4.3")
+PROFILES = ("spring-cloud-2021", "spring-cloud-2020", "spring-cloud-hoxton")
 MAX_REPAIRS = 3
 MAX_CONTEXT_BYTES = 600_000
 DEEPSEEK_URL = "https://api.deepseek.com/beta/chat/completions"
