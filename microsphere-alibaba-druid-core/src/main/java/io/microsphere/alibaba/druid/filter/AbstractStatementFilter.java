@@ -239,6 +239,10 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
             result = callback.get();
         } catch (Throwable e) {
             failure = e;
+            if (e instanceof Error) {
+                // JVM Errors (e.g. OutOfMemoryError) must not be masked as SQLException
+                throw (Error) e;
+            }
             throw wrap(e, SQLException.class);
         } finally {
             if (logger.isTraceEnabled()) {
@@ -319,7 +323,7 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
             } else if (sqlStatement instanceof SQLDeleteStatement) {
                 return buildResourceName((SQLDeleteStatement) sqlStatement);
             }
-        } catch (Throwable e) {
+        } catch (Exception e) {
             if (logger.isDebugEnabled()) {
                 logger.debug("The JDBC statement can't be parsed, sql : '{}'", sqlStatement, e);
             }
@@ -337,12 +341,19 @@ public abstract class AbstractStatementFilter extends FilterAdapter {
      * }</pre>
      *
      * @param selectStatement the {@link SQLSelectStatement}
-     * @return the resource name
+     * @return the resource name, or {@code null} if the query block or table source is absent
      */
     protected String buildResourceName(SQLSelectStatement selectStatement) {
         SQLSelect sqlSelect = selectStatement.getSelect();
         SQLSelectQueryBlock sqlSelectQueryBlock = sqlSelect.getFirstQueryBlock();
+        if (sqlSelectQueryBlock == null) {
+            return null;
+        }
         SQLTableSource sqlTableSource = sqlSelectQueryBlock.getFrom();
+        if (sqlTableSource == null) {
+            // e.g. "SELECT 1" without a FROM clause
+            return null;
+        }
         return "SELECT " + sqlTableSource.computeAlias();
     }
 
