@@ -110,6 +110,9 @@ public abstract class AlibabaDruidTestUtils {
     public static Properties loadProperties(String resourceName) throws IOException {
         final Properties properties;
         URL resource = getResource(resourceName);
+        if (resource == null) {
+            throw new IOException("The properties resource '" + resourceName + "' can not be found in classpath");
+        }
         try (InputStream inputStream = resource.openStream()) {
             properties = properties(copyToString(inputStream, DEFAULT_CHARSET));
         }
