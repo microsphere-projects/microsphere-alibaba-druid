@@ -28,7 +28,8 @@ import io.microsphere.alibaba.druid.spring.boot.condition.ConditionalOnAlibabaDr
  *   microsphere.alibaba.druid.enabled=true
  *
  *   # When Spring Cloud is on the classpath and Alibaba Druid is available,
- *   # this auto-configuration registers Druid features with Spring Cloud Actuator.
+ *   # this auto-configuration serves as the extension point for Spring Cloud-specific
+ *   # Druid features. It currently registers no additional beans.
  * }</pre>
  *
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy<a/>
