@@ -62,6 +62,10 @@ public class AlibabaDruidAutoConfiguration {
      *   // Adds configured Filter beans to every DruidDataSource bean before initialization
      * }</pre>
      *
+     * <p>Note: This {@code @Bean} method is intentionally non-static because it requires
+     * {@link AlibabaDruidProperties}; the early-initialization impact on other beans is
+     * limited since only {@link DruidDataSource} beans are processed.
+     *
      * @param alibabaDruidProperties the Alibaba Druid properties
      * @return the configured {@link DruidDataSourceBeanPostProcessor}
      */
