@@ -87,10 +87,6 @@ public class DruidDataSourcePoolMetadata implements DataSourcePoolMetadata {
             return ZERO;
         } else {
             int maxActive = dataSource.getMaxActive();
-            if (maxActive <= 0) {
-                // The pool is misconfigured, the usage ratio can't be calculated
-                return null;
-            }
             if (active >= maxActive) {
                 return ONE;
             }

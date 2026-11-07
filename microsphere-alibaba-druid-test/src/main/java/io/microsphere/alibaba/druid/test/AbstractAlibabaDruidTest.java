@@ -59,7 +59,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
  */
 public abstract class AbstractAlibabaDruidTest {
 
-    private DruidDataSource dataSource;
+    protected DruidDataSource dataSource;
 
     @BeforeEach
     public void init() throws Throwable {
