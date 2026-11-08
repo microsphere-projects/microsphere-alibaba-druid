@@ -24,8 +24,11 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Set;
 
 import static io.microsphere.logging.LoggerFactory.getLogger;
 import static io.microsphere.spring.beans.BeanUtils.getSortedBeans;
@@ -96,7 +99,8 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
      *                          {@link DruidDataSource} before initialization
      */
     public DruidDataSourceBeanPostProcessor(Class<? extends Filter>[] filterBeanClasses) {
-        this.filterBeanClasses = filterBeanClasses;
+        this.filterBeanClasses = filterBeanClasses == null ? of(Filter.class)
+                : Arrays.copyOf(filterBeanClasses, filterBeanClasses.length);
         if (logger.isTraceEnabled()) {
             logger.trace("The classes of Filter Bean to be added : {}", arrayToString(filterBeanClasses));
         }
@@ -135,15 +139,16 @@ public class DruidDataSourceBeanPostProcessor extends GenericBeanPostProcessorAd
      * @param druidDataSource the {@link DruidDataSource} to add filters to
      */
     protected void initializeFilterBeans(DruidDataSource druidDataSource) {
-        List<Filter> filterBeans = new LinkedList<>();
+        Set<Filter> filterBeans = new LinkedHashSet<>();
         for (Class<? extends Filter> filterBeanClass : filterBeanClasses) {
             filterBeans.addAll(getSortedBeans(this.beanFactory, filterBeanClass));
         }
-        sort(filterBeans);
+        List<Filter> sortedFilterBeans = new ArrayList<>(filterBeans);
+        sort(sortedFilterBeans);
         if (logger.isTraceEnabled()) {
-            logger.trace("The {} Filter Beans[{}] will be added into DruidDataSource[{}]", filterBeans.size(), filterBeans, druidDataSource);
+            logger.trace("The {} Filter Beans[{}] will be added into DruidDataSource[{}]", sortedFilterBeans.size(), sortedFilterBeans, druidDataSource);
         }
-        druidDataSource.getProxyFilters().addAll(filterBeans);
+        druidDataSource.getProxyFilters().addAll(sortedFilterBeans);
     }
 
     /**

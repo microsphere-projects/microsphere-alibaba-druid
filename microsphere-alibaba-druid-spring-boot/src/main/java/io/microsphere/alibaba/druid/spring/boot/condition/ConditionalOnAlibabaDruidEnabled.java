@@ -28,7 +28,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * The {@link ConditionalOnProperty @ConditionalOnProperty} variant for Alibaba Druid :
- * "microsphere.spring.boot.alibaba.druid.enabled" .
+ * "microsphere.alibaba.druid.enabled" .
  *
  * <h3>Example Usage</h3>
  * <pre>{@code

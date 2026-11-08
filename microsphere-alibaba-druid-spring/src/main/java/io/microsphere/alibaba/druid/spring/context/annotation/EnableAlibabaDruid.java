@@ -65,7 +65,7 @@ public @interface EnableAlibabaDruid {
 
     /**
      * The classes of {@link Filter} are searched in the {@link #sources() scopes}, whose instances will be registered
-     * as the Spring Beans, and then be added into {@link {@link DruidDataSource#getProxyFilters() DruidDataSource}.
+     * as the Spring Beans, and then be added into {@link DruidDataSource#getProxyFilters() the proxy filters of DruidDataSource}.
      *
      * <h3>Example Usage</h3>
      * <pre>{@code
