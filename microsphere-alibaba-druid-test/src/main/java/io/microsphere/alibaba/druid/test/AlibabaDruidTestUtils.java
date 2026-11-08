@@ -61,7 +61,7 @@ public abstract class AlibabaDruidTestUtils {
     public static final String H2_PROPERTIES_RESOURCE = "META-INF/druid/h2.properties";
 
     /**
-     * The default resource name of Propertiess
+     * The default resource name of Properties
      *
      * @see DruidDataSource#configFromProperties(Properties)
      * @see #H2_PROPERTIES_RESOURCE
@@ -110,6 +110,9 @@ public abstract class AlibabaDruidTestUtils {
     public static Properties loadProperties(String resourceName) throws IOException {
         final Properties properties;
         URL resource = getResource(resourceName);
+        if (resource == null) {
+            throw new IOException("The properties resource '" + resourceName + "' can not be found in classpath");
+        }
         try (InputStream inputStream = resource.openStream()) {
             properties = properties(copyToString(inputStream, DEFAULT_CHARSET));
         }
@@ -169,7 +172,7 @@ public abstract class AlibabaDruidTestUtils {
      * }</pre>
      *
      * @return {@link DruidDataSource}
-     * @throws RuntimeException if any I/O error or {@link NullPointerException}
+     * @throws IOException if any I/O error
      */
     @Nonnull
     public static DruidDataSource buildDefaultDruidDataSource() throws IOException {
